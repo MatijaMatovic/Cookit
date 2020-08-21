@@ -17,7 +17,8 @@ public class CookIt {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Hello world!");
-        System.out.print("Hello no. 2");
+        System.out.println("Hello no. 2");
+        System.out.println("Pozdrav!");
     }
     
 }
