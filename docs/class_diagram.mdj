@@ -81,7 +81,7 @@
 											"top": 559,
 											"width": 172.732421875,
 											"height": 13,
-											"text": "RegistrovaniKorisnik"
+											"text": "RegistredUser"
 										},
 										{
 											"_type": "LabelView",
@@ -153,7 +153,7 @@
 											"top": 582,
 											"width": 172.732421875,
 											"height": 13,
-											"text": "+ime: String",
+											"text": "+name: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -170,7 +170,7 @@
 											"top": 597,
 											"width": 172.732421875,
 											"height": 13,
-											"text": "+prezime: String",
+											"text": "+surname: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -187,7 +187,7 @@
 											"top": 612,
 											"width": 172.732421875,
 											"height": 13,
-											"text": "+datumRodjenja: LocalDate",
+											"text": "+birthDate: LocalDate",
 											"horizontalAlignment": 0
 										},
 										{
@@ -204,7 +204,7 @@
 											"top": 627,
 											"width": 172.732421875,
 											"height": 13,
-											"text": "+privilegovan: boolean = false",
+											"text": "+privileged: boolean = false",
 											"horizontalAlignment": 0
 										}
 									],
@@ -328,7 +328,7 @@
 											"top": 132,
 											"width": 123.55712890625,
 											"height": 13,
-											"text": "TipKorisnika"
+											"text": "UserType"
 										},
 										{
 											"_type": "LabelView",
@@ -464,7 +464,7 @@
 											"top": 155,
 											"width": 123.55712890625,
 											"height": 13,
-											"text": "korisnik",
+											"text": "user",
 											"horizontalAlignment": 0
 										},
 										{
@@ -515,7 +515,7 @@
 											"top": 200,
 											"width": 123.55712890625,
 											"height": 13,
-											"text": "sponzor",
+											"text": "sponsor",
 											"horizontalAlignment": 0
 										}
 									],
@@ -596,7 +596,7 @@
 											"top": 871,
 											"width": 189.91552734375,
 											"height": 13,
-											"text": "Recept"
+											"text": "Recipe"
 										},
 										{
 											"_type": "LabelView",
@@ -668,7 +668,7 @@
 											"top": 894,
 											"width": 189.91552734375,
 											"height": 13,
-											"text": "+naziv: String",
+											"text": "+name: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -703,7 +703,7 @@
 											"top": 909,
 											"width": 189.91552734375,
 											"height": 13,
-											"text": "+tekst: String",
+											"text": "+text: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -720,7 +720,7 @@
 											"top": 924,
 											"width": 189.91552734375,
 											"height": 13,
-											"text": "+datumKreiranja: LocalDateTime",
+											"text": "+creationName: LocalDateTime",
 											"horizontalAlignment": 0
 										},
 										{
@@ -772,7 +772,7 @@
 											"top": 954,
 											"width": 189.91552734375,
 											"height": 13,
-											"text": "+aktivan: boolean = true",
+											"text": "+active: boolean = true",
 											"horizontalAlignment": 0
 										}
 									],
@@ -1384,7 +1384,7 @@
 											"top": 823,
 											"width": 207.9873046875,
 											"height": 13,
-											"text": "Reklama"
+											"text": "Ad"
 										},
 										{
 											"_type": "LabelView",
@@ -1456,7 +1456,7 @@
 											"top": 846,
 											"width": 207.9873046875,
 											"height": 13,
-											"text": "+sadrzaj: Image",
+											"text": "+content: Image",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1473,7 +1473,7 @@
 											"top": 861,
 											"width": 207.9873046875,
 											"height": 13,
-											"text": "+tekst: String",
+											"text": "+text: String",
 											"horizontalAlignment": 0
 										}
 									],
@@ -1646,7 +1646,7 @@
 										"$ref": "AAAAAAF0AitWId0iwus="
 									},
 									"edgePosition": 2,
-									"text": "+reklame"
+									"text": "+ads"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -1710,7 +1710,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAF0AitWId0iwus="
 									},
-									"text": "+recept"
+									"text": "+recipe"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -3514,7 +3514,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAF0AkazK58yUUg="
 									},
-									"text": "+praceniKorisnici"
+									"text": "+following"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -3704,7 +3704,7 @@
 											"top": 239,
 											"width": 179.5751953125,
 											"height": 13,
-											"text": "KorisnickiNalog"
+											"text": "Account"
 										},
 										{
 											"_type": "LabelView",
@@ -3774,7 +3774,7 @@
 											"top": 262,
 											"width": 179.5751953125,
 											"height": 13,
-											"text": "+korisnickoIme: String {unique}",
+											"text": "+username: String {unique}",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3791,7 +3791,7 @@
 											"top": 277,
 											"width": 179.5751953125,
 											"height": 13,
-											"text": "+lozinka: String",
+											"text": "+password: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3825,7 +3825,7 @@
 											"top": 307,
 											"width": 179.5751953125,
 											"height": 13,
-											"text": "+aktivan: boolean = true",
+											"text": "+active: boolean = true",
 											"horizontalAlignment": 0
 										}
 									],
@@ -3946,9 +3946,9 @@
 											"font": "Arial;13;1",
 											"left": 869,
 											"top": 343,
-											"width": 121.74169921875,
+											"width": 136.20166015625,
 											"height": 13,
-											"text": "Sponzor"
+											"text": "Sponsor"
 										},
 										{
 											"_type": "LabelView",
@@ -3981,7 +3981,7 @@
 									"font": "Arial;13;0",
 									"left": 864,
 									"top": 336,
-									"width": 131.74169921875,
+									"width": 146.20166015625,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF0AlzFKhvpmyc="
@@ -4018,9 +4018,9 @@
 											"font": "Arial;13;0",
 											"left": 869,
 											"top": 366,
-											"width": 121.74169921875,
+											"width": 136.20166015625,
 											"height": 13,
-											"text": "+nazivFirme: String",
+											"text": "+companyName: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -4035,9 +4035,9 @@
 											"font": "Arial;13;0",
 											"left": 869,
 											"top": 381,
-											"width": 121.74169921875,
+											"width": 136.20166015625,
 											"height": 13,
-											"text": "+adresaFirme: String",
+											"text": "+address: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -4052,16 +4052,16 @@
 											"font": "Arial;13;0",
 											"left": 869,
 											"top": 396,
-											"width": 121.74169921875,
+											"width": 136.20166015625,
 											"height": 13,
-											"text": "+brTelefona: String",
+											"text": "+telephone: String",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 864,
 									"top": 361,
-									"width": 131.74169921875,
+									"width": 146.20166015625,
 									"height": 53
 								},
 								{
@@ -4076,7 +4076,7 @@
 									"font": "Arial;13;0",
 									"left": 864,
 									"top": 414,
-									"width": 131.74169921875,
+									"width": 146.20166015625,
 									"height": 10
 								},
 								{
@@ -4116,7 +4116,7 @@
 							"containerChangeable": true,
 							"left": 864,
 							"top": 336,
-							"width": 131.74169921875,
+							"width": 146.20166015625,
 							"height": 88,
 							"nameCompartment": {
 								"$ref": "AAAAAAF0AlzFKhvoSvo="
@@ -4217,9 +4217,9 @@
 										"$ref": "AAAAAAF0Al+k2Gdg0Qc="
 									},
 									"font": "Arial;13;0",
-									"left": 1002,
+									"left": 1012,
 									"top": 343,
-									"width": 37.22265625,
+									"width": 44.45263671875,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -4227,7 +4227,7 @@
 										"$ref": "AAAAAAF0Al+k2WdjQZg="
 									},
 									"edgePosition": 2,
-									"text": "+autor"
+									"text": "+author"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -4240,7 +4240,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1023,
+									"left": 1037,
 									"top": 329,
 									"height": 13,
 									"alpha": 0.7853981633974483,
@@ -4260,7 +4260,7 @@
 										"$ref": "AAAAAAF0Al+k2Gdg0Qc="
 									},
 									"font": "Arial;13;0",
-									"left": 1006,
+									"left": 1020,
 									"top": 370,
 									"width": 21.68359375,
 									"height": 13,
@@ -4291,7 +4291,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAF0Al+k2WdjQZg="
 									},
-									"text": "+reklame"
+									"text": "+ads"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -4371,7 +4371,7 @@
 								"$ref": "AAAAAAF0AlzFKhvnPbw="
 							},
 							"lineStyle": 2,
-							"points": "995:364;1040:364;1040:816",
+							"points": "1009:364;1040:364;1040:816",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF0Al+k2WdkZNM="
@@ -4664,7 +4664,7 @@
 											"top": 415,
 											"width": 153.0546875,
 											"height": 13,
-											"text": "VlasnikNaloga"
+											"text": "AccountOwner"
 										},
 										{
 											"_type": "LabelView",
@@ -4736,7 +4736,7 @@
 											"top": 438,
 											"width": 153.0546875,
 											"height": 13,
-											"text": "+tipKorisnika: TipKorisnika",
+											"text": "+userType: UserType",
 											"horizontalAlignment": 0
 										}
 									],
@@ -4909,7 +4909,7 @@
 										"$ref": "AAAAAAF0B0nbP8yckAc="
 									},
 									"edgePosition": 2,
-									"text": "+korisnickiNalog"
+									"text": "+account"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -4964,16 +4964,16 @@
 										"$ref": "AAAAAAF0B0nbP8yakK4="
 									},
 									"font": "Arial;13;0",
-									"left": 630,
+									"left": 629,
 									"top": 383,
-									"width": 88.5244140625,
+									"width": 91.41259765625,
 									"height": 13,
 									"alpha": -1.292496587767281,
 									"distance": 65.52098900352466,
 									"hostEdge": {
 										"$ref": "AAAAAAF0B0nbP8yckAc="
 									},
-									"text": "+vlasnikNaloga"
+									"text": "+accountOwner"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -6620,9 +6620,9 @@
 										"$ref": "AAAAAAF0SWUHtk2FPDE="
 									},
 									"font": "Arial;13;0",
-									"left": 1026,
+									"left": 1025,
 									"top": 1067,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -6829,9 +6829,9 @@
 										"$ref": "AAAAAAF0Sj1SgEW49No="
 									},
 									"font": "Arial;13;0",
-									"left": 712,
+									"left": 711,
 									"top": 998,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -6892,9 +6892,9 @@
 										"$ref": "AAAAAAF0Sj1SgEW5Up0="
 									},
 									"font": "Arial;13;0",
-									"left": 723,
+									"left": 722,
 									"top": 1204,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -7182,9 +7182,9 @@
 										"$ref": "AAAAAAF0Sj/OuVIGqzU="
 									},
 									"font": "Arial;13;0",
-									"left": 647,
+									"left": 646,
 									"top": 1263,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -7453,9 +7453,9 @@
 										"$ref": "AAAAAAF0SkQEWWeQhQI="
 									},
 									"font": "Arial;13;0",
-									"left": 352,
+									"left": 351,
 									"top": 1258,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -7724,9 +7724,9 @@
 										"$ref": "AAAAAAF0SknPvn7/QM8="
 									},
 									"font": "Arial;13;0",
-									"left": 1178,
+									"left": 1177,
 									"top": 1144,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -7816,7 +7816,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF0AhGTvsL7Sys="
 					},
-					"name": "RegistrovaniKorisnik",
+					"name": "RegistredUser",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -7932,7 +7932,7 @@
 								"_parent": {
 									"$ref": "AAAAAAF0AkazKp8uqOA="
 								},
-								"name": "praceniKorisnici",
+								"name": "following",
 								"reference": {
 									"$ref": "AAAAAAF0AhHVR8MAOds="
 								},
@@ -7960,7 +7960,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0AhHVR8MAOds="
 							},
-							"name": "ime",
+							"name": "name",
 							"type": "String"
 						},
 						{
@@ -7969,7 +7969,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0AhHVR8MAOds="
 							},
-							"name": "prezime",
+							"name": "surname",
 							"type": "String"
 						},
 						{
@@ -7978,7 +7978,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0AhHVR8MAOds="
 							},
-							"name": "datumRodjenja",
+							"name": "birthDate",
 							"type": "LocalDate"
 						},
 						{
@@ -7987,7 +7987,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0AhHVR8MAOds="
 							},
-							"name": "privilegovan",
+							"name": "privileged",
 							"type": "boolean",
 							"defaultValue": "false"
 						}
@@ -7999,7 +7999,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF0AhGTvsL7Sys="
 					},
-					"name": "TipKorisnika",
+					"name": "UserType",
 					"literals": [
 						{
 							"_type": "UMLEnumerationLiteral",
@@ -8007,7 +8007,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0AhUmIcNCDCk="
 							},
-							"name": "korisnik"
+							"name": "user"
 						},
 						{
 							"_type": "UMLEnumerationLiteral",
@@ -8031,7 +8031,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0AhUmIcNCDCk="
 							},
-							"name": "sponzor"
+							"name": "sponsor"
 						}
 					]
 				},
@@ -8041,7 +8041,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF0AhGTvsL7Sys="
 					},
-					"name": "Recept",
+					"name": "Recipe",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -8169,7 +8169,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0AhyBzsR2wRA="
 							},
-							"name": "naziv",
+							"name": "name",
 							"type": "String"
 						},
 						{
@@ -8187,7 +8187,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0AhyBzsR2wRA="
 							},
-							"name": "tekst",
+							"name": "text",
 							"type": "String"
 						},
 						{
@@ -8196,7 +8196,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0AhyBzsR2wRA="
 							},
-							"name": "datumKreiranja",
+							"name": "creationName",
 							"type": "LocalDateTime"
 						},
 						{
@@ -8223,7 +8223,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0AhyBzsR2wRA="
 							},
-							"name": "aktivan",
+							"name": "active",
 							"type": "boolean",
 							"defaultValue": "true"
 						}
@@ -8288,7 +8288,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF0AhGTvsL7Sys="
 					},
-					"name": "Reklama",
+					"name": "Ad",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -8302,7 +8302,7 @@
 								"_parent": {
 									"$ref": "AAAAAAF0AitWId0eh78="
 								},
-								"name": "reklame",
+								"name": "ads",
 								"reference": {
 									"$ref": "AAAAAAF0AihjB9NDwdU="
 								},
@@ -8315,7 +8315,7 @@
 								"_parent": {
 									"$ref": "AAAAAAF0AitWId0eh78="
 								},
-								"name": "recept",
+								"name": "recipe",
 								"reference": {
 									"$ref": "AAAAAAF0AhyBzsR2wRA="
 								},
@@ -8331,7 +8331,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0AihjB9NDwdU="
 							},
-							"name": "sadrzaj",
+							"name": "content",
 							"type": "Image"
 						},
 						{
@@ -8340,7 +8340,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0AihjB9NDwdU="
 							},
-							"name": "tekst",
+							"name": "text",
 							"type": "String"
 						}
 					]
@@ -8472,7 +8472,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF0AhGTvsL7Sys="
 					},
-					"name": "KorisnickiNalog",
+					"name": "Account",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -8486,7 +8486,7 @@
 								"_parent": {
 									"$ref": "AAAAAAF0B0nbPsyYtyc="
 								},
-								"name": "korisnickiNalog",
+								"name": "account",
 								"reference": {
 									"$ref": "AAAAAAF0Ak8JtdrYH4Q="
 								},
@@ -8498,7 +8498,7 @@
 								"_parent": {
 									"$ref": "AAAAAAF0B0nbPsyYtyc="
 								},
-								"name": "vlasnikNaloga",
+								"name": "accountOwner",
 								"reference": {
 									"$ref": "AAAAAAF0B0mya8p0CEg="
 								},
@@ -8513,7 +8513,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0Ak8JtdrYH4Q="
 							},
-							"name": "korisnickoIme",
+							"name": "username",
 							"type": "String",
 							"isUnique": true
 						},
@@ -8523,7 +8523,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0Ak8JtdrYH4Q="
 							},
-							"name": "lozinka",
+							"name": "password",
 							"type": "String"
 						},
 						{
@@ -8541,7 +8541,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0Ak8JtdrYH4Q="
 							},
-							"name": "aktivan",
+							"name": "active",
 							"type": "boolean",
 							"defaultValue": "true"
 						}
@@ -8553,7 +8553,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF0AhGTvsL7Sys="
 					},
-					"name": "Sponzor",
+					"name": "Sponsor",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -8567,7 +8567,7 @@
 								"_parent": {
 									"$ref": "AAAAAAF0Al+k2GdfieU="
 								},
-								"name": "autor",
+								"name": "author",
 								"reference": {
 									"$ref": "AAAAAAF0AlzFKhvlv1s="
 								},
@@ -8579,7 +8579,7 @@
 								"_parent": {
 									"$ref": "AAAAAAF0Al+k2GdfieU="
 								},
-								"name": "reklame",
+								"name": "ads",
 								"reference": {
 									"$ref": "AAAAAAF0AihjB9NDwdU="
 								},
@@ -8607,7 +8607,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0AlzFKhvlv1s="
 							},
-							"name": "nazivFirme",
+							"name": "companyName",
 							"type": "String"
 						},
 						{
@@ -8616,7 +8616,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0AlzFKhvlv1s="
 							},
-							"name": "adresaFirme",
+							"name": "address",
 							"type": "String"
 						},
 						{
@@ -8625,7 +8625,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0AlzFKhvlv1s="
 							},
-							"name": "brTelefona",
+							"name": "telephone",
 							"type": "String"
 						}
 					]
@@ -8807,7 +8807,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF0AhGTvsL7Sys="
 					},
-					"name": "VlasnikNaloga",
+					"name": "AccountOwner",
 					"attributes": [
 						{
 							"_type": "UMLAttribute",
@@ -8815,7 +8815,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF0B0mya8p0CEg="
 							},
-							"name": "tipKorisnika",
+							"name": "userType",
 							"type": {
 								"$ref": "AAAAAAF0AhUmIcNCDCk="
 							}
