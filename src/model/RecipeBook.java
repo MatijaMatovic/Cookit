@@ -1,8 +1,10 @@
 package model;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.*;
 import org.yaml.snakeyaml.DumperOptions;
@@ -93,10 +95,32 @@ public class RecipeBook {
             DumperOptions dop = new DumperOptions();
             dop.setPrettyFlow(true);
             
-            Yaml yaml = new Yaml(dop);
-            PrintWriter out = new PrintWriter(new FileWriter(getPath(FileType.ACCOUNTS)));
-            yaml.dump(this.accounts, out);
+            // makeFile and PrintWriter constructor throw different Exceptions
+            // so they need to be handled separately
+            try (PrintWriter out = new PrintWriter(new FileWriter(getPath(FileType.ACCOUNTS)))) {
+                Yaml yaml = new Yaml(dop);
+                yaml.dump(this.accounts, out);
+            }
         } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Loads all the accounts from the file into accounts set
+     */
+    public void loadAccounts() {
+        try {
+            makeFile(FileType.ACCOUNTS);
+            
+            // makeFile and InputStream constructor throw different Exceptions
+            // so they need to be handled separately
+            try (InputStream in = new FileInputStream(new File(getPath(FileType.ACCOUNTS)))) {
+                Yaml yaml = new Yaml();
+                this.accounts = (Set<Account>) yaml.load(in);
+            } 
+        }
         catch (Exception e) {
             e.printStackTrace();
         }
