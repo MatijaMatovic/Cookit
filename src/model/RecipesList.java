@@ -20,7 +20,7 @@ public class RecipesList {
 
     private Set<Recipe> recipesSet; // spisak svih recepata, sortiranih po datumu kreiranja (najnoviji prvo)
 
-    private Map<Set<Ingredient>, Set<Recipe>> recipeByIngredientsMap;
+    private Map<Set<Ingredient>, Set<Recipe>> recipeByIngredientsMap; // Set<Ingredient> skup sastojaka neophodnih za recept
 
     public RecipesList() {
         recipesSet = new TreeSet<>(new Comparator<Recipe>() {

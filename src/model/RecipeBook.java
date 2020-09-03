@@ -27,9 +27,16 @@ public class RecipeBook {
     
     public RecipeBook() {
         this.accounts = new HashMap<>();
-        this.recipes = new HashSet<>();
-        this.ingredientCategories = new HashSet<>();
-        this.appliances = new HashSet<>();
+        this.recipes = new TreeSet<>(new Comparator<Recipe>() {
+            @Override
+            public int compare(Recipe o1, Recipe o2) {
+                return o2.getCreationDate().compareTo(o1.getCreationDate());
+            }
+
+        });
+        this.ingredientCategories = new TreeSet<>();
+
+        this.appliances = new TreeSet<>();
     }
     
     public void logIn(String userName, String password) {
