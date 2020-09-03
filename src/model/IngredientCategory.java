@@ -1,6 +1,8 @@
 package model;
 
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class IngredientCategory implements Comparable<IngredientCategory> {
 
@@ -9,11 +11,11 @@ public class IngredientCategory implements Comparable<IngredientCategory> {
 
     public IngredientCategory(String name) {
         this.name = name;
+        this.ingredientsSet = new TreeSet<>();
     }
-    
-    
 
     private String name;
+    private Set<Ingredient> ingredientsSet;
 
     public String getName() {
         return name;
@@ -52,5 +54,18 @@ public class IngredientCategory implements Comparable<IngredientCategory> {
     public int compareTo(IngredientCategory o) {
         return this.name.compareTo(o.name);
     }
+    
+    public void addIngredient(Ingredient i){
+        ingredientsSet.add(i);
+    }
 
+    public Set<Ingredient> getIngredientsSet() {
+        return ingredientsSet;
+    }
+
+    public void setIngredientsSet(Set<Ingredient> ingredientsSet) {
+        this.ingredientsSet = ingredientsSet;
+    }
+    
+    
 }
