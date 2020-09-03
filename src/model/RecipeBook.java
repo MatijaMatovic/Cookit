@@ -12,7 +12,7 @@ import org.yaml.snakeyaml.Yaml;
 
 public class RecipeBook {
 
-    public Set<Account> accounts;
+    public Map<String, Account> accounts;
     public Set<Recipe> recipes;
     public Set<IngredientCategory> ingredientCategories;
     public Set<KitchenAppliance> appliances;
@@ -26,10 +26,10 @@ public class RecipeBook {
     public static String separator = System.getProperty("file.separator");
     
     public RecipeBook() {
-        this.accounts = new HashSet<Account>();
-        this.recipes = new HashSet<Recipe>();
-        this.ingredientCategories = new HashSet<IngredientCategory>();
-        this.appliances = new HashSet<KitchenAppliance>();
+        this.accounts = new HashMap<>();
+        this.recipes = new HashSet<>();
+        this.ingredientCategories = new HashSet<>();
+        this.appliances = new HashSet<>();
     }
     
     public void logIn(String userName, String password) {
@@ -118,7 +118,7 @@ public class RecipeBook {
             // so they need to be handled separately
             try (InputStream in = new FileInputStream(new File(getPath(FileType.ACCOUNTS)))) {
                 Yaml yaml = new Yaml();
-                this.accounts = (Set<Account>) yaml.load(in);
+                this.accounts = (Map<String, Account>) yaml.load(in);
             } 
         }
         catch (Exception e) {
