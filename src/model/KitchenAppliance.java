@@ -6,5 +6,6 @@ public class KitchenAppliance {
     }
 
     public String name;
-
+    
+    
 }
