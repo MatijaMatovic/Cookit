@@ -13,7 +13,7 @@ import org.yaml.snakeyaml.Yaml;
 public class RecipeBook {
 
     public Map<String, Account> accounts;
-    public Set<Recipe> recipes;
+    public Map<Long, Recipe> recipes;
     public Set<IngredientCategory> ingredientCategories;
     public Set<KitchenAppliance> appliances;
     
@@ -27,13 +27,7 @@ public class RecipeBook {
     
     public RecipeBook() {
         this.accounts = new HashMap<>();
-        this.recipes = new TreeSet<>(new Comparator<Recipe>() {
-            @Override
-            public int compare(Recipe o1, Recipe o2) {
-                return o2.getCreationDate().compareTo(o1.getCreationDate());
-            }
-
-        });
+        this.recipes = new HashMap<>();
         this.ingredientCategories = new TreeSet<>();
 
         this.appliances = new TreeSet<>();

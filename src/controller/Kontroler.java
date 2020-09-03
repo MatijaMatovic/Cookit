@@ -17,6 +17,7 @@ public class Kontroler {
     
     public RecipePanel createRecipePanel(Recipe r) {
         RecipePanel rp = new RecipePanel();
+        rp.setRecipeId(r.getId());
         rp.getDateLabel().setText(r.getCreationDate()
                 .format(DateTimeFormatter
                 .ofPattern("dd.MM.yyyy. HH:mm")));

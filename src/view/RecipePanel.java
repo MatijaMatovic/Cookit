@@ -14,6 +14,8 @@ public class RecipePanel extends javax.swing.JPanel {
     /**
      * Creates new form RecipePanel
      */
+    private long recipeId;
+    
     public RecipePanel() {
         initComponents();
     }
@@ -120,6 +122,14 @@ public class RecipePanel extends javax.swing.JPanel {
 
     public JLabel getAuthorLabel() {
         return authorLabel;
+    }
+
+    public long getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(long recipeId) {
+        this.recipeId = recipeId;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
