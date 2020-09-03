@@ -7,6 +7,7 @@ package model;
 
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -18,7 +19,8 @@ import java.util.TreeSet;
 public class RecipesList {
 
     private Set<Recipe> recipesSet; // spisak svih recepata, sortiranih po datumu kreiranja (najnoviji prvo)
-    private Map<Ingredient, Set<Recipe>> recipesByIngredientMap;
+
+    private Map<Set<Ingredient>, Set<Recipe>> recipeByIngredientsMap;
 
     public RecipesList() {
         recipesSet = new TreeSet<>(new Comparator<Recipe>() {
@@ -28,24 +30,59 @@ public class RecipesList {
             }
 
         });
-        recipesByIngredientMap = new HashMap<>();
+        recipeByIngredientsMap = new HashMap<>();
 
     }
 
     public void addRecipe(Recipe r) {
         Set<IngredientAmount> ingredientAmounts = r.getIngredientAmounts();
 
-        for (IngredientAmount ing : ingredientAmounts) {
-            Ingredient i = ing.getIngredient();
-            recipesByIngredientMap.putIfAbsent(i, new TreeSet<>(new Comparator<Recipe>() {
+        Set<Ingredient> ingredientsSet = new HashSet<>();
+
+        ingredientAmounts.stream().map(ing -> ing.getIngredient()).forEachOrdered(i -> {
+            ingredientsSet.add(i);
+        });
+
+        Set<Set<Ingredient>> powerSet = PowerSet.powerSet(ingredientsSet);
+
+        for (Set<Ingredient> si : powerSet) {
+            recipeByIngredientsMap.putIfAbsent(si, new TreeSet<>(new Comparator<Recipe>() {
                 @Override
                 public int compare(Recipe o1, Recipe o2) {
                     return o2.getCreationDate().compareTo(o1.getCreationDate());
                 }
             }));
-            
-            recipesByIngredientMap.get(i).add(r);
+
+            recipeByIngredientsMap.get(si).add(r);
         }
     }
 
+    public Set<Recipe> getRecipes() {
+        return recipesSet;
+    }
+
+    public Set<Recipe> getRecipes(Set<Ingredient> ingredientsSet) {
+        return recipeByIngredientsMap.get(ingredientsSet);
+    }
+
+}
+
+class PowerSet {
+
+    static <T> Set<Set<T>> powerSet(Set<T> set) {
+        T[] element = (T[]) set.toArray();
+        final int SET_LENGTH = 1 << element.length;
+        Set<Set<T>> powerSet = new HashSet<>();
+        for (int binarySet = 0; binarySet < SET_LENGTH; binarySet++) {
+            Set<T> subset = new HashSet<>();
+            for (int bit = 0; bit < element.length; bit++) {
+                int mask = 1 << bit;
+                if ((binarySet & mask) != 0) {
+                    subset.add(element[bit]);
+                }
+            }
+            powerSet.add(subset);
+        }
+        return powerSet;
+    }
 }
