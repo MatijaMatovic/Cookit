@@ -1,6 +1,7 @@
 package view;
 
 import java.time.format.DateTimeFormatter;
+import javax.swing.JLabel;
 import model.Recipe;
 
 /**
@@ -10,8 +11,6 @@ import model.Recipe;
  * @author matija
  */
 public class RecipePanel extends javax.swing.JPanel {
-    
-    private Recipe recipe;
     /**
      * Creates new form RecipePanel
      */
@@ -90,29 +89,29 @@ public class RecipePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public Recipe getRecipe() {
-        return recipe;
+    public JLabel getAppliancesLabel() {
+        return appliancesLabel;
     }
 
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-        initRecipeGUI();
-    }
-    
-    private void initRecipeGUI() {
-        this.dateLabel.setText(recipe.creationDate
-                .format(DateTimeFormatter
-                .ofPattern("dd.MM.yyyy. HH:mm")));
-        this.nameLabel.setText(recipe.text);
-        /* If instructions are longer than 280 chars, it chopps it off */
-        /* <html> tags enable the formatting of text in the label      */
-        this.instructionsLabel.setText("<html>" + recipe.text.substring(0, 
-                Math.min(recipe.text.length(), 280)) + "...</html>");
-        this.nameLabel.setText(Double.toString(recipe.calculateGradeAvg()));
-        this.ingredientsLabel.setText(recipe.getIngredientsString());
-        this.appliancesLabel.setText(recipe.getAppliancesString());
+    public JLabel getDateLabel() {
+        return dateLabel;
     }
 
+    public JLabel getIngredientsLabel() {
+        return ingredientsLabel;
+    }
+
+    public JLabel getInstructionsLabel() {
+        return instructionsLabel;
+    }
+
+    public JLabel getNameLabel() {
+        return nameLabel;
+    }
+
+    public JLabel getReviewsLabel() {
+        return reviewsLabel;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel appliancesLabel;
