@@ -96,19 +96,20 @@ public class Recipe {
     public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
     }
-    
-        public double calculateGradeAvg() {
+
+    public double calculateGradeAvg() {
         Iterator<Review> it = reviews.iterator();
         double count = 0, sum = 0;
         while (it.hasNext()) {
             sum += it.next().rating;
             count++;
         }
-        return sum/count;
+        return sum / count;
     }
-    
+
     /**
      * Returns all the ingredients as a string
+     *
      * @return Formatted string containing all the ingredients
      */
     public String getIngredientsString() {
@@ -118,11 +119,12 @@ public class Recipe {
             sb.append(it.next().getIngredient());
             sb.append(", ");
         }
-        return sb.toString().substring(0, sb.length()-1); // Cuts of the final ", "
+        return sb.toString().substring(0, sb.length() - 1); // Cuts of the final ", "
     }
-    
+
     /**
      * Returns all the required appliances as a string
+     *
      * @return Formatted string containing all the required appliances
      */
     public String getAppliancesString() {
@@ -132,7 +134,7 @@ public class Recipe {
             sb.append(it.next());
             sb.append(", ");
         }
-        return sb.toString().substring(0, sb.length()-1);
+        return sb.toString().substring(0, sb.length() - 1);
     }
 
 }
