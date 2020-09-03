@@ -1,6 +1,6 @@
 package model;
 
-public class IngredientAmount {
+public class IngredientAmount extends Ingredient{
 
     private Double amount;
 
@@ -8,9 +8,6 @@ public class IngredientAmount {
 
     public IngredientAmount() {
     }
-
-    private Ingredient ingredient;
-
     public Double getAmount() {
         return amount;
     }
@@ -25,14 +22,6 @@ public class IngredientAmount {
 
     public void setUnit(String unit) {
         this.unit = unit;
-    }
-
-    public Ingredient getIngredient() {
-        return ingredient;
-    }
-
-    public void setIngredient(Ingredient ingredient) {
-        this.ingredient = ingredient;
     }
 
 }
