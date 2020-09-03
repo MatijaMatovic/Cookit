@@ -5,9 +5,11 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -43,18 +45,9 @@ public class RecipesList {
             ingredientsSet.add(i);
         });
 
-        Set<Set<Ingredient>> powerSet = PowerSet.powerSet(ingredientsSet);
+        recipeByIngredientsMap.putIfAbsent(ingredientsSet, new TreeSet<>());
+        recipeByIngredientsMap.get(ingredientsSet).add(r);
 
-        for (Set<Ingredient> si : powerSet) {
-            recipeByIngredientsMap.putIfAbsent(si, new TreeSet<>(new Comparator<Recipe>() {
-                @Override
-                public int compare(Recipe o1, Recipe o2) {
-                    return o2.getCreationDate().compareTo(o1.getCreationDate());
-                }
-            }));
-
-            recipeByIngredientsMap.get(si).add(r);
-        }
     }
 
     public Set<Recipe> getRecipes() {
@@ -62,7 +55,21 @@ public class RecipesList {
     }
 
     public Set<Recipe> getRecipes(Set<Ingredient> ingredientsSet) {
-        return recipeByIngredientsMap.get(ingredientsSet);
+        Set<Recipe> returnRecipes = new TreeSet<>(new Comparator<Recipe>() {
+            @Override
+            public int compare(Recipe o1, Recipe o2) {
+                return o2.getCreationDate().compareTo(o1.getCreationDate());
+            }
+
+        });
+
+        Set<Set<Ingredient>> combinationsSet = PowerSet.powerSet(ingredientsSet);
+
+        for (Set<Ingredient> ingSet : combinationsSet) {
+            returnRecipes.addAll(recipeByIngredientsMap.get(ingSet));
+        }
+
+        return returnRecipes;
     }
 
 }
