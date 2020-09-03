@@ -28,5 +28,6 @@ public class Kontroler {
         rp.getReviewsLabel().setText(Double.toString(r.calculateGradeAvg()));
         rp.getIngredientsLabel().setText(r.getIngredientsString());
         rp.getAppliancesLabel().setText(r.getAppliancesString());
+        return rp;
     }
 }
