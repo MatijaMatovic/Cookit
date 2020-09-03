@@ -23,9 +23,10 @@
                       <Component id="dateLabel" min="-2" pref="164" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="reviewsLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="authorLabel" min="-2" pref="153" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="appliancesLabel" alignment="1" pref="1041" max="32767" attributes="0"/>
@@ -54,6 +55,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="reviewsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="dateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="authorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -94,6 +96,11 @@
     <Component class="javax.swing.JLabel" name="appliancesLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Kuhinjski aparati: aparat1, aparat2, aparat3..."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="authorLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="authorLabel"/>
       </Properties>
     </Component>
   </SubComponents>

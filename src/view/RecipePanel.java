@@ -33,6 +33,7 @@ public class RecipePanel extends javax.swing.JPanel {
         dateLabel = new javax.swing.JLabel();
         reviewsLabel = new javax.swing.JLabel();
         appliancesLabel = new javax.swing.JLabel();
+        authorLabel = new javax.swing.JLabel();
 
         nameLabel.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         nameLabel.setText("Naziv recepta ");
@@ -49,6 +50,8 @@ public class RecipePanel extends javax.swing.JPanel {
 
         appliancesLabel.setText("Kuhinjski aparati: aparat1, aparat2, aparat3...");
 
+        authorLabel.setText("authorLabel");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -60,7 +63,8 @@ public class RecipePanel extends javax.swing.JPanel {
                         .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(reviewsLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(authorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,7 +88,8 @@ public class RecipePanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(reviewsLabel)
-                    .addComponent(dateLabel))
+                    .addComponent(dateLabel)
+                    .addComponent(authorLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -112,9 +117,14 @@ public class RecipePanel extends javax.swing.JPanel {
     public JLabel getReviewsLabel() {
         return reviewsLabel;
     }
+
+    public JLabel getAuthorLabel() {
+        return authorLabel;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel appliancesLabel;
+    private javax.swing.JLabel authorLabel;
     private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel ingredientsLabel;
     private javax.swing.JLabel instructionsLabel;
