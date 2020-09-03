@@ -97,6 +97,42 @@ public class Recipe {
         this.reviews = reviews;
     }
     
+        public double calculateGradeAvg() {
+        Iterator<Review> it = reviews.iterator();
+        double count = 0, sum = 0;
+        while (it.hasNext()) {
+            sum += it.next().rating;
+            count++;
+        }
+        return sum/count;
+    }
     
+    /**
+     * Returns all the ingredients as a string
+     * @return Formatted string containing all the ingredients
+     */
+    public String getIngredientsString() {
+        Iterator<IngredientAmount> it = ingredientAmounts.iterator();
+        StringBuilder sb = new StringBuilder("Sastojci: ");
+        while (it.hasNext()) {
+            sb.append(it.next().getIngredient());
+            sb.append(", ");
+        }
+        return sb.toString().substring(0, sb.length()-1); // Cuts of the final ", "
+    }
+    
+    /**
+     * Returns all the required appliances as a string
+     * @return Formatted string containing all the required appliances
+     */
+    public String getAppliancesString() {
+        Iterator<KitchenAppliance> it = requiredAppliances.iterator();
+        StringBuilder sb = new StringBuilder("Aparati: ");
+        while (it.hasNext()) {
+            sb.append(it.next());
+            sb.append(", ");
+        }
+        return sb.toString().substring(0, sb.length()-1);
+    }
 
 }
