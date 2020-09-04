@@ -24,4 +24,9 @@ public class IngredientAmount extends Ingredient{
         this.unit = unit;
     }
 
+    @Override
+    public String toString() {
+        return this.name + " " + Double.toString(this.amount) + this.unit;
+    }
+    
 }

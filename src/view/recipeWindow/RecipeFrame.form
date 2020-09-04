@@ -35,10 +35,10 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="ratingLabel" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="ingredientsList" pref="137" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="ingredientsScollPane" min="-2" pref="125" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="instructionsScroll" min="-2" pref="548" max="-2" attributes="0"/>
+                      <Component id="instructionsScroll" min="-2" pref="560" max="-2" attributes="0"/>
                   </Group>
                   <Component id="reviewsPanel" alignment="1" max="32767" attributes="0"/>
               </Group>
@@ -57,7 +57,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="instructionsScroll" max="32767" attributes="0"/>
-                  <Component id="ingredientsList" pref="271" max="32767" attributes="0"/>
+                  <Component id="ingredientsScollPane" pref="271" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="reviewsPanel" max="32767" attributes="0"/>
@@ -75,14 +75,14 @@
         <Property name="text" type="java.lang.String" value="jLabel1"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="ingredientsList">
+    <Container class="javax.swing.JScrollPane" name="ingredientsScollPane">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="jList1">
+        <Component class="javax.swing.JList" name="ingredientsList">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -256,7 +256,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="jTextArea1">
+                <Component class="javax.swing.JTextArea" name="reviewText">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="lineWrap" type="boolean" value="true"/>

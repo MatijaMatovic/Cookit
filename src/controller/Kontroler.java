@@ -6,8 +6,14 @@
 package controller;
 
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import model.Recipe;
+import model.Review;
 import view.RecipePanel;
+import view.recipeWindow.RecipeFrame;
+import view.recipeWindow.ReviewPanel;
 
 /**
  *
@@ -31,5 +37,29 @@ public class Kontroler {
         rp.getAppliancesLabel().setText(r.getAppliancesString());
         rp.getAuthorLabel().setText(r.getAuthor().getAccount().getUsername());
         return rp;
+    }
+    
+    public ReviewPanel createReviewPanel(Review r) {
+        ReviewPanel rp = new ReviewPanel();
+        rp.getTextLabel().setText(r.comment);
+        rp.getUsernameLabel().setText(r.reviewer.getAccount().getUsername());
+        rp.getRatingLabel().setText(Integer.toString(r.rating));
+        return rp;
+    }
+    
+    public RecipeFrame createRecipeFrame(Recipe r) {
+        RecipeFrame rf = new RecipeFrame();
+        rf.getNameLabel().setText(r.getName());
+        rf.getRatingLabel().setText(Double.toString(r.calculateGradeAvg()));
+        rf.getInstructionsPane().setText(r.getText());
+        
+        DefaultListModel ingredientsListModel = new DefaultListModel();
+        ingredientsListModel.addAll(r.getIngredientAmounts()
+                                     .stream()
+                                     .map(i -> i.toString())
+                                     .collect(Collectors.toList()));
+        rf.setIngredientsList(new JList<>(ingredientsListModel));
+        
+        return rf;
     }
 }

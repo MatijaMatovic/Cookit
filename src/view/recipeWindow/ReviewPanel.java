@@ -5,6 +5,8 @@
  */
 package view.recipeWindow;
 
+import javax.swing.JLabel;
+
 /**
  *
  * @author matija
@@ -29,7 +31,7 @@ public class ReviewPanel extends javax.swing.JPanel {
 
         usernameLabel = new javax.swing.JLabel();
         ratingLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        textLabel = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(32767, 150));
 
@@ -38,8 +40,8 @@ public class ReviewPanel extends javax.swing.JPanel {
         ratingLabel.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         ratingLabel.setText("1.0-5.0");
 
-        jLabel1.setText("Review");
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        textLabel.setText("Review");
+        textLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -48,7 +50,7 @@ public class ReviewPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -64,15 +66,27 @@ public class ReviewPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ratingLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public JLabel getRatingLabel() {
+        return ratingLabel;
+    }
 
+    public JLabel getTextLabel() {
+        return textLabel;
+    }
+
+    public JLabel getUsernameLabel() {
+        return usernameLabel;
+    }
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel ratingLabel;
+    private javax.swing.JLabel textLabel;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }

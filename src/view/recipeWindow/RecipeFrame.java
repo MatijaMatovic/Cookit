@@ -5,6 +5,10 @@
  */
 package view.recipeWindow;
 
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JTextPane;
+
 /**
  *
  * @author matija
@@ -29,8 +33,8 @@ public class RecipeFrame extends javax.swing.JFrame {
 
         ratingGroup = new javax.swing.ButtonGroup();
         nameLabel = new javax.swing.JLabel();
-        ingredientsList = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        ingredientsScollPane = new javax.swing.JScrollPane();
+        ingredientsList = new javax.swing.JList<>();
         instructionsScroll = new javax.swing.JScrollPane();
         instructionsPane = new javax.swing.JTextPane();
         ratingLabel = new javax.swing.JLabel();
@@ -42,7 +46,7 @@ public class RecipeFrame extends javax.swing.JFrame {
         grade4 = new javax.swing.JRadioButton();
         grade5 = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        reviewText = new javax.swing.JTextArea();
         postReviwButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,13 +54,13 @@ public class RecipeFrame extends javax.swing.JFrame {
         nameLabel.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         nameLabel.setText("jLabel1");
 
-        jList1.setBorder(javax.swing.BorderFactory.createTitledBorder("Sastojci"));
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        ingredientsList.setBorder(javax.swing.BorderFactory.createTitledBorder("Sastojci"));
+        ingredientsList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        ingredientsList.setViewportView(jList1);
+        ingredientsScollPane.setViewportView(ingredientsList);
 
         instructionsScroll.setBorder(javax.swing.BorderFactory.createTitledBorder("Postupak"));
 
@@ -85,12 +89,12 @@ public class RecipeFrame extends javax.swing.JFrame {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setHorizontalScrollBar(null);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setToolTipText("Napisite svoju recnziju");
-        jTextArea1.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(jTextArea1);
+        reviewText.setColumns(20);
+        reviewText.setLineWrap(true);
+        reviewText.setRows(5);
+        reviewText.setToolTipText("Napisite svoju recnziju");
+        reviewText.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(reviewText);
 
         postReviwButton.setText("Objavi");
 
@@ -160,10 +164,10 @@ public class RecipeFrame extends javax.swing.JFrame {
                         .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ratingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(ingredientsList, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ingredientsScollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(instructionsScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(instructionsScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(reviewsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -177,7 +181,7 @@ public class RecipeFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(instructionsScroll)
-                    .addComponent(ingredientsList, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
+                    .addComponent(ingredientsScollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(reviewsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -221,6 +225,27 @@ public class RecipeFrame extends javax.swing.JFrame {
         });
     }
 
+    public JList<String> getIngredientsList() {
+        return ingredientsList;
+    }
+
+    public JTextPane getInstructionsPane() {
+        return instructionsPane;
+    }
+
+    public JLabel getNameLabel() {
+        return nameLabel;
+    }
+
+    public JLabel getRatingLabel() {
+        return ratingLabel;
+    }
+
+    public void setIngredientsList(JList<String> ingredientsList) {
+        this.ingredientsList = ingredientsList;
+    }
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton grade1;
     private javax.swing.JRadioButton grade2;
@@ -228,16 +253,16 @@ public class RecipeFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton grade4;
     private javax.swing.JRadioButton grade5;
     private javax.swing.JPanel gradePanel;
-    private javax.swing.JScrollPane ingredientsList;
+    private javax.swing.JList<String> ingredientsList;
+    private javax.swing.JScrollPane ingredientsScollPane;
     private javax.swing.JTextPane instructionsPane;
     private javax.swing.JScrollPane instructionsScroll;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JButton postReviwButton;
     private javax.swing.ButtonGroup ratingGroup;
     private javax.swing.JLabel ratingLabel;
+    private javax.swing.JTextArea reviewText;
     private javax.swing.JPanel reviewsPanel;
     // End of variables declaration//GEN-END:variables
 }
