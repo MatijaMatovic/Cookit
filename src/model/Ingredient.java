@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Ingredient implements Comparable<Ingredient> {
 
-    private String name;
+    protected String name;
 
     public Ingredient() {
     }

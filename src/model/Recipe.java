@@ -116,7 +116,7 @@ public class Recipe {
         Iterator<IngredientAmount> it = ingredientAmounts.iterator();
         StringBuilder sb = new StringBuilder("Sastojci: ");
         while (it.hasNext()) {
-            sb.append(it.next().getIngredient());
+            sb.append(it.next().getName());
             sb.append(", ");
         }
         return sb.toString().substring(0, sb.length() - 1); // Cuts of the final ", "
