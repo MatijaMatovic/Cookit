@@ -31,6 +31,8 @@ public class ReviewPanel extends javax.swing.JPanel {
         ratingLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
+        setMaximumSize(new java.awt.Dimension(32767, 150));
+
         usernameLabel.setText("username");
 
         ratingLabel.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
