@@ -119,10 +119,10 @@ public class ViewController {
     }
     
         public ReviewPanel createReviewPanel(Review r) {
-        ReviewPanel rp = new ReviewPanel();
+        ReviewPanel rp = new ReviewPanel(r.rating);
         rp.getTextLabel().setText(r.comment);
         rp.getUsernameLabel().setText(r.reviewer.getAccount().getUsername());
-        rp.getRatingLabel().setText(Integer.toString(r.rating));
+        //rp.getRatingLabel().setText(Integer.toString(r.rating));
         return rp;
     }
     
