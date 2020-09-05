@@ -5,11 +5,15 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
@@ -21,6 +25,8 @@ public class RecipesList {
     private Set<Recipe> recipesSet; // spisak svih recepata, sortiranih po datumu kreiranja (najnoviji prvo)
 
     private Map<Set<Ingredient>, Set<Recipe>> recipeByIngredientsMap; // Set<Ingredient> skup sastojaka neophodnih za recept
+    private TreeMap<String, Set<Recipe>> recipeStringMap;
+    private TreeMap<TreeSet<Ingredient>, Set<Recipe>> newIngredientRecipeMap;
 
     public RecipesList() {
         recipesSet = new TreeSet<>(new Comparator<Recipe>() {
@@ -31,21 +37,78 @@ public class RecipesList {
 
         });
         recipeByIngredientsMap = new HashMap<>();
+        recipeStringMap = new TreeMap<>(String::compareTo);
+        
+
+///                                                "leksikografski" komparator
+        newIngredientRecipeMap = new TreeMap<>(new Comparator<TreeSet<Ingredient>>() { 
+            @Override
+            public int compare(TreeSet<Ingredient> o1, TreeSet<Ingredient> o2) {
+                int len1 = o1.size();
+                int len2 = o2.size();
+
+                int lim = Math.min(len1, len2);
+
+                int k = 0;
+
+                Ingredient i1 = o1.first();
+                Ingredient i2 = o2.first();
+
+                if (!(i1.equals(i2))) {
+                    return i1.compareTo(i2);
+                }
+
+                while (k < lim) {
+                    i1 = o1.higher(i1);
+                    i2 = o2.higher(i2);
+
+                    if (!(i1.equals(i2))) {
+                        return i1.compareTo(i2);
+                    }
+                    k++;
+                }
+
+                return len1 - len2;
+
+            }
+
+        });
 
     }
 
     public void addRecipe(Recipe r) {
         Set<IngredientAmount> ingredientAmounts = r.getIngredientAmounts();
+        List<IngredientAmount> sortedIngredentsList = new ArrayList(ingredientAmounts);
+        sortedIngredentsList.sort(Ingredient::compareTo);
 
-        Set<Ingredient> ingredientsSet = new HashSet<>();
+        String ingredientsString = String.join("", "", sortedIngredentsList.toString());
 
-        ingredientAmounts.stream().map(ing -> ing.getIngredient()).forEachOrdered(i -> {
-            ingredientsSet.add(i);
-        });
+        recipeStringMap.putIfAbsent(ingredientsString, new TreeSet<>(new Comparator<Recipe>() {
+            @Override
+            public int compare(Recipe o1, Recipe o2) {
+                return o2.getCreationDate().compareTo(o1.getCreationDate());
+            }
 
-        recipeByIngredientsMap.putIfAbsent(ingredientsSet, new TreeSet<>());
-        recipeByIngredientsMap.get(ingredientsSet).add(r);
+        }));
 
+        recipeStringMap.get(ingredientsString).add(r);
+
+    }
+
+    public void addRecipe2(Recipe r) {
+        Set<IngredientAmount> ingredientAmounts = r.getIngredientAmounts();
+        TreeSet<Ingredient> ts = new TreeSet<>(Ingredient::compareTo);
+        ts.addAll(ingredientAmounts);
+
+        newIngredientRecipeMap.putIfAbsent(ts, new TreeSet<>(new Comparator<Recipe>() {
+            @Override
+            public int compare(Recipe o1, Recipe o2) {
+                return o2.getCreationDate().compareTo(o1.getCreationDate());
+            }
+
+        }));
+
+        newIngredientRecipeMap.get(ts).add(r);
     }
 
     public Set<Recipe> getRecipes() {
@@ -68,6 +131,27 @@ public class RecipesList {
         }
 
         return returnRecipes;
+    }
+
+    public Set<Recipe> getRecipes2(TreeSet<Ingredient> ingredientsSet) {
+        Set<Recipe> returnRecipes = new TreeSet<>(new Comparator<Recipe>() {
+            @Override
+            public int compare(Recipe o1, Recipe o2) {
+                return o2.getCreationDate().compareTo(o1.getCreationDate());
+            }
+
+        });
+
+        String ingredientsString = String.join("", "", ingredientsSet.toString());
+        String firstIngredientString = ingredientsSet.first().toString();
+
+        Collection<Set<Recipe>> coll1 = recipeStringMap.subMap(firstIngredientString, ingredientsString).values();
+        coll1.forEach((Set<Recipe> rs) -> {
+            returnRecipes.addAll(rs);
+        });
+
+        return returnRecipes;
+
     }
 
 }

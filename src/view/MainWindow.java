@@ -5,6 +5,8 @@
  */
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,7 +14,23 @@ import javax.swing.JOptionPane;
  * @author Jovana
  */
 public class MainWindow extends javax.swing.JFrame {
+
     private boolean labelPressed = false;
+    
+    private ActionListener loginLblListener;
+
+    public void setLoginLblListener(ActionListener loginLblListener) {
+        this.loginLblListener = loginLblListener;
+    }
+    
+    public void changeLoginLbl(boolean loggedIn){
+        if (loggedIn) {
+            this.jLabel5.setText("Izloguj se");
+        } else {
+            this.jLabel5.setText("Logovanje");
+        }
+    }
+
 
     /**
      * Creates new form MainWindow
@@ -20,9 +38,9 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
         jPanel4.setVisible(false);
-        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);       
+        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+
     }
 
     /**
@@ -126,6 +144,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Logovanje");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel5MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -211,16 +234,15 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
-        if(!labelPressed){
+        if (!labelPressed) {
             jPanel4.setVisible(true);
             labelPressed = true;
-            
-        }
-        else{
+
+        } else {
             jPanel4.setVisible(false);
             labelPressed = false;
         }
-        
+
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -236,6 +258,12 @@ public class MainWindow extends javax.swing.JFrame {
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO dodati jfame za dodavanje novog recepta:
     }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
+        if (loginLblListener != null) {
+            loginLblListener.actionPerformed(new ActionEvent(this, 0, "clicked"));
+        }
+    }//GEN-LAST:event_jLabel5MousePressed
 
     /**
      * @param args the command line arguments
@@ -254,13 +282,17 @@ public class MainWindow extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
