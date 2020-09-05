@@ -5,7 +5,14 @@
  */
 package view.recipeWindow;
 
+import java.awt.FlowLayout;
+import java.awt.Toolkit;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageProducer;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -13,9 +20,11 @@ import javax.swing.JTextPane;
 
 /**
  *
- * @author matija
+ * @author matija i isidora
  */
 public class RecipeFrame extends javax.swing.JFrame {
+    
+    private LevelBar rating;
 
     /**
      * Creates new form RecipeFrame
@@ -26,6 +35,21 @@ public class RecipeFrame extends javax.swing.JFrame {
         // Set the layout to enable adding user reviews
         BoxLayout layout = new BoxLayout(commentPanel, BoxLayout.Y_AXIS);
         commentPanel.setLayout(layout);
+        initRatingStars();
+    }
+    
+    private void initRatingStars(){
+        ImageIcon defaultIcon = new ImageIcon(getClass().getResource("star.png"));
+        ImageProducer ip = defaultIcon.getImage().getSource();
+        ImageIcon star = makeStarImageIcon(ip, 1f, .5f, 0f);
+        List<ImageIcon> list = Arrays.asList(star, star, star, star, star);
+        ratingPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        rating = new LevelBar(defaultIcon, list, 2);
+        ratingPanel.add(rating);
+    }
+    
+    private static ImageIcon makeStarImageIcon(ImageProducer ip, float rf, float gf, float bf) {
+        return new ImageIcon(Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(ip, new SelectedImageFilter(rf, gf, bf))));
     }
 
     /**
@@ -46,14 +70,10 @@ public class RecipeFrame extends javax.swing.JFrame {
         ratingLabel = new javax.swing.JLabel();
         reviewsPanel = new javax.swing.JPanel();
         gradePanel = new javax.swing.JPanel();
-        grade1 = new javax.swing.JRadioButton();
-        grade2 = new javax.swing.JRadioButton();
-        grade3 = new javax.swing.JRadioButton();
-        grade4 = new javax.swing.JRadioButton();
-        grade5 = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         reviewText = new javax.swing.JTextArea();
         postReviwButton = new javax.swing.JButton();
+        ratingPanel = new javax.swing.JPanel();
         reviewsScroller = new javax.swing.JScrollPane();
         commentPanel = new javax.swing.JPanel();
 
@@ -79,21 +99,6 @@ public class RecipeFrame extends javax.swing.JFrame {
         ratingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ratingLabel.setText("1-5");
 
-        ratingGroup.add(grade1);
-        grade1.setText("1");
-
-        ratingGroup.add(grade2);
-        grade2.setText("2");
-
-        ratingGroup.add(grade3);
-        grade3.setText("3");
-
-        ratingGroup.add(grade4);
-        grade4.setText("4");
-
-        ratingGroup.add(grade5);
-        grade5.setText("5");
-
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setHorizontalScrollBar(null);
 
@@ -106,6 +111,17 @@ public class RecipeFrame extends javax.swing.JFrame {
 
         postReviwButton.setText("Objavi");
 
+        javax.swing.GroupLayout ratingPanelLayout = new javax.swing.GroupLayout(ratingPanel);
+        ratingPanel.setLayout(ratingPanelLayout);
+        ratingPanelLayout.setHorizontalGroup(
+            ratingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+        ratingPanelLayout.setVerticalGroup(
+            ratingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 29, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout gradePanelLayout = new javax.swing.GroupLayout(gradePanel);
         gradePanel.setLayout(gradePanelLayout);
         gradePanelLayout.setHorizontalGroup(
@@ -115,15 +131,7 @@ public class RecipeFrame extends javax.swing.JFrame {
                 .addGroup(gradePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(gradePanelLayout.createSequentialGroup()
-                        .addComponent(grade1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(grade2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(grade3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(grade4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(grade5)
+                        .addComponent(ratingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(postReviwButton)))
                 .addContainerGap())
@@ -132,13 +140,9 @@ public class RecipeFrame extends javax.swing.JFrame {
             gradePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gradePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(gradePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(gradePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(postReviwButton)
-                    .addComponent(grade5)
-                    .addComponent(grade4)
-                    .addComponent(grade3)
-                    .addComponent(grade2)
-                    .addComponent(grade1))
+                    .addComponent(ratingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 10, Short.MAX_VALUE))
@@ -175,7 +179,7 @@ public class RecipeFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(gradePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(reviewsScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                .addComponent(reviewsScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -278,11 +282,6 @@ public class RecipeFrame extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel commentPanel;
-    private javax.swing.JRadioButton grade1;
-    private javax.swing.JRadioButton grade2;
-    private javax.swing.JRadioButton grade3;
-    private javax.swing.JRadioButton grade4;
-    private javax.swing.JRadioButton grade5;
     private javax.swing.JPanel gradePanel;
     private javax.swing.JList<String> ingredientsList;
     private javax.swing.JScrollPane ingredientsScrollPane;
@@ -293,6 +292,7 @@ public class RecipeFrame extends javax.swing.JFrame {
     private javax.swing.JButton postReviwButton;
     private javax.swing.ButtonGroup ratingGroup;
     private javax.swing.JLabel ratingLabel;
+    private javax.swing.JPanel ratingPanel;
     private javax.swing.JTextArea reviewText;
     private javax.swing.JPanel reviewsPanel;
     private javax.swing.JScrollPane reviewsScroller;
