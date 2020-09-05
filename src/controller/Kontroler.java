@@ -10,15 +10,23 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
+import java.util.stream.Collectors;
+import javax.swing.Box;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import model.Account;
 import model.Recipe;
 import model.RecipeBook;
+import model.Review;
 import view.MainWindow;
 import view.RecipePanel;
 import view.loginWindow.LoginEvent;
 import view.loginWindow.LoginListener;
 import view.loginWindow.LoginWindow;
+import view.recipeWindow.RecipeFrame;
+import view.recipeWindow.ReviewPanel;
 
 /**
  *
@@ -99,5 +107,38 @@ public class Kontroler {
         int x = (screenSize.width - frame.getSize().width) / 2;
         int y = (screenSize.height - frame.getSize().height) / 2;
         frame.setLocation(x, y);
+    }
+    
+        public ReviewPanel createReviewPanel(Review r) {
+        ReviewPanel rp = new ReviewPanel();
+        rp.getTextLabel().setText(r.comment);
+        rp.getUsernameLabel().setText(r.reviewer.getAccount().getUsername());
+        rp.getRatingLabel().setText(Integer.toString(r.rating));
+        return rp;
+    }
+    
+    public RecipeFrame createRecipeFrame(Recipe r) {
+        RecipeFrame rf = new RecipeFrame();
+        rf.getNameLabel().setText(r.getName());
+        rf.getRatingLabel().setText(Double.toString(r.calculateGradeAvg()));
+        rf.getInstructionsPane().setText(r.getText());
+        
+        DefaultListModel ingredientsListModel = new DefaultListModel();
+        ingredientsListModel.addAll(r.getIngredientAmounts()
+                                     .stream()
+                                     .map(i -> i.toString())
+                                     .collect(Collectors.toList()));
+        rf.setIngredientsList(new JList<>(ingredientsListModel));
+        
+        /* Add users' reviews to the scroll pane */
+        Iterator<Review> it = r.getReviews().iterator();
+        while (it.hasNext()) {
+            Review review = it.next();
+            ReviewPanel rp = createReviewPanel(review);
+            rf.getCommentPanel().add(rp);
+            rf.getCommentPanel().add(Box.createVerticalStrut(5));
+        }
+        
+        return rf;
     }
 }
