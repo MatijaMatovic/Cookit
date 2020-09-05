@@ -36,7 +36,7 @@
                       <Component id="ratingLabel" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="ingredientsScollPane" min="-2" pref="125" max="-2" attributes="0"/>
+                      <Component id="ingredientsScrollPane" min="-2" pref="125" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="instructionsScroll" min="-2" pref="560" max="-2" attributes="0"/>
                   </Group>
@@ -57,7 +57,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="instructionsScroll" max="32767" attributes="0"/>
-                  <Component id="ingredientsScollPane" pref="271" max="32767" attributes="0"/>
+                  <Component id="ingredientsScrollPane" pref="271" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="reviewsPanel" max="32767" attributes="0"/>
@@ -75,7 +75,7 @@
         <Property name="text" type="java.lang.String" value="jLabel1"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="ingredientsScollPane">
+    <Container class="javax.swing.JScrollPane" name="ingredientsScrollPane">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
@@ -139,8 +139,13 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="gradePanel" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="gradePanel" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="reviewsScroller" alignment="0" max="32767" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -150,7 +155,9 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="gradePanel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="233" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="reviewsScroller" pref="221" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -272,6 +279,27 @@
                 <Property name="text" type="java.lang.String" value="Objavi"/>
               </Properties>
             </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JScrollPane" name="reviewsScroller">
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="commentPanel">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="683" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="219" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>

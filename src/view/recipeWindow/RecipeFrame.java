@@ -5,8 +5,10 @@
  */
 package view.recipeWindow;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
 /**
@@ -20,6 +22,10 @@ public class RecipeFrame extends javax.swing.JFrame {
      */
     public RecipeFrame() {
         initComponents();
+        
+        // Set the layout to enable adding user reviews
+        BoxLayout layout = new BoxLayout(commentPanel, BoxLayout.Y_AXIS);
+        commentPanel.setLayout(layout);
     }
 
     /**
@@ -33,7 +39,7 @@ public class RecipeFrame extends javax.swing.JFrame {
 
         ratingGroup = new javax.swing.ButtonGroup();
         nameLabel = new javax.swing.JLabel();
-        ingredientsScollPane = new javax.swing.JScrollPane();
+        ingredientsScrollPane = new javax.swing.JScrollPane();
         ingredientsList = new javax.swing.JList<>();
         instructionsScroll = new javax.swing.JScrollPane();
         instructionsPane = new javax.swing.JTextPane();
@@ -48,6 +54,8 @@ public class RecipeFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         reviewText = new javax.swing.JTextArea();
         postReviwButton = new javax.swing.JButton();
+        reviewsScroller = new javax.swing.JScrollPane();
+        commentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,7 +68,7 @@ public class RecipeFrame extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        ingredientsScollPane.setViewportView(ingredientsList);
+        ingredientsScrollPane.setViewportView(ingredientsList);
 
         instructionsScroll.setBorder(javax.swing.BorderFactory.createTitledBorder("Postupak"));
 
@@ -136,13 +144,29 @@ public class RecipeFrame extends javax.swing.JFrame {
                 .addGap(0, 10, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout commentPanelLayout = new javax.swing.GroupLayout(commentPanel);
+        commentPanel.setLayout(commentPanelLayout);
+        commentPanelLayout.setHorizontalGroup(
+            commentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 683, Short.MAX_VALUE)
+        );
+        commentPanelLayout.setVerticalGroup(
+            commentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 219, Short.MAX_VALUE)
+        );
+
+        reviewsScroller.setViewportView(commentPanel);
+
         javax.swing.GroupLayout reviewsPanelLayout = new javax.swing.GroupLayout(reviewsPanel);
         reviewsPanel.setLayout(reviewsPanelLayout);
         reviewsPanelLayout.setHorizontalGroup(
             reviewsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reviewsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(gradePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(reviewsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(reviewsPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(gradePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(reviewsScroller))
                 .addContainerGap())
         );
         reviewsPanelLayout.setVerticalGroup(
@@ -150,7 +174,9 @@ public class RecipeFrame extends javax.swing.JFrame {
             .addGroup(reviewsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(gradePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reviewsScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -165,7 +191,7 @@ public class RecipeFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ratingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(ingredientsScollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ingredientsScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(instructionsScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(reviewsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -181,7 +207,7 @@ public class RecipeFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(instructionsScroll)
-                    .addComponent(ingredientsScollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
+                    .addComponent(ingredientsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(reviewsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -245,8 +271,13 @@ public class RecipeFrame extends javax.swing.JFrame {
         this.ingredientsList = ingredientsList;
     }
 
+    public JPanel getCommentPanel() {
+        return commentPanel;
+    }
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel commentPanel;
     private javax.swing.JRadioButton grade1;
     private javax.swing.JRadioButton grade2;
     private javax.swing.JRadioButton grade3;
@@ -254,7 +285,7 @@ public class RecipeFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton grade5;
     private javax.swing.JPanel gradePanel;
     private javax.swing.JList<String> ingredientsList;
-    private javax.swing.JScrollPane ingredientsScollPane;
+    private javax.swing.JScrollPane ingredientsScrollPane;
     private javax.swing.JTextPane instructionsPane;
     private javax.swing.JScrollPane instructionsScroll;
     private javax.swing.JScrollPane jScrollPane1;
@@ -264,5 +295,6 @@ public class RecipeFrame extends javax.swing.JFrame {
     private javax.swing.JLabel ratingLabel;
     private javax.swing.JTextArea reviewText;
     private javax.swing.JPanel reviewsPanel;
+    private javax.swing.JScrollPane reviewsScroller;
     // End of variables declaration//GEN-END:variables
 }

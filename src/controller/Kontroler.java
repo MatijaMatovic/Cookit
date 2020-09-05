@@ -6,7 +6,9 @@
 package controller;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import java.util.stream.Collectors;
+import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import model.Recipe;
@@ -59,6 +61,15 @@ public class Kontroler {
                                      .map(i -> i.toString())
                                      .collect(Collectors.toList()));
         rf.setIngredientsList(new JList<>(ingredientsListModel));
+        
+        /* Add users' reviews to the scroll pane */
+        Iterator<Review> it = r.getReviews().iterator();
+        while (it.hasNext()) {
+            Review review = it.next();
+            ReviewPanel rp = createReviewPanel(review);
+            rf.getCommentPanel().add(rp);
+            rf.getCommentPanel().add(Box.createVerticalStrut(5));
+        }
         
         return rf;
     }
