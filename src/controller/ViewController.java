@@ -20,7 +20,6 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import model.Account;
 import model.Recipe;
-import model.RecipeBook;
 import model.Review;
 import view.MainWindow;
 import view.RecipePanel;
@@ -34,13 +33,13 @@ import view.recipeWindow.ReviewPanel;
  *
  * @author Jovana
  */
-public class Kontroler {
+public class ViewController {
 
     public static RecipeBook rb;
     
     public static void main(String[] args) {
         rb = new RecipeBook();
-        Kontroler k = new Kontroler();
+        ViewController k = new ViewController();
         MainWindow mw = k.createMainWindow();
         mw.setVisible(true);
     }
