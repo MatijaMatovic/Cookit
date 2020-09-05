@@ -9,6 +9,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.stream.Collectors;
@@ -75,6 +77,14 @@ public class Kontroler {
                     mw.changeLoginLbl(true);
                 }
             }
+        });
+        
+        mw.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentHidden(ComponentEvent e) {
+                //sacuvajUFajl();
+            }
+            
         });
 
         return mw;
