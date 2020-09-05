@@ -156,7 +156,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="gradePanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="reviewsScroller" pref="221" max="32767" attributes="0"/>
+                  <Component id="reviewsScroller" pref="215" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -173,15 +173,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane1" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="grade1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="grade2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="grade3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="grade4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="grade5" min="-2" max="-2" attributes="0"/>
+                              <Component id="ratingPanel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="postReviwButton" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -194,13 +186,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="postReviwButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="grade5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="grade4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="grade3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="grade2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="grade1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="postReviwButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="ratingPanel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
@@ -210,46 +198,6 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JRadioButton" name="grade1">
-              <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="ratingGroup"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="1"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="grade2">
-              <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="ratingGroup"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="2"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="grade3">
-              <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="ratingGroup"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="3"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="grade4">
-              <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="ratingGroup"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="4"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="grade5">
-              <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="ratingGroup"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="5"/>
-              </Properties>
-            </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
               <Properties>
                 <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
@@ -279,6 +227,21 @@
                 <Property name="text" type="java.lang.String" value="Objavi"/>
               </Properties>
             </Component>
+            <Container class="javax.swing.JPanel" name="ratingPanel">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="150" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="29" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JScrollPane" name="reviewsScroller">
