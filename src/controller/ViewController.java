@@ -122,7 +122,7 @@ public class ViewController {
         ReviewPanel rp = new ReviewPanel();
         rp.getTextLabel().setText(r.comment);
         rp.getUsernameLabel().setText(r.reviewer.getAccount().getUsername());
-        rp.getRatingLabel().setText(Integer.toString(r.rating));
+        rp.initRating(r.rating);
         return rp;
     }
     
