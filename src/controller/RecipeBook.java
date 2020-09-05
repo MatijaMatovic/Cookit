@@ -1,4 +1,4 @@
-package model;
+package controller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.*;
+import model.Account;
+import model.IngredientCategory;
+import model.KitchenAppliance;
+import model.Recipe;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
