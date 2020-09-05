@@ -45,6 +45,9 @@ public class RecipeBook {
 
     public Account logIn(String userName, String password) {
         Account ac = this.accounts.get(userName);
+        if (ac == null){
+            return null;
+        }
         if (ac.getPassword().equals(password)) {
             return ac;
         } else {

@@ -27,6 +27,13 @@ import view.loginWindow.LoginWindow;
 public class Kontroler {
 
     public static RecipeBook rb;
+    
+    public static void main(String[] args) {
+        rb = new RecipeBook();
+        Kontroler k = new Kontroler();
+        MainWindow mw = k.createMainWindow();
+        mw.setVisible(true);
+    }
 
     public RecipePanel createRecipePanel(Recipe r) {
         RecipePanel rp = new RecipePanel();
@@ -54,10 +61,10 @@ public class Kontroler {
             public void actionPerformed(ActionEvent e) {
                 if (rb.getCurrentAccount() == null) {
                     createLoginWindow();
-                    mw.changeLoginLbl(true);
+                    mw.changeLoginLbl(false);
                 } else {
                     rb.setCurrentAccount(null);
-                    mw.changeLoginLbl(false);
+                    mw.changeLoginLbl(true);
                 }
             }
         });
@@ -83,6 +90,7 @@ public class Kontroler {
         });
 
         centerFrame(lw);
+        lw.setVisible(true);
         return lw;
     }
 
