@@ -38,7 +38,7 @@ public class ShowReviews extends javax.swing.JPanel {
 
     private void initAllRecipePanels(ArrayList<Integer> ratings) {
         for (int i = 0; i < ratings.size(); i++) {
-            ReviewPanel panel = new ReviewPanel(ratings.get(i));
+            ReviewPanel panel = new ReviewPanel();
             panel.setPreferredSize(new Dimension(200, 40));
             add(panel);
         }
