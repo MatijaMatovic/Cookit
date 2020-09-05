@@ -51,7 +51,7 @@ public class Kontroler {
                         .ofPattern("dd.MM.yyyy. HH:mm")));
         rp.getNameLabel().setText(r.getName());
         /* If instructions are longer than 280 chars, it chopps it off */
- /* <html> tags enable the formatting of text in the label      */
+        /* <html> tags enable the formatting of text in the label      */
         rp.getInstructionsLabel().setText("<html>" + r.getText().substring(0,
                 Math.min(r.getText().length(), 280)) + "...</html>");
         rp.getReviewsLabel().setText(Double.toString(r.calculateGradeAvg()));
@@ -109,7 +109,7 @@ public class Kontroler {
         frame.setLocation(x, y);
     }
     
-        public ReviewPanel createReviewPanel(Review r) {
+    public ReviewPanel createReviewPanel(Review r) {
         ReviewPanel rp = new ReviewPanel();
         rp.getTextLabel().setText(r.comment);
         rp.getUsernameLabel().setText(r.reviewer.getAccount().getUsername());
