@@ -20,7 +20,7 @@ import javax.swing.JTextPane;
 
 /**
  *
- * @author matija
+ * @author matija i isidora
  */
 public class RecipeFrame extends javax.swing.JFrame {
     
