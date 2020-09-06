@@ -8,6 +8,13 @@ public class IngredientAmount extends Ingredient{
 
     public IngredientAmount() {
     }
+
+    public IngredientAmount(String name, Double amount, String unit) {
+        super(name);
+        this.amount = amount;
+        this.unit = unit;
+    }
+    
     public Double getAmount() {
         return amount;
     }

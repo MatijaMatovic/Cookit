@@ -5,14 +5,12 @@ import java.util.*;
 
 public class Recipe {
 
-    public Recipe() {
-    }
-
     private String name;
 
     private String text;
 
     private LocalDateTime creationDate;
+    
     private Long id;
 
     private boolean active = true;
@@ -24,6 +22,19 @@ public class Recipe {
     private Set<IngredientAmount> ingredientAmounts;
 
     private Set<Review> reviews;
+    
+    
+    public Recipe() {
+    }
+
+    public Recipe(Long id, String name, String text, RegisteredUser author, Set<IngredientAmount> ingredientAmounts) {
+        this.id = id;
+        this.name = name;
+        this.text = text;
+        this.author = author;
+        this.ingredientAmounts = ingredientAmounts;
+    }
+    
 
     public String getName() {
         return name;

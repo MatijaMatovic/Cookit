@@ -12,15 +12,24 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import model.Account;
+import model.IngredientAmount;
 import model.Recipe;
+import model.RegisteredUser;
 import model.Review;
+import view.CreateRecipeWindow.CreateRecipeEvent;
+import view.CreateRecipeWindow.CreateRecipeFrame;
+import view.CreateRecipeWindow.CreateRecipeListener;
 import view.MainWindow;
 import view.RecipePanel;
 import view.loginWindow.LoginEvent;
@@ -149,5 +158,32 @@ public class ViewController {
         }
         
         return rf;
+    }
+    
+    public CreateRecipeFrame createRecipeCreator() {
+        CreateRecipeFrame crf = new CreateRecipeFrame();
+        crf.setListener(new CreateRecipeListener() {
+            @Override
+            public void createRecipeEventEmitted(CreateRecipeEvent r) {
+                long id = Collections.max(rb.recipes.keySet());
+                String name = r.getName();
+                String text = r.getText();
+                Set<IngredientAmount> ingredients = new HashSet<>();
+                Iterator<String> it = r.getIngredients().iterator();
+                while (it.hasNext()) {
+                    String ingredientData [] = it.next().split(" ");
+                    IngredientAmount ing = new IngredientAmount(
+                            ingredientData[0], 
+                            Double.parseDouble(ingredientData[1]),
+                            ingredientData[2]);
+                    ingredients.add(ing);
+                }
+                Recipe recipe = new Recipe(id, name, text, 
+                        (RegisteredUser) rb.getCurrentAccount().getAccountOwner(), ingredients);
+                rb.recipes.put(id, recipe);
+                JOptionPane.showMessageDialog(crf, "Uspesno dodat recept!");
+            }
+        });
+        return crf;
     }
 }

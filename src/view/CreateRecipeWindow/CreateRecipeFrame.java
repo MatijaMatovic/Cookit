@@ -5,6 +5,8 @@
  */
 package view.CreateRecipeWindow;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.DefaultListModel;
 
 /**
@@ -14,6 +16,7 @@ import javax.swing.DefaultListModel;
 public class CreateRecipeFrame extends javax.swing.JFrame {
     
     DefaultListModel<String> ingrModel;
+    CreateRecipeListener listener;
 
     /**
      * Creates new form ReceptKreiranje
@@ -165,14 +168,22 @@ public class CreateRecipeFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setListener(CreateRecipeListener listener) {
+        this.listener = listener;
+    }
+
     private void okayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okayActionPerformed
-        String naslov = heading.getText() + "\n";
-        String sastojci = "";
-        for (int i = 0; i < ingrModel.getSize(); i++){
-           sastojci += ingrModel.getElementAt(i) + "\n";
-        }
-        String tekst = textOfRecipe.getText() + "\n";
-        System.out.println(naslov + sastojci + tekst);
+        if (listener == null)
+            return;
+        
+        String name = heading.getText();
+        String text = textOfRecipe.getText();
+        Set<String> ingredients = new HashSet<>(); //Ingredient is in the format name <val> unit (brasno 100 g)
+        for (int i = 0; i < ingrModel.getSize(); i++)
+            ingredients.add(ingrModel.getElementAt(i));
+        
+        CreateRecipeEvent ev = new CreateRecipeEvent(name, text, ingredients, this);
+        listener.createRecipeEventEmitted(ev);
     }//GEN-LAST:event_okayActionPerformed
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
