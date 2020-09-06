@@ -20,7 +20,7 @@ public class ShowReviews extends javax.swing.JPanel {
      */
     public ShowReviews(ArrayList<Integer> ratings) {
         initComponents();
-        initAllRecipePanels(ratings);
+        initAllReviewPanels(ratings);
         repaint();
     }
 
@@ -36,7 +36,7 @@ public class ShowReviews extends javax.swing.JPanel {
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void initAllRecipePanels(ArrayList<Integer> ratings) {
+    private void initAllReviewPanels(ArrayList<Integer> ratings) {
         for (int i = 0; i < ratings.size(); i++) {
             ReviewPanel panel = new ReviewPanel();
             panel.setPreferredSize(new Dimension(200, 40));
