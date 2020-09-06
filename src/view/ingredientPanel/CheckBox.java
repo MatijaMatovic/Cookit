@@ -5,12 +5,17 @@
  */
 package view.ingredientPanel;
 
+import java.awt.Color;
+import java.awt.Dimension;
+
 /**
  *
  * @author Jovana
  */
 public class CheckBox extends javax.swing.JCheckBox{
+    
     private final String label;
+    
     public CheckBox(String l) {
         super();
         this.label = l;

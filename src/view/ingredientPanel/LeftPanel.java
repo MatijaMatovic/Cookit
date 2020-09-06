@@ -15,9 +15,10 @@ import javax.swing.JPanel;
  * @author Jovana
  */
 public class LeftPanel extends javax.swing.JPanel {
+    
     private int i=1;
     private GridBagConstraints cbg;
-    private final LPanel p;
+    private LPanel lPanel;
 
     /**
      * Creates new form LeftPanel
@@ -33,8 +34,8 @@ public class LeftPanel extends javax.swing.JPanel {
         cbg.gridx = 0;
         cbg.gridy = 0;
         cbg.fill = GridBagConstraints.HORIZONTAL;
-        p = new LPanel();
-        this.add(p, cbg);
+        lPanel = new LPanel();
+        this.add(lPanel, cbg);
         
         cbg = new GridBagConstraints();
         cbg.anchor = GridBagConstraints.NORTHWEST;
@@ -44,33 +45,32 @@ public class LeftPanel extends javax.swing.JPanel {
         cbg.gridy = i;
         this.add(jp, cbg);
         i++;
-        p.categories.add(jp);
+        lPanel.categories.add(jp);
     }
     
     public void initIngridient(JPanel jp){
         cbg.gridy = i;
         this.add(jp, cbg);
         i++;
-        p.ingredients.add(jp);
+        lPanel.ingredients.add(jp);
     }
     
-    public void initPanelA(JPanel jp){
+    public void initPanelAppliance(JPanel jp){
         cbg.gridy = 1;
         jp.setVisible(false);
         this.add(jp, cbg);
-
-        p.appliances = jp;
+        lPanel.appliances = jp;
     }
-    
-    
-    
+
     public void alignment(){
         cbg.weighty=1;
         this.add(new JPanel(),cbg);
     }
     
-   
-
+    public LPanel getLPanel(){
+        return lPanel;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

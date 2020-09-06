@@ -7,13 +7,9 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-import view.ingredientPanel.CategoryPanel;
-import view.ingredientPanel.IngredientPanel;
-import view.ingredientPanel.LeftPanel;
 
 /**
  *
@@ -22,21 +18,7 @@ import view.ingredientPanel.LeftPanel;
 public class MainWindow extends javax.swing.JFrame {
 
     private boolean labelPressed = false;
-    
-    private ActionListener loginLblListener;
-
-    public void setLoginLblListener(ActionListener loginLblListener) {
-        this.loginLblListener = loginLblListener;
-    }
-    
-    public void changeLoginLbl(boolean loggedIn){
-        if (loggedIn) {
-            this.jLabel5.setText("Izloguj se");
-        } else {
-            this.jLabel5.setText("Logovanje");
-        }
-    }
-
+    private ActionListener loginLblListener, favLblListener, myPrListener, newRecepieListener;
 
     /**
      * Creates new form MainWindow
@@ -46,8 +28,38 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel4.setVisible(false);
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        jScrollPane1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jScrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    }
+    public void changeLoginLbl(boolean loggedIn){
+        if (loggedIn) {
+            this.jLabel5.setText("Izloguj se");
+        } else {
+            this.jLabel5.setText("Logovanje");
+        }
+    }
+    
+    public void setLoginLblListener(ActionListener loginLblListener) {
+        this.loginLblListener = loginLblListener;
     }
 
+    public void setFavLblListener(ActionListener favLblListener) {
+        this.favLblListener = favLblListener;
+    }
+    
+    public void setMyPrListener(ActionListener myPrListener) {
+        this.myPrListener = myPrListener;
+    }
+    
+    public void setNewRecepieListener(ActionListener newRecepieListener) {
+        this.newRecepieListener = newRecepieListener;
+    }
+    
+    public JScrollPane getJScrollPane1(){
+        return jScrollPane1;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -253,17 +265,21 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        // TODO dodati jfame za prikaz omiljenih recepata:
-        JOptionPane.showMessageDialog(null, "dodati jfame za prikaz omiljenih recepata");
+         if (favLblListener != null) {
+            favLblListener.actionPerformed(new ActionEvent(this, 0, "clicked"));
+        }
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        // TODO dodati jfame za izmjenu licnih podataka:
-        JOptionPane.showMessageDialog(null, "dodati jfame za izmjenu licnih podataka");
+        if (myPrListener != null) {
+            myPrListener.actionPerformed(new ActionEvent(this, 0, "clicked"));
+        }
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        // TODO dodati jfame za dodavanje novog recepta:
+        if (newRecepieListener != null) {
+            newRecepieListener.actionPerformed(new ActionEvent(this, 0, "clicked"));
+        }
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed

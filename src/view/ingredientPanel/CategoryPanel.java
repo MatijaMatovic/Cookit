@@ -13,6 +13,7 @@ import java.awt.Toolkit;
  */
 public class CategoryPanel extends javax.swing.JPanel {
     private String category;
+    
     /**
      * Creates new form CategoryPanel
      */
@@ -20,9 +21,16 @@ public class CategoryPanel extends javax.swing.JPanel {
         initComponents();
         this.category = c;
         jLabel1.setText(c);
-        setPreferredSize(new java.awt.Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/3-20, 80));
+        setPreferredSize(new java.awt.Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/3-20, (int)this.getPreferredSize().getHeight()));
     }
-
+    
+    public String getGategory(){
+        return category;
+    }
+    
+    public void setGategory(String c){
+        this.category = c;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

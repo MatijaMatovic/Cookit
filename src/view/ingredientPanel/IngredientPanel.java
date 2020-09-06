@@ -6,6 +6,7 @@
 package view.ingredientPanel;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -21,13 +22,13 @@ import javax.swing.JLabel;
  * @author Jovana
  */
 public class IngredientPanel extends javax.swing.JPanel {
+     
     private final GridBagConstraints c;
     private int i = -1;
     private int j = 0;
     private final int width;
     private int tmp;
     private final Set<String> ingredients =  new HashSet<String>();
-    
 
     /**
      * Creates new form IngredientPanel
@@ -37,7 +38,7 @@ public class IngredientPanel extends javax.swing.JPanel {
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 0), 1, true));
         setBackground(Color.WHITE);
         this.setLayout(new GridBagLayout());
-        
+
         c = new GridBagConstraints();
         c.anchor = GridBagConstraints.NORTHWEST;
         width = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth()/3);
@@ -49,6 +50,7 @@ public class IngredientPanel extends javax.swing.JPanel {
  
         JLabel tl = new JLabel(ingredient);
         tl.setFont(new Font("", Font.PLAIN, 10));
+        
         CheckBox jcb = new CheckBox(ingredient);
         jcb.addActionListener(new ActionListener() {
             @Override
@@ -61,9 +63,8 @@ public class IngredientPanel extends javax.swing.JPanel {
                 } 
             }
             });
-        jcb.setBackground(Color.red);
+        jcb.setBackground(Color.white);
         tmp = tmp - ingredient.length()*8-30 ;
-
         if(tmp<=0)
         {
             tmp = width;
@@ -108,6 +109,8 @@ public class IngredientPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+        setMaximumSize(new Dimension((int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()/3)-20,32767));
+        setMinimumSize(new Dimension((int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()/3)-20,0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
