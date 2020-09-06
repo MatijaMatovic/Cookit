@@ -159,7 +159,7 @@ public class ViewController {
         
         return rf;
     }
-    
+        
     public CreateRecipeFrame createRecipeCreator() {
         CreateRecipeFrame crf = new CreateRecipeFrame();
         crf.setListener(new CreateRecipeListener() {
