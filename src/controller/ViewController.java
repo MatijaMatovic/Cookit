@@ -40,6 +40,7 @@ import view.CreateRecipeWindow.CreateRecipeListener;
 import view.MainWindow;
 import view.RecipePanel;
 import view.createUser.CreateAccountEvent;
+import view.createUser.CreateAccountFrame;
 import view.createUser.CreateAccountListener;
 import view.createUser.CreateAccountPanel;
 import view.createUser.GenerateUsernameEvent;
@@ -173,6 +174,16 @@ public class ViewController {
                 }
             }
         });
+        
+        lw.setCreateAccountListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CreateAccountFrame caf = createNewAccountFrame();
+                caf.setVisible(true);
+                centerFrame(caf);
+                lw.dispose();
+            }
+        });
 
         centerFrame(lw);
         lw.setVisible(true);
@@ -284,8 +295,8 @@ public class ViewController {
         return lp;
     }
     
-    public CreateAccountPanel createNewAccountPanel() {
-        CreateAccountPanel cap = new CreateAccountPanel();
+    public CreateAccountFrame createNewAccountFrame() {
+        CreateAccountFrame cap = new CreateAccountFrame();
 
         cap.setGeneratePasswordListener(new ActionListener() {
             @Override
@@ -385,6 +396,7 @@ public class ViewController {
                     newAccOwner.setAccount(newAcc);
                     
                     rb.accounts.put(username, newAcc);
+                    cap.dispose();
                 }
 
             }
