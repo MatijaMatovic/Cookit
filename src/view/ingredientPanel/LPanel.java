@@ -15,14 +15,21 @@ import javax.swing.JPanel;
  * @author Jovana
  */
 public class LPanel extends javax.swing.JPanel {
+     
     public Set<JPanel> ingredients = new HashSet<JPanel>();
     public Set<JPanel> categories = new HashSet<JPanel>();
     public JPanel appliances;
+    private SearchListener listener;
+    
     /**
      * Creates new form LPanel
      */
     public LPanel() {
         initComponents();
+    }
+    
+     public void setListener(SearchListener listener) {
+        this.listener = listener;
     }
 
     /**
@@ -64,6 +71,11 @@ public class LPanel extends javax.swing.JPanel {
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Pretraga");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -97,8 +109,10 @@ public class LPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+   
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        
         Iterator value = ingredients.iterator(); 
         while (value.hasNext()) { 
             JPanel name = (JPanel)value.next();
@@ -115,8 +129,10 @@ public class LPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+      
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        
         Iterator value = ingredients.iterator(); 
         while (value.hasNext()) { 
             JPanel name = (JPanel)value.next();
@@ -130,6 +146,21 @@ public class LPanel extends javax.swing.JPanel {
         } 
         appliances.setVisible(false);
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        
+        if(listener != null){
+            Set<String> set = new HashSet<String>();
+            
+            Iterator value = ingredients.iterator(); 
+            while (value.hasNext()) { 
+                set.addAll(((IngredientPanel)value.next()).getIngredients());   
+            } 
+            
+            SearchEvent sev = new SearchEvent(set, this);
+            listener.searchEventEmitted(sev);
+        }
+    }//GEN-LAST:event_jLabel4MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

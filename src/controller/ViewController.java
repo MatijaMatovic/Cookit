@@ -24,6 +24,8 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import model.Account;
 import model.IngredientAmount;
+import model.Ingredient;
+import model.IngredientCategory;
 import model.Recipe;
 import model.RegisteredUser;
 import model.Review;
@@ -32,6 +34,11 @@ import view.CreateRecipeWindow.CreateRecipeFrame;
 import view.CreateRecipeWindow.CreateRecipeListener;
 import view.MainWindow;
 import view.RecipePanel;
+import view.ingredientPanel.CategoryPanel;
+import view.ingredientPanel.IngredientPanel;
+import view.ingredientPanel.LeftPanel;
+import view.ingredientPanel.SearchEvent;
+import view.ingredientPanel.SearchListener;
 import view.loginWindow.LoginEvent;
 import view.loginWindow.LoginListener;
 import view.loginWindow.LoginWindow;
@@ -47,9 +54,29 @@ public class ViewController {
     public static RecipeBook rb;
     
     public static void main(String[] args) {
+        IngredientCategory ic1 = new IngredientCategory("Mlijecni proizvodi");
+        IngredientCategory ic2 = new IngredientCategory("Povrce");
+        Set<IngredientCategory> ic = new HashSet<>();
+        Set<Ingredient> i1 = new HashSet<>();
+        Set<Ingredient> i2 = new HashSet<>();
+        i1.add(new Ingredient("mlijeko")); i1.add(new Ingredient("Feta sir"));i1.add(new Ingredient("Mozzarella"));
+        i1.add(new Ingredient("Gauda"));i1.add(new Ingredient("Feta sir"));i1.add(new Ingredient("Kackavalj"));
+        i1.add(new Ingredient("jaja")); i1.add(new Ingredient("maslac")); i1.add(new Ingredient("slag"));
+        i1.add(new Ingredient("mleko u prahu"));
+        
+        i2.add(new Ingredient("paprika")); i2.add(new Ingredient("mrkva"));i2.add(new Ingredient("repa"));
+        i2.add(new Ingredient("rotkva"));i2.add(new Ingredient("kupus"));i2.add(new Ingredient("luk"));
+        i2.add(new Ingredient("spanac")); i2.add(new Ingredient("blitva")); i2.add(new Ingredient("tikvice"));
+        i2.add(new Ingredient("persun"));
+        ic1.setIngredientsSet(i1);
+        ic2.setIngredientsSet(i2);
+        ic.add(ic1); ic.add(ic2);
+        //---------------------------------------------------------------------------
+                
         rb = new RecipeBook();
         ViewController k = new ViewController();
         MainWindow mw = k.createMainWindow();
+        mw.getJScrollPane1().setViewportView(k.createLeftPanel(ic));
         mw.setVisible(true);
     }
 
@@ -93,6 +120,28 @@ public class ViewController {
                 //sacuvajUFajl();
             }
             
+        });
+        
+        mw.setFavLblListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO: kreirati prozor za prikaz omiljenih recepata
+                System.out.println("fav");
+            }
+        });
+        mw.setMyPrListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO: kreirati prozor za izmjenu licnih podataka
+                System.out.println("my profile");
+            }
+        });
+        mw.setNewRecepieListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO:kreirati prozor za prikaz novih recepata
+                System.out.println("new recepie");
+            }
         });
 
         return mw;
@@ -185,5 +234,43 @@ public class ViewController {
             }
         });
         return crf;
+    }
+    
+    private LeftPanel createLeftPanel(Set<IngredientCategory> ingredientCategories){
+        Set<Ingredient> ingridients = new HashSet<>();
+        LeftPanel lp = new LeftPanel();
+        Iterator<IngredientCategory> itC = ingredientCategories.iterator();
+
+        while(itC.hasNext())
+        {
+            IngredientCategory ci = itC.next();
+            CategoryPanel cp = new CategoryPanel(ci.getName());
+            lp.initCategory(cp);
+            Iterator<Ingredient> itI = ci.getIngredientsSet().iterator();
+            IngredientPanel ip = new IngredientPanel();
+            
+            while(itI.hasNext())
+            {
+                ip.init(itI.next().getName());
+            }
+            lp.initIngridient(ip);
+        }
+        lp.alignment();
+        
+        lp.getLPanel().setListener(new SearchListener() 
+        {
+             @Override
+             public void searchEventEmitted(SearchEvent e) 
+             {
+                 for (String ingr : e.getIngredients())
+                 {
+                      ingridients.add(new Ingredient(ingr));
+                }
+                 
+                //TODO: poziv funkcije za sortiranje, kojoj se posalje ingridients
+             }
+         });
+        
+        return lp;
     }
 }
