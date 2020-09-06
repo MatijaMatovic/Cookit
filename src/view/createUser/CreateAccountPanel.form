@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="titleSeparator" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="panelTitleLbl" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="surnameLbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="surnameTextField" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="nameLbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="nameTextField" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="birthDateLbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="birthDateChooser" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="createAccountBtn" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="generateUserNameBtn" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="passwordLbl" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="passwordTextField" pref="265" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="usernameLbl" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="userNameTextField" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="generatePasswordBtn" min="-2" pref="84" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="emailLbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="emailUserNameTextField" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                      <Component id="atLbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                      <Component id="emailDomainTextField" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Component id="dotLbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Component id="emailDotComTextField" min="-2" pref="62" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="panelTitleLbl" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="titleSeparator" min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="nameLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="surnameLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="surnameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="birthDateLbl" min="-2" max="-2" attributes="0"/>
+                  <Component id="birthDateChooser" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="emailLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="emailUserNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="atLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="emailDomainTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="dotLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="emailDotComTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="usernameLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="userNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="generateUserNameBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="passwordLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="generatePasswordBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="passwordTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <Component id="createAccountBtn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="panelTitleLbl">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+          <FontInfo relative="true">
+            <Font component="panelTitleLbl" property="font" relativeSize="true" size="12"/>
+          </FontInfo>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Registracija"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSeparator" name="titleSeparator">
+    </Component>
+    <Component class="javax.swing.JLabel" name="nameLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ime:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="nameTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="surnameLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Prezime:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="surnameTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="birthDateLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Datum ro&#x111;enja:"/>
+      </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="birthDateChooser">
+    </Component>
+    <Component class="javax.swing.JLabel" name="emailLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="e-mail adresa:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="emailUserNameTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="usernameLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Korisni&#x10d;ko ime:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="userNameTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="passwordLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Lozinka:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="createAccountBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Kreiraj nalog"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createAccountBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="generateUserNameBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Predlo&#x17e;i"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="generateUserNameBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="generatePasswordBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Predlo&#x17e;i"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="generatePasswordBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="atLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="@"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="emailDomainTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="dotLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="emailDotComTextField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="emailDotComTextFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="passwordTextField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField1"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

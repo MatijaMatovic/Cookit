@@ -151,4 +151,8 @@ public class RecipeBook {
             e.printStackTrace();
         }
     }
+    
+    public boolean checkAccount(String username){
+        return this.accounts.containsKey(username);
+    }
 }
