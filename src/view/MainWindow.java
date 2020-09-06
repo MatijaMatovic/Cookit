@@ -370,7 +370,9 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
     }
-
+    public void addRecipePanel(RecipePanel recipeComp) {
+        this.recipePanelsPanel.add(recipeComp);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

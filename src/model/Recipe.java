@@ -25,9 +25,14 @@ public class Recipe {
     
     
     public Recipe() {
+        creationDate = LocalDateTime.now();
+        requiredAppliances = new HashSet<>();
+        ingredientAmounts = new HashSet<>();
+        reviews = new HashSet<>();
     }
 
     public Recipe(Long id, String name, String text, RegisteredUser author, Set<IngredientAmount> ingredientAmounts) {
+        this();
         this.id = id;
         this.name = name;
         this.text = text;
@@ -109,6 +114,9 @@ public class Recipe {
     }
 
     public double calculateGradeAvg() {
+        if (reviews.isEmpty())
+            return 0.0d;
+        
         Iterator<Review> it = reviews.iterator();
         double count = 0, sum = 0;
         while (it.hasNext()) {

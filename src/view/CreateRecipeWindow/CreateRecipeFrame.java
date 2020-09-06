@@ -83,7 +83,7 @@ public class CreateRecipeFrame extends javax.swing.JFrame {
         ingredientPopupMenu.add(addIngredientMenuItem);
         addIngredientMenuItem.getAccessibleContext().setAccessibleName("");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pisanje recepta");
         setFont(new java.awt.Font("Comic Sans MS", 0, 10)); // NOI18N
 
@@ -144,7 +144,7 @@ public class CreateRecipeFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 155, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(okay, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane3))))
                 .addContainerGap())

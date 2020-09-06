@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
@@ -145,12 +146,22 @@ public class ViewController {
             public void actionPerformed(ActionEvent e) {
                 //TODO: kreirati prozor za izmjenu licnih podataka
                 System.out.println("my profile");
+                Recipe r = rb.recipes.get(1l);
+                mw.addRecipePanel(createRecipePanel(r));//DELETE
+                mw.setVisible(false);
+                mw.setVisible(true);
             }
         });
         mw.setNewRecepieListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO:kreirati prozor za prikaz novih recepata
+                if (rb.currentAccount == null) {
+                    JOptionPane.showMessageDialog(mw, "Niste ulogovani");
+                    return;
+                }
+                CreateRecipeFrame crf = createRecipeCreator();
+                crf.setVisible(true);
+                centerFrame(crf);
                 System.out.println("new recepie");
             }
         });
@@ -235,7 +246,7 @@ public class ViewController {
         crf.setListener(new CreateRecipeListener() {
             @Override
             public void createRecipeEventEmitted(CreateRecipeEvent r) {
-                long id = Collections.max(rb.recipes.keySet());
+                long id = 1;
                 String name = r.getName();
                 String text = r.getText();
                 Set<IngredientAmount> ingredients = new HashSet<>();
@@ -395,6 +406,7 @@ public class ViewController {
                     newAccOwner.setPrivileged(false);
                     newAccOwner.setAccount(newAcc);
                     
+                    newAcc.setAccountOwner(newAccOwner);
                     rb.accounts.put(username, newAcc);
                     cap.dispose();
                 }
