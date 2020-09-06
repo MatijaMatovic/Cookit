@@ -126,7 +126,8 @@ public class JovanoveViewControllerFunkcije {
                     newAccOwner.setReviews(new TreeSet<>());
                     newAccOwner.setPrivileged(false);
                     newAccOwner.setAccount(newAcc);
-
+                    
+                    rb.accounts.put(username, newAcc);
                 }
 
             }
