@@ -25,6 +25,8 @@ import javax.swing.JTextPane;
 public class RecipeFrame extends javax.swing.JFrame {
     
     private LevelBar rating;
+    private PostReviewListener listener;
+    private Long id;
 
     /**
      * Creates new form RecipeFrame
@@ -110,6 +112,11 @@ public class RecipeFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(reviewText);
 
         postReviwButton.setText("Objavi");
+        postReviwButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postReviwButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ratingPanelLayout = new javax.swing.GroupLayout(ratingPanel);
         ratingPanel.setLayout(ratingPanelLayout);
@@ -220,6 +227,12 @@ public class RecipeFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void postReviwButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postReviwButtonActionPerformed
+        // TODO add your handling code here:
+        PostReviewEvent ev = new PostReviewEvent(reviewText.getText(), rating.getLevel(), "a", id, this);
+        listener.postReviewEventEmitted(ev);
+    }//GEN-LAST:event_postReviwButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -253,6 +266,17 @@ public class RecipeFrame extends javax.swing.JFrame {
                 new RecipeFrame().setVisible(true);
             }
         });
+    }
+    
+    public void disableRating(){
+        gradePanel.setVisible(false);
+        //rating.clear();
+        //rating.freezeRating();
+        //reviewText.setEditable(false);
+    }
+
+    public void setListener(PostReviewListener listener) {
+        this.listener = listener;
     }
 
     public JList<String> getIngredientsList() {

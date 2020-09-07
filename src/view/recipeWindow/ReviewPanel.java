@@ -5,6 +5,7 @@
  */
 package view.recipeWindow;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.image.FilteredImageSource;
@@ -27,6 +28,7 @@ public class ReviewPanel extends javax.swing.JPanel {
      */
     public ReviewPanel() {
         initComponents();
+        setPreferredSize(new Dimension(500, 100));
         
     }
     

@@ -22,6 +22,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import javax.crypto.AEADBadTagException;
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -54,6 +55,8 @@ import view.ingredientPanel.SearchListener;
 import view.loginWindow.LoginEvent;
 import view.loginWindow.LoginListener;
 import view.loginWindow.LoginWindow;
+import view.recipeWindow.PostReviewEvent;
+import view.recipeWindow.PostReviewListener;
 import view.recipeWindow.RecipeFrame;
 import view.recipeWindow.ReviewPanel;
 
@@ -97,8 +100,16 @@ public class ViewController {
         HashSet<IngredientAmount> ingrs = new HashSet<>();
         ingrs.add(new IngredientAmount("mleko", 100.0, "g"));
         ingrs.add(new IngredientAmount("jaja", 100.0, "kom"));
-        recs.add(new Recipe(1l, "Palacinke", "Mesaj sve", user, ingrs));
-        recs.add(new Recipe(2l, "Baklava", "Kupi u poslasticarnici", user, ingrs));
+        Recipe r1 = new Recipe(1l, "Palacinke", "Mesaj sve", user, ingrs);
+        Review stars = new Review();
+        stars.comment = "lep recept";
+        stars.rating = 4;
+        stars.reviewer = user;
+        HashSet<Review> reviews = new HashSet<>(); reviews.add(stars);
+        r1.setReviews(reviews);
+        recs.add(r1);
+        Recipe r2 = new Recipe(2l, "Baklava", "Kupi u poslasticarnici", user, ingrs);
+        recs.add(r2);
         //---------------------------------------------------------------------------
                 
         rb = new RecipeBook();
@@ -111,6 +122,7 @@ public class ViewController {
         MainWindow mw = k.createMainWindow();
         mw.getJScrollPane1().setViewportView(k.createLeftPanel(ic));
         k.initAllRecipePanels(mw, recs);
+        RecipeFrame rf = k.createRecipeFrame(r1); rf.setVisible(true);
         mw.setVisible(true);
     }
     
@@ -273,6 +285,37 @@ public class ViewController {
             rf.getCommentPanel().add(rp);
             rf.getCommentPanel().add(Box.createVerticalStrut(5));
         }
+        
+        rf.setListener(new PostReviewListener() {
+            @Override
+            public void postReviewEventEmitted(PostReviewEvent e) {
+                String username = e.getReviewerUsername();
+                Integer rating = e.getRating();
+                String comment = e.getComment();
+                
+                //rf.getCommentPanel().setEnabled(false);
+                rf.disableRating();
+                
+                Review review = new Review();
+                review.rating = rating;
+                review.comment = comment;
+                review.reviewer = new RegisteredUser(); // ovo je privremeno resenje, treba nam fja za pretragu korisnickih naloga
+                review.reviewer.setUserType(UserType.user); //
+                Account acc = new Account(); //
+                acc.setUsername(username); //
+                review.reviewer.setAccount(acc); //
+                
+                Set<Review> reviews = r.getReviews();
+                reviews.add(review);
+                r.setReviews(reviews);
+                
+                ReviewPanel rp = createReviewPanel(review);
+                rf.getCommentPanel().add(rp);
+                rf.getCommentPanel().add(Box.createVerticalStrut(5));
+                rf.validate();
+                rf.repaint();
+            }
+        });
         
         return rf;
     }
