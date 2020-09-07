@@ -31,7 +31,7 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
         jPanel4.setVisible(false);
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         
         jScrollPane1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jScrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
