@@ -364,7 +364,7 @@ public class ViewController {
         crf.setListener(new CreateRecipeListener() {
             @Override
             public void createRecipeEventEmitted(CreateRecipeEvent r) {
-                long id = 1;
+                long id = rb.recipes.isEmpty() ? 1 : Collections.max(rb.recipes.keySet());
                 String name = r.getName();
                 String text = r.getText();
                 Set<IngredientAmount> ingredients = new HashSet<>();
