@@ -23,6 +23,10 @@ public class RegisteredUser extends AccountOwner {
 
     public Set<RegisteredUser> following;
 
+    public RegisteredUser(String name) {
+        this.name = name; 
+    }
+
     public String getName() {
         return name;
     }

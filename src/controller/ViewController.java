@@ -69,6 +69,12 @@ public class ViewController {
     public static MainWindow mw;
 
     public static void main(String[] args) {
+        
+        rb = new RecipeBook();
+        rb.loadAll();
+        
+        //---------------------------------------------------------------------------------------
+        
         IngredientCategory ic1 = new IngredientCategory("Mlijecni proizvodi");
         IngredientCategory ic2 = new IngredientCategory("Povrce");
         Set<IngredientCategory> ic = new HashSet<>();
@@ -103,7 +109,13 @@ public class ViewController {
         Set<KitchenAppliance> ka = new HashSet<>();
         ka.add(new KitchenAppliance("mikser"));
         ka.add(new KitchenAppliance("blender"));
+        ka.add(new KitchenAppliance("sokovnik"));
+        
+        rb.ingredientCategories = ic;
+        rb.appliances = ka;
+        
 
+        /*
         Set<Recipe> recs = new HashSet<>();
         RegisteredUser user = new RegisteredUser();
         user.setAccount(new Account());
@@ -129,17 +141,15 @@ public class ViewController {
         recs.add(r1);
         Recipe r2 = new Recipe(2l, "Baklava", "Kupi u poslasticarnici", user, ingrs);
         recs.add(r2);
+        */
         //---------------------------------------------------------------------------
-
-        rb = new RecipeBook();
-
         //-------------------------------------------------
         // dodavanje usera da ne bi morali da se logujemo??
         //-------------------------------------------------
         ViewController k = new ViewController();
         mw = k.createMainWindow();
         mw.getJScrollPane1().setViewportView(k.createLeftPanel(ic, ka));
-        k.initAllRecipePanels(mw, recs);
+        k.initAllRecipePanels(mw, new HashSet<Recipe>(rb.recipes.values()));
         //RecipeFrame rf = k.createRecipeFrame(r1); rf.setVisible(true);
         mw.setVisible(true);
     }
@@ -382,11 +392,15 @@ public class ViewController {
         return crf;
     }
 
-    public Set<Recipe> getRecipesByIngredients(Set<Ingredient> ingredients, Set<KitchenAppliance> kAppliances) {
+   public Set<Recipe> getRecipesByIngredients(Set<Ingredient> ingredients, Set<KitchenAppliance> kAppliances) {
         //------------------------------------OVO OBRISATI, SAMO ZA PROVJERU ISPRAVNOSTI RADA FJE
         Set<IngredientAmount> ia = new HashSet<>();
         ia.add(new IngredientAmount("jaja", 1.0, "kg"));
-        Recipe rp1 = new Recipe(1l, "a", "a", null, ia);
+        
+        RegisteredUser rrr = new RegisteredUser("neki autor");
+        rrr.setAccount(new Account("dkjsj"));
+        Recipe rp1 = new Recipe(1l, "a", "a", rrr, ia);
+        
         Set<KitchenAppliance> kp = new HashSet<>();
         kp.add(new KitchenAppliance("mikser"));
         rp1.setRequiredAppliances(kp);
@@ -447,12 +461,14 @@ public class ViewController {
                 }
 
                 Set<Recipe> foundRecipes = getRecipesByIngredients(ingredients, appliances);
+                initAllRecipePanels(mw, foundRecipes);
                 //TODO: poziv funkcije za dodavanje panela u desni dio kojoj se proslijedjuju foundRecipes
             }
         });
 
         return lp;
     }
+
 
     public CreateAccountFrame createNewAccountFrame() {
         CreateAccountFrame cap = new CreateAccountFrame();

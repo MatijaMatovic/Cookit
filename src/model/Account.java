@@ -17,6 +17,10 @@ public class Account implements Comparable<Account> {
 
     private AccountOwner accountOwner;
 
+    public Account(String username) {
+        this.username = username;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
