@@ -53,12 +53,23 @@ public class MainWindow extends javax.swing.JFrame {
         //initAllRecipePanels(recipes);
     }
     
-    public void changeLoginLbl(boolean loggedIn){
+    public void changeLoginLbl(boolean loggedIn) {
         if (loggedIn) {
             this.jLabel5.setText("Odjava");
         } else {
             this.jLabel5.setText("Prijava");
         }
+        this.jLabel5.repaint();
+    }
+
+    public void showAccountLbl(boolean show) {
+        if (!show) {
+            this.jLabel2.setText("");
+        } else {
+            this.jLabel2.setText("Profil");
+        }
+
+        this.jLabel2.repaint();
     }
     
     public void setLoginLblListener(ActionListener loginLblListener) {
