@@ -39,7 +39,7 @@ public class RecipePanel extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        setMaximumSize(new java.awt.Dimension(32767, 200));
+        setMaximumSize(new java.awt.Dimension(32767, 277));
         setMinimumSize(new java.awt.Dimension(0, 200));
         setPreferredSize(new java.awt.Dimension(1053, 200));
 
