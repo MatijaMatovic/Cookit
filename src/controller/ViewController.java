@@ -5,7 +5,6 @@
  */
 package controller;
 
-import static controller.JovanoveViewControllerFunkcije.rb;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -13,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,7 +22,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
-import javax.crypto.AEADBadTagException;
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -47,7 +44,6 @@ import view.RecipePanel;
 import view.createUser.CreateAccountEvent;
 import view.createUser.CreateAccountFrame;
 import view.createUser.CreateAccountListener;
-import view.createUser.CreateAccountPanel;
 import view.createUser.GenerateUsernameEvent;
 import view.createUser.GenerateUsernameListener;
 import view.ingredientPanel.CategoryPanel;
