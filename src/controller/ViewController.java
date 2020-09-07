@@ -83,13 +83,49 @@ public class ViewController {
         ic1.setIngredientsSet(i1);
         ic2.setIngredientsSet(i2);
         ic.add(ic1); ic.add(ic2);
+        
+        
+        Set<Recipe> recs = new HashSet<>();
+        RegisteredUser user = new RegisteredUser();
+        user.setAccount(new Account());
+        user.getAccount().setUsername("kuvar najbolji na svetu");
+        user.getAccount().setPassword("a");
+        user.getAccount().setEmail("a@a.a");
+        user.setName("Kuvar"); user.setSurname("Kuvaric");
+        user.setBirthDate(LocalDate.now()); user.setUserType(UserType.user);
+        
+        HashSet<IngredientAmount> ingrs = new HashSet<>();
+        ingrs.add(new IngredientAmount("mleko", 100.0, "g"));
+        ingrs.add(new IngredientAmount("jaja", 100.0, "kom"));
+        recs.add(new Recipe(1l, "Palacinke", "Mesaj sve", user, ingrs));
+        recs.add(new Recipe(2l, "Baklava", "Kupi u poslasticarnici", user, ingrs));
         //---------------------------------------------------------------------------
                 
         rb = new RecipeBook();
+        
+        //-------------------------------------------------
+        // dodavanje usera da ne bi morali da se logujemo??
+        //-------------------------------------------------
+        
         ViewController k = new ViewController();
         MainWindow mw = k.createMainWindow();
         mw.getJScrollPane1().setViewportView(k.createLeftPanel(ic));
+        k.initAllRecipePanels(mw, recs);
         mw.setVisible(true);
+    }
+    
+    public MainWindow initAllRecipePanels(MainWindow mw, Set<Recipe> recipes) {
+        mw.emptyRecipePanelsPanel(); // uklanja sve recepte prethodno prikazane
+        mw.validate(); //...
+        Iterator<Recipe> it = recipes.iterator();
+        while (it.hasNext()){
+            Recipe r = it.next();
+            createRecipePanel(r);
+            mw.addRecipePanel(createRecipePanel(r));
+        }
+        mw.validate();
+        mw.repaint();
+        return mw;
     }
 
     public RecipePanel createRecipePanel(Recipe r) {
@@ -146,10 +182,10 @@ public class ViewController {
             public void actionPerformed(ActionEvent e) {
                 //TODO: kreirati prozor za izmjenu licnih podataka
                 System.out.println("my profile");
-                Recipe r = rb.recipes.get(1l);
-                mw.addRecipePanel(createRecipePanel(r));//DELETE
-                mw.setVisible(false);
-                mw.setVisible(true);
+                //Recipe r = rb.recipes.get(1l);
+                //mw.addRecipePanel(createRecipePanel(r));//DELETE
+                //mw.setVisible(false);
+                //mw.setVisible(true);
             }
         });
         mw.setNewRecepieListener(new ActionListener() {

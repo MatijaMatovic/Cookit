@@ -37,7 +37,7 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         
         // test code //
-        ArrayList<Recipe> recipes = new ArrayList<>();
+        //ArrayList<Recipe> recipes = new ArrayList<>();
         /*
         Recipe r = new Recipe();
         r.setName("Recept test");
@@ -50,7 +50,7 @@ public class MainWindow extends javax.swing.JFrame {
         recipes.add(r3);
         // end of test code... almost //  */
         recipePanelsPanel.setLayout(new BoxLayout(recipePanelsPanel, BoxLayout.Y_AXIS));
-        initAllRecipePanels(recipes);
+        //initAllRecipePanels(recipes);
     }
     
     public void changeLoginLbl(boolean loggedIn){
@@ -58,14 +58,6 @@ public class MainWindow extends javax.swing.JFrame {
             this.jLabel5.setText("Odjava");
         } else {
             this.jLabel5.setText("Prijava");
-        }
-    }
-    
-    private void initAllRecipePanels(ArrayList<Recipe> recipes) {
-        for (int i = 0; i < recipes.size(); i++) {
-            RecipePanel panel = new RecipePanel();
-            panel.setPreferredSize(new Dimension(800, 270));
-            recipePanelsPanel.add(panel);
         }
     }
     
@@ -370,9 +362,15 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
     }
+    
     public void addRecipePanel(RecipePanel recipeComp) {
         this.recipePanelsPanel.add(recipeComp);
     }
+    
+    public void emptyRecipePanelsPanel() {
+        this.recipePanelsPanel.removeAll();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
