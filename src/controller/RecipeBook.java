@@ -125,7 +125,7 @@ public class RecipeBook {
 
             // makeFile and PrintWriter constructor throw different Exceptions
             // so they need to be handled separately
-            try (PrintWriter out = new PrintWriter(new FileWriter(getPath(FileType.ACCOUNTS)))) {
+            try (PrintWriter out = new PrintWriter(new FileWriter(getPath(FileType.ACCOUNTS), false))) {
                 Yaml yaml = new Yaml(dop);
                 yaml.dump(this.accounts, out);
             }
@@ -155,4 +155,125 @@ public class RecipeBook {
     public boolean checkAccount(String username){
         return this.accounts.containsKey(username);
     }
+    
+    /**
+     * This function saves all the recipes to their designated data storage
+     */
+    public void saveRecipes() {
+        try {
+            makeFile(FileType.RECIPES);
+            
+            DumperOptions dop = new DumperOptions();
+            dop.setPrettyFlow(true);
+            
+            try (PrintWriter out = new PrintWriter(new FileWriter(getPath(FileType.RECIPES), false))) {
+                Yaml yaml = new Yaml(dop);
+                yaml.dump(this.recipes, out);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void loadRecipes() {
+        try {
+            makeFile(FileType.RECIPES);
+            
+            try (InputStream in = new FileInputStream(new File(getPath(FileType.RECIPES)))) {
+                Yaml yaml = new Yaml();
+                this.recipes = (Map<Long, Recipe>) yaml.load(in);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void saveIngredients() {
+        try {
+            makeFile(FileType.INGREDIENT_CATEGORIES);
+            
+            DumperOptions dop = new DumperOptions();
+            dop.setPrettyFlow(true);
+            
+            try (PrintWriter out = new PrintWriter(new FileWriter(getPath(FileType.INGREDIENT_CATEGORIES), false))) {
+                Yaml yaml = new Yaml(dop);
+                yaml.dump(this.ingredientCategories, out);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void loadIngredients() {
+        try {
+            makeFile(FileType.INGREDIENT_CATEGORIES);
+            
+            try (InputStream in = new FileInputStream(new File(getPath(FileType.INGREDIENT_CATEGORIES)))) {
+                Yaml yaml = new Yaml();
+                this.ingredientCategories = (Set<IngredientCategory>) yaml.load(in);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void saveAppliances() {
+        try {
+            makeFile(FileType.APPLIANCES);
+            
+            DumperOptions dop = new DumperOptions();
+            dop.setPrettyFlow(true);
+            
+            try (PrintWriter out = new PrintWriter(new FileWriter(getPath(FileType.APPLIANCES), false))) {
+                Yaml yaml = new Yaml(dop);
+                yaml.dump(this.appliances, out);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void loadAppliances() {
+        try {
+            makeFile(FileType.APPLIANCES);
+            
+            try (InputStream in = new FileInputStream(new File(getPath(FileType.APPLIANCES)))) {
+                Yaml yaml = new Yaml();
+                this.appliances = (Set<KitchenAppliance>) yaml.load(in);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void dumpAll() {
+        try {
+            saveAccounts();
+            saveAppliances();
+            saveIngredients();
+            saveRecipes();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void loadAll() {
+        try {
+            loadAccounts();
+            loadAppliances();
+            loadIngredients();
+            loadRecipes();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 }
