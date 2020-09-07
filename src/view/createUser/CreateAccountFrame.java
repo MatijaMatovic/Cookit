@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  * @author jovandjordjic
  */
 public class CreateAccountFrame extends javax.swing.JFrame {
-    
+
     private ActionListener generatePasswordListener;
     private GenerateUsernameListener generateUserNameListener;
     private CreateAccountListener createAccountListener;
@@ -83,14 +83,14 @@ public class CreateAccountFrame extends javax.swing.JFrame {
     public CreateAccountFrame() {
         initComponents();
         initializeDateChooser();
-        
+
     }
 
     public void addPanel(CreateAccountPanel jPanel1) {
         this.add(jPanel1, BorderLayout.CENTER);
         jPanel1.setVisible(true);
     }
-    
+
     private void initializeDateChooser() {
         this.birthDateChooser.setMaxSelectableDate(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         this.birthDateChooser.setDate(Date.from(LocalDate.of(1999, Month.MAY, 13).atStartOfDay(ZoneId.systemDefault()).toInstant()));
@@ -100,7 +100,6 @@ public class CreateAccountFrame extends javax.swing.JFrame {
         this.birthDateChooser.setLocale(aLocale);
 
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -141,13 +140,52 @@ public class CreateAccountFrame extends javax.swing.JFrame {
 
         nameLbl.setText("Ime:");
 
+        nameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                nameTextFieldFocusGained(evt);
+            }
+        });
+        nameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameTextFieldActionPerformed(evt);
+            }
+        });
+
         surnameLbl.setText("Prezime:");
+
+        surnameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                surnameTextFieldFocusGained(evt);
+            }
+        });
+        surnameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surnameTextFieldActionPerformed(evt);
+            }
+        });
 
         birthDateLbl.setText("Datum rođenja:");
 
         emailLbl.setText("e-mail adresa:");
 
+        emailUserNameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                emailUserNameTextFieldFocusGained(evt);
+            }
+        });
+
         usernameLbl.setText("Korisničko ime:");
+
+        userNameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                userNameTextFieldFocusGained(evt);
+            }
+        });
+        userNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userNameTextFieldActionPerformed(evt);
+            }
+        });
 
         passwordLbl.setText("Lozinka:");
 
@@ -174,11 +212,38 @@ public class CreateAccountFrame extends javax.swing.JFrame {
 
         atLbl.setText("@");
 
+        emailDomainTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                emailDomainTextFieldFocusGained(evt);
+            }
+        });
+        emailDomainTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailDomainTextFieldActionPerformed(evt);
+            }
+        });
+
         dotLbl.setText(".");
 
+        emailDotComTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                emailDotComTextFieldFocusGained(evt);
+            }
+        });
         emailDotComTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailDotComTextFieldActionPerformed(evt);
+            }
+        });
+
+        passwordTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                passwordTextFieldFocusGained(evt);
+            }
+        });
+        passwordTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordTextFieldActionPerformed(evt);
             }
         });
 
@@ -334,8 +399,56 @@ public class CreateAccountFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_generatePasswordBtnActionPerformed
 
     private void emailDotComTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailDotComTextFieldActionPerformed
-        // TODO add your handling code here:
+        emailDotComTextField.setBackground(Color.white);
     }//GEN-LAST:event_emailDotComTextFieldActionPerformed
+
+    private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
+        nameTextField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_nameTextFieldActionPerformed
+
+    private void surnameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surnameTextFieldActionPerformed
+        surnameTextField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_surnameTextFieldActionPerformed
+
+    private void userNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTextFieldActionPerformed
+        userNameTextField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_userNameTextFieldActionPerformed
+
+    private void passwordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextFieldActionPerformed
+        passwordTextField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_passwordTextFieldActionPerformed
+
+    private void passwordTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordTextFieldFocusGained
+        passwordTextField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_passwordTextFieldFocusGained
+
+    private void userNameTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameTextFieldFocusGained
+        userNameTextField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_userNameTextFieldFocusGained
+
+    private void emailUserNameTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailUserNameTextFieldFocusGained
+        emailUserNameTextField.setBackground(Color.white);
+    }//GEN-LAST:event_emailUserNameTextFieldFocusGained
+
+    private void emailDomainTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailDomainTextFieldActionPerformed
+        emailDomainTextField.setBackground(Color.white);
+    }//GEN-LAST:event_emailDomainTextFieldActionPerformed
+
+    private void surnameTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_surnameTextFieldFocusGained
+        surnameTextField.setBackground(Color.white);
+    }//GEN-LAST:event_surnameTextFieldFocusGained
+
+    private void nameTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameTextFieldFocusGained
+        nameTextField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_nameTextFieldFocusGained
+
+    private void emailDomainTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailDomainTextFieldFocusGained
+        emailDomainTextField.setBackground(Color.white);
+    }//GEN-LAST:event_emailDomainTextFieldFocusGained
+
+    private void emailDotComTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailDotComTextFieldFocusGained
+        emailDotComTextField.setBackground(Color.white);
+    }//GEN-LAST:event_emailDotComTextFieldFocusGained
 
     /**
      * @param args the command line arguments
