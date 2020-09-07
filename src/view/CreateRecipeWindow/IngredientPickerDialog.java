@@ -7,6 +7,8 @@ package view.CreateRecipeWindow;
 
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 
 /**
  *
@@ -14,7 +16,8 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class IngredientPickerDialog extends javax.swing.JDialog {
     
-    DefaultComboBoxModel<String> ingredientsComboModel;
+    private DefaultComboBoxModel<String> ingredientsComboModel;
+    private OkIngredientListener okListener;
 
     /**
      * Creates new form IngredientPickerDialog
@@ -25,11 +28,10 @@ public class IngredientPickerDialog extends javax.swing.JDialog {
         super(parent, modal);
         ArrayList<String> ingrs = new ArrayList<>();
         //{"mleko", "jaja", "brasno", "djumbir", "kisela pavlaka"}
-        ingrs.add("mleko"); ingrs.add("jaja"); ingrs.add("brasno"); ingrs.add("djumbir"); ingrs.add("kisela pavlaka");
+        //ingrs.add("mleko"); ingrs.add("jaja"); ingrs.add("brasno"); ingrs.add("djumbir"); ingrs.add("kisela pavlaka");
         ingredientsComboModel = new DefaultComboBoxModel<>();
-        ingredientsComboModel.addAll(ingrs);
+        //ingredientsComboModel.addAll(ingrs);
         initComponents();
-        AutoCompletion.enable(ingrComboBox);
     }
 
     /**
@@ -97,17 +99,13 @@ public class IngredientPickerDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        CreateRecipeFrame tata;
-        tata = (CreateRecipeFrame) this.getParent();
-        if (ingrComboBox.isEnabled()){
-            tata.addIngredient(ingrComboBox.getSelectedItem() + " " + amountFTF.getText() + " " + unitComboBox.getSelectedItem());
-        } else {
-            tata.editIngredient(ingrComboBox.getSelectedItem(), ingrComboBox.getSelectedItem() + " " + amountFTF.getText() + " " + unitComboBox.getSelectedItem());
-        }
-        //System.out.println(ingrComboBox.getSelectedItem() + " " + amountFTF.getText() + " " + unitComboBox.getSelectedItem());
-        dispose();
+        okListener.okIngredientEventEmitted(new OkIngredientEvent(evt));
     }//GEN-LAST:event_okButtonActionPerformed
 
+    public void setOkListener(OkIngredientListener okListener) {
+        this.okListener = okListener;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -151,10 +149,32 @@ public class IngredientPickerDialog extends javax.swing.JDialog {
         });
     }
 
+    public DefaultComboBoxModel<String> getIngredientsComboModel() {
+        return ingredientsComboModel;
+    }
+
+    public void setIngredientsComboModel(DefaultComboBoxModel<String> ingredientsComboModel) {
+        this.ingredientsComboModel = ingredientsComboModel;
+        this.ingrComboBox.setModel(ingredientsComboModel);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField amountFTF;
     protected javax.swing.JComboBox<String> ingrComboBox;
     private javax.swing.JButton okButton;
     private javax.swing.JComboBox<String> unitComboBox;
     // End of variables declaration//GEN-END:variables
+
+    public JComboBox getIngredientsComboBox() {
+        return ingrComboBox;
+    }
+
+    public JFormattedTextField getAmountFTF() {
+        return amountFTF;
+    }
+
+    public JComboBox<String> getUnitComboBox() {
+        return unitComboBox;
+    }
+
 }

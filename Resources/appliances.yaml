@@ -1,2 +1,13 @@
-!!set {
-  }
+!!set
+? !!model.KitchenAppliance {
+  name: sokovnik
+}
+: null
+? !!model.KitchenAppliance {
+  name: mikser
+}
+: null
+? !!model.KitchenAppliance {
+  name: blender
+}
+: null

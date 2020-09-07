@@ -15,21 +15,17 @@ import javax.swing.DefaultListModel;
  */
 public class CreateRecipeFrame extends javax.swing.JFrame {
     
-    DefaultListModel<String> ingrModel;
-    CreateRecipeListener listener;
+    private DefaultListModel<String> ingredientModel;
+    private CreateRecipeListener listener;
+    private IngredientPickerListener ingredientListener;
 
     /**
      * Creates new form ReceptKreiranje
      */
     public CreateRecipeFrame() {
-        //borderPaint = new Color(255, 127, 0);
-        ingrModel = new DefaultListModel<>();
+        ingredientModel = new DefaultListModel<>();
         initComponents();
         ingredientsList.setComponentPopupMenu(ingredientPopupMenu);
-        //VidiKOmentare vk = new VidiKOmentare();
-        //vk.setVisible(true);
-        //ingrModel = new DefaultListModel();
-        //ingredientsList.setModel(ingrModel);
     }
 
     /**
@@ -92,7 +88,7 @@ public class CreateRecipeFrame extends javax.swing.JFrame {
         heading.setText("Naslov recepta");
 
         ingredientsList.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        ingredientsList.setModel(ingrModel);
+        ingredientsList.setModel(ingredientModel);
         ingredientsList.setToolTipText("Potrebni sastojci");
         jScrollPane1.setViewportView(ingredientsList);
 
@@ -172,6 +168,10 @@ public class CreateRecipeFrame extends javax.swing.JFrame {
         this.listener = listener;
     }
 
+    public void setIngredientListener(IngredientPickerListener ingredientListener) {
+        this.ingredientListener = ingredientListener;
+    }
+
     private void okayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okayActionPerformed
         if (listener == null)
             return;
@@ -179,8 +179,8 @@ public class CreateRecipeFrame extends javax.swing.JFrame {
         String name = heading.getText();
         String text = textOfRecipe.getText();
         Set<String> ingredients = new HashSet<>(); //Ingredient is in the format name <val> unit (brasno 100 g)
-        for (int i = 0; i < ingrModel.getSize(); i++)
-            ingredients.add(ingrModel.getElementAt(i));
+        for (int i = 0; i < ingredientModel.getSize(); i++)
+            ingredients.add(ingredientModel.getElementAt(i));
         
         CreateRecipeEvent ev = new CreateRecipeEvent(name, text, ingredients, this);
         listener.createRecipeEventEmitted(ev);
@@ -203,22 +203,20 @@ public class CreateRecipeFrame extends javax.swing.JFrame {
     private void deleteIngredientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteIngredientActionPerformed
         int koji = ingredientsList.getSelectedIndex();
         if (koji > -1)
-            ingrModel.remove(koji);
+            ingredientModel.remove(koji);
     }//GEN-LAST:event_deleteIngredientActionPerformed
 
     private void addIngredientMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addIngredientMenuItemActionPerformed
-        // TODO add your handling code here:
-        IngredientPickerDialog picker = new IngredientPickerDialog(CreateRecipeFrame.this, true);
-        picker.setVisible(true);
+        ingredientListener.ingredientPickerEventEmitted(new IngredientPickerEvent(evt));
     }//GEN-LAST:event_addIngredientMenuItemActionPerformed
     
     void editIngredient(Object selectedItem, String string) {
         int koji = ingredientsList.getSelectedIndex();
-        ingrModel.setElementAt(string, koji);
+        ingredientModel.setElementAt(string, koji);
     }
     
     public void addIngredient(String ingr){
-        ingrModel.addElement(ingr);
+        ingredientModel.addElement(ingr);
     }
     
     /**

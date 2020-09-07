@@ -26,7 +26,6 @@ public class RecipeFrame extends javax.swing.JFrame {
     
     private LevelBar rating;
     private PostReviewListener listener;
-    private Long id;
 
     /**
      * Creates new form RecipeFrame
@@ -270,9 +269,6 @@ public class RecipeFrame extends javax.swing.JFrame {
     
     public void disableRating(){
         gradePanel.setVisible(false);
-        //rating.clear();
-        //rating.freezeRating();
-        //reviewText.setEditable(false);
     }
 
     public void setListener(PostReviewListener listener) {

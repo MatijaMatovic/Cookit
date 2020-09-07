@@ -23,6 +23,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import javax.swing.Box;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -36,9 +37,15 @@ import model.Recipe;
 import model.RegisteredUser;
 import model.Review;
 import model.UserType;
+import view.CreateRecipeWindow.AutoCompletion;
 import view.CreateRecipeWindow.CreateRecipeEvent;
 import view.CreateRecipeWindow.CreateRecipeFrame;
 import view.CreateRecipeWindow.CreateRecipeListener;
+import view.CreateRecipeWindow.IngredientPickerDialog;
+import view.CreateRecipeWindow.IngredientPickerEvent;
+import view.CreateRecipeWindow.IngredientPickerListener;
+import view.CreateRecipeWindow.OkIngredientEvent;
+import view.CreateRecipeWindow.OkIngredientListener;
 import view.MainWindow;
 import view.RecipePanel;
 import view.createUser.CreateAccountEvent;
@@ -71,7 +78,7 @@ public class ViewController {
     public static void main(String[] args) {
         
         rb = new RecipeBook();
-        rb.loadAll();
+        //rb.loadAll();
         
         //---------------------------------------------------------------------------------------
         
@@ -149,12 +156,12 @@ public class ViewController {
         ViewController k = new ViewController();
         mw = k.createMainWindow();
         mw.getJScrollPane1().setViewportView(k.createLeftPanel(ic, ka));
-        k.initAllRecipePanels(mw, new HashSet<Recipe>(rb.recipes.values()));
+        k.initAllRecipePanels(new HashSet<Recipe>(rb.recipes.values()));
         //RecipeFrame rf = k.createRecipeFrame(r1); rf.setVisible(true);
         mw.setVisible(true);
     }
 
-    public MainWindow initAllRecipePanels(MainWindow mw, Set<Recipe> recipes) {
+    public MainWindow initAllRecipePanels(Set<Recipe> recipes) {
         mw.emptyRecipePanelsPanel(); // uklanja sve recepte prethodno prikazane
         mw.validate(); //...
         Iterator<Recipe> it = recipes.iterator();
@@ -239,10 +246,6 @@ public class ViewController {
             public void actionPerformed(ActionEvent e) {
                 //TODO: kreirati prozor za izmjenu licnih podataka
                 System.out.println("my profile");
-                //Recipe r = rb.recipes.get(1l);
-                //mw.addRecipePanel(createRecipePanel(r));//DELETE
-                //mw.setVisible(false);
-                //mw.setVisible(true);
             }
         });
         mw.setNewRecepieListener(new ActionListener() {
@@ -384,25 +387,62 @@ public class ViewController {
                         (RegisteredUser) rb.getCurrentAccount().getAccountOwner(), ingredients);
                 rb.recipes.put(id, recipe);
                 JOptionPane.showMessageDialog(crf, "Uspesno dodat recept!");
+                
+                initAllRecipePanels(new HashSet<Recipe>(rb.recipes.values()));
+            }
+        });
+        
+        crf.setIngredientListener(new IngredientPickerListener() {
+            @Override
+            public void ingredientPickerEventEmitted(IngredientPickerEvent e) {
+                Set<String> ingrs = new HashSet<>();
+                Iterator<IngredientCategory> itCat = rb.ingredientCategories.iterator();
+                while (itCat.hasNext()){
+                    Iterator<Ingredient> it = itCat.next().getIngredientsSet().iterator();
+                    while (it.hasNext()){
+                        Ingredient in = it.next();
+                        ingrs.add(in.getName());
+                    }
+                }
+                IngredientPickerDialog i = createIngredientPickerDialog(ingrs, crf);
+                i.setVisible(true);
             }
         });
         return crf;
+    }
+    
+    public IngredientPickerDialog createIngredientPickerDialog(Set<String> ingrs, CreateRecipeFrame crf){
+        IngredientPickerDialog i = new IngredientPickerDialog(mw, true);
+        DefaultComboBoxModel<String> ingrModel = new DefaultComboBoxModel();
+        ingrModel.addAll(ingrs);
+        i.setIngredientsComboModel(ingrModel);
+        AutoCompletion.enable(i.getIngredientsComboBox());
+        
+        i.setOkListener(new OkIngredientListener() {
+            @Override
+            public void okIngredientEventEmitted(OkIngredientEvent e) {
+                crf.addIngredient(i.getIngredientsComboModel().getSelectedItem().toString() 
+                        + " " + i.getAmountFTF().getText() + " " + i.getUnitComboBox().getModel().getSelectedItem().toString());
+                i.dispose();
+            }
+        });
+        return i;
     }
 
    public Set<Recipe> getRecipesByIngredients(Set<Ingredient> ingredients, Set<KitchenAppliance> kAppliances) {
         //------------------------------------OVO OBRISATI, SAMO ZA PROVJERU ISPRAVNOSTI RADA FJE
         Set<IngredientAmount> ia = new HashSet<>();
-        ia.add(new IngredientAmount("jaja", 1.0, "kg"));
+        //ia.add(new IngredientAmount("jaja", 1.0, "kg"));
         
-        RegisteredUser rrr = new RegisteredUser("neki autor");
-        rrr.setAccount(new Account("dkjsj"));
-        Recipe rp1 = new Recipe(1l, "a", "a", rrr, ia);
+        //RegisteredUser rrr = new RegisteredUser("neki autor");
+        //rrr.setAccount(new Account("dkjsj"));
+        //Recipe rp1 = new Recipe(1l, "a", "a", rrr, ia);
         
-        Set<KitchenAppliance> kp = new HashSet<>();
-        kp.add(new KitchenAppliance("mikser"));
-        rp1.setRequiredAppliances(kp);
-        Map<Long, Recipe> R = new HashMap<>();
-        R.put(1l, rp1);
+        //Set<KitchenAppliance> kp = new HashSet<>();
+        //kp.add(new KitchenAppliance("mikser"));
+        //rp1.setRequiredAppliances(kp);
+        Map<Long, Recipe> R = rb.recipes;
+        //R.put(1l, rp1);
         //----------------------------------------------------------------------
         Set<Recipe> foundRecipes = new HashSet<>();
 
@@ -458,7 +498,7 @@ public class ViewController {
                 }
 
                 Set<Recipe> foundRecipes = getRecipesByIngredients(ingredients, appliances);
-                initAllRecipePanels(mw, foundRecipes);
+                initAllRecipePanels(foundRecipes);
                 //TODO: poziv funkcije za dodavanje panela u desni dio kojoj se proslijedjuju foundRecipes
             }
         });

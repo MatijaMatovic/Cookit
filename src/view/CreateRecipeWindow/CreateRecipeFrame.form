@@ -138,7 +138,7 @@
               <Font name="Comic Sans MS" size="12" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="ingrModel" type="code"/>
+              <Connection code="ingredientModel" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Potrebni sastojci"/>
           </Properties>

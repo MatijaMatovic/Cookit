@@ -1,2 +1,85 @@
-!!set {
-  }
+!!set
+? !!model.IngredientCategory
+  ingredientsSet: !!set
+    ? {
+      name: jaja
+    }
+    : null
+    ? {
+      name: Kackavalj
+    }
+    : null
+    ? {
+      name: mleko u prahu
+    }
+    : null
+    ? {
+      name: Mozzarella
+    }
+    : null
+    ? {
+      name: mlijeko
+    }
+    : null
+    ? {
+      name: slag
+    }
+    : null
+    ? {
+      name: Feta sir
+    }
+    : null
+    ? {
+      name: Gauda
+    }
+    : null
+    ? {
+      name: maslac
+    }
+    : null
+  name: Mlijecni proizvodi
+: null
+? !!model.IngredientCategory
+  ingredientsSet: !!set
+    ? {
+      name: paprika
+    }
+    : null
+    ? {
+      name: mrkva
+    }
+    : null
+    ? {
+      name: persun
+    }
+    : null
+    ? {
+      name: repa
+    }
+    : null
+    ? {
+      name: luk
+    }
+    : null
+    ? {
+      name: tikvice
+    }
+    : null
+    ? {
+      name: rotkva
+    }
+    : null
+    ? {
+      name: spanac
+    }
+    : null
+    ? {
+      name: kupus
+    }
+    : null
+    ? {
+      name: blitva
+    }
+    : null
+  name: Povrce
+: null
