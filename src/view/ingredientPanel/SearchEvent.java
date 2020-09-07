@@ -37,8 +37,9 @@ public class SearchEvent extends EventObject {
         super(o);
     }
 
-    public SearchEvent(Set<String> i, Object o) {
+    public SearchEvent(Set<String> i,Set<String> a, Object o) {
         super(o);
         this.ingredients = i;
+        this.appliances = a;
     }
 }

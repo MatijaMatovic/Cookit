@@ -16,8 +16,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
@@ -32,6 +34,7 @@ import model.Account;
 import model.IngredientAmount;
 import model.Ingredient;
 import model.IngredientCategory;
+import model.KitchenAppliance;
 import model.Recipe;
 import model.RegisteredUser;
 import model.Review;
@@ -87,6 +90,9 @@ public class ViewController {
         ic2.setIngredientsSet(i2);
         ic.add(ic1); ic.add(ic2);
         
+         Set<KitchenAppliance> ka = new HashSet<>(); ka.add(new KitchenAppliance("mikser"));
+         ka.add(new KitchenAppliance("blender"));
+        
         
         Set<Recipe> recs = new HashSet<>();
         RegisteredUser user = new RegisteredUser();
@@ -120,9 +126,9 @@ public class ViewController {
         
         ViewController k = new ViewController();
         MainWindow mw = k.createMainWindow();
-        mw.getJScrollPane1().setViewportView(k.createLeftPanel(ic));
+        mw.getJScrollPane1().setViewportView(k.createLeftPanel(ic, ka));
         k.initAllRecipePanels(mw, recs);
-        RecipeFrame rf = k.createRecipeFrame(r1); rf.setVisible(true);
+        //RecipeFrame rf = k.createRecipeFrame(r1); rf.setVisible(true);
         mw.setVisible(true);
     }
     
@@ -347,8 +353,28 @@ public class ViewController {
         return crf;
     }
     
-    private LeftPanel createLeftPanel(Set<IngredientCategory> ingredientCategories){
-        Set<Ingredient> ingridients = new HashSet<>();
+    public Set<Recipe> getRecipesByIngredients(Set<Ingredient> ingredients, Set<KitchenAppliance> kAppliances) {
+        //------------------------------------OVO OBRISATI, SAMO ZA PROVJERU ISPRAVNOSTI RADA FJE
+        Set<IngredientAmount> ia = new HashSet<>(); ia.add(new IngredientAmount("jaja", 1.0, "kg"));
+        Recipe rp1 = new Recipe(1l, "a", "a", null, ia);
+        Set<KitchenAppliance> kp = new HashSet<>(); kp.add(new KitchenAppliance("mikser"));
+        rp1.setRequiredAppliances(kp);
+        Map<Long, Recipe> R = new HashMap<>(); R.put(1l, rp1);
+        //----------------------------------------------------------------------
+        Set<Recipe> foundRecipes = new HashSet<>();
+    
+        for (Iterator<Map.Entry<Long, Recipe>> it = R.entrySet().iterator(); it.hasNext();) 
+        {  
+            Recipe r = it.next().getValue();
+            if (r.getIngredientAmounts().containsAll(ingredients) && r.getRequiredAppliances().containsAll(kAppliances))
+                foundRecipes.add(r);
+        }
+    return foundRecipes;
+}
+    private LeftPanel createLeftPanel(Set<IngredientCategory> ingredientCategories, Set<KitchenAppliance> kAppliance){
+        
+        Set<Ingredient> ingredients = new HashSet<>();
+        Set<KitchenAppliance> appliances = new HashSet<>();
         LeftPanel lp = new LeftPanel();
         Iterator<IngredientCategory> itC = ingredientCategories.iterator();
 
@@ -361,24 +387,33 @@ public class ViewController {
             IngredientPanel ip = new IngredientPanel();
             
             while(itI.hasNext())
-            {
                 ip.init(itI.next().getName());
-            }
             lp.initIngridient(ip);
         }
         lp.alignment();
+        
+        Iterator<KitchenAppliance> itI = kAppliance.iterator();
+        IngredientPanel ip = new IngredientPanel();
+            
+        while(itI.hasNext())
+            ip.init(itI.next().getName());
+        
+        CategoryPanel cp = new CategoryPanel("Kuhinjski aparati");
+        lp.initPanelAppliance(ip, cp);
         
         lp.getLPanel().setListener(new SearchListener() 
         {
              @Override
              public void searchEventEmitted(SearchEvent e) 
              {
-                 for (String ingr : e.getIngredients())
-                 {
-                      ingridients.add(new Ingredient(ingr));
-                }
-                 
-                //TODO: poziv funkcije za sortiranje, kojoj se posalje ingridients
+                for (String ingr : e.getIngredients())
+                      ingredients.add(new Ingredient(ingr));
+
+                for (String aplc : e.getAppliances())
+                      appliances.add(new KitchenAppliance(aplc));
+                
+                Set<Recipe> foundRecipes = getRecipesByIngredients(ingredients, appliances);
+                //TODO: poziv funkcije za dodavanje panela u desni dio kojoj se proslijedjuju foundRecipes
              }
          });
         

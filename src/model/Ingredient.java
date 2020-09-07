@@ -36,7 +36,7 @@ public class Ingredient implements Comparable<Ingredient> {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass() && IngredientAmount.class != obj.getClass() ) {
             return false;
         }
         final Ingredient other = (Ingredient) obj;

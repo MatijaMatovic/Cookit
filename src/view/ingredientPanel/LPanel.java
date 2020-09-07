@@ -16,9 +16,10 @@ import javax.swing.JPanel;
  */
 public class LPanel extends javax.swing.JPanel {
      
+    
     public Set<JPanel> ingredients = new HashSet<JPanel>();
     public Set<JPanel> categories = new HashSet<JPanel>();
-    public JPanel appliances;
+    public JPanel appliances, hAppliances;
     private SearchListener listener;
     
     /**
@@ -109,7 +110,7 @@ public class LPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-   
+        
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         
@@ -124,12 +125,14 @@ public class LPanel extends javax.swing.JPanel {
             JPanel name = (JPanel)value1.next();
             name.setVisible(false);
         } 
-        appliances.setVisible(true);
-      
+        hAppliances.setVisible(true);
+        if(appliances != null)
+            appliances.setVisible(true);      
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
       
+        
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         
@@ -144,20 +147,25 @@ public class LPanel extends javax.swing.JPanel {
             JPanel name = (JPanel)value1.next();
             name.setVisible(true);
         } 
-        appliances.setVisible(false);
+        hAppliances.setVisible(false);
+        if(appliances != null)
+            appliances.setVisible(false);
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         
-        if(listener != null){
-            Set<String> set = new HashSet<String>();
-            
+        if(listener != null)
+        {
+            Set<String> ingr = new HashSet<String>();
             Iterator value = ingredients.iterator(); 
-            while (value.hasNext()) { 
-                set.addAll(((IngredientPanel)value.next()).getIngredients());   
-            } 
+            while (value.hasNext())
+                ingr.addAll(((IngredientPanel)value.next()).getIngredients());   
+
+            Set<String> aplc = new HashSet<String>();
+            if(appliances != null)
+                aplc.addAll(((IngredientPanel)appliances).getIngredients());
             
-            SearchEvent sev = new SearchEvent(set, this);
+            SearchEvent sev = new SearchEvent(ingr,aplc, this);
             listener.searchEventEmitted(sev);
         }
     }//GEN-LAST:event_jLabel4MouseClicked

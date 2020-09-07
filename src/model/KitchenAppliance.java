@@ -4,10 +4,18 @@ import java.util.Objects;
 
 public class KitchenAppliance implements Comparable<KitchenAppliance>{
 
+    public String name;
+      
     public KitchenAppliance() {
     }
 
-    public String name;
+    public KitchenAppliance(String name) {
+        this.name = name; 
+    }
+    
+    public String getName(){
+        return name;
+    }
 
     @Override
     public int hashCode() {
