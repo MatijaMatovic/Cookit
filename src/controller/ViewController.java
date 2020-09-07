@@ -334,25 +334,22 @@ public class ViewController {
         rf.setListener(new PostReviewListener() {
             @Override
             public void postReviewEventEmitted(PostReviewEvent e) {
-                String username = e.getReviewerUsername();
                 Integer rating = e.getRating();
                 String comment = e.getComment();
 
-                //rf.getCommentPanel().setEnabled(false);
                 rf.disableRating();
 
                 Review review = new Review();
                 review.rating = rating;
                 review.comment = comment;
-                review.reviewer = new RegisteredUser(); // ovo je privremeno resenje, treba nam fja za pretragu korisnickih naloga
-                review.reviewer.setUserType(UserType.user); //
-                Account acc = new Account(); //
-                acc.setUsername(username); //
-                review.reviewer.setAccount(acc); //
+                review.reviewer.setAccount(rb.getCurrentAccount());
 
                 Set<Review> reviews = r.getReviews();
                 reviews.add(review);
+                RegisteredUser us = (RegisteredUser) rb.getCurrentAccount().getAccountOwner();
+                us.getReviews().add(review);
                 r.setReviews(reviews);
+                rf.getRatingLabel().setText(Double.toString(r.calculateGradeAvg()));
 
                 ReviewPanel rp = createReviewPanel(review);
                 rf.getCommentPanel().add(rp);

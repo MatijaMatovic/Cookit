@@ -229,7 +229,7 @@ public class RecipeFrame extends javax.swing.JFrame {
 
     private void postReviwButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postReviwButtonActionPerformed
         // TODO add your handling code here:
-        PostReviewEvent ev = new PostReviewEvent(reviewText.getText(), rating.getLevel(), "a", id, this);
+        PostReviewEvent ev = new PostReviewEvent(reviewText.getText(), rating.getLevel(), this);
         listener.postReviewEventEmitted(ev);
     }//GEN-LAST:event_postReviwButtonActionPerformed
 
