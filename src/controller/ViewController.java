@@ -183,7 +183,8 @@ public class ViewController {
         mw.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentHidden(ComponentEvent e) {
-                //sacuvajUFajl();
+                rb.dumpAll();
+                mw.dispose();
             }
             
         });
