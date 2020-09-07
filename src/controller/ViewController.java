@@ -70,39 +70,54 @@ import view.recipeWindow.ReviewPanel;
 public class ViewController {
 
     public static RecipeBook rb;
-    
+
     public static void main(String[] args) {
         IngredientCategory ic1 = new IngredientCategory("Mlijecni proizvodi");
         IngredientCategory ic2 = new IngredientCategory("Povrce");
         Set<IngredientCategory> ic = new HashSet<>();
         Set<Ingredient> i1 = new HashSet<>();
         Set<Ingredient> i2 = new HashSet<>();
-        i1.add(new Ingredient("mlijeko")); i1.add(new Ingredient("Feta sir"));i1.add(new Ingredient("Mozzarella"));
-        i1.add(new Ingredient("Gauda"));i1.add(new Ingredient("Feta sir"));i1.add(new Ingredient("Kackavalj"));
-        i1.add(new Ingredient("jaja")); i1.add(new Ingredient("maslac")); i1.add(new Ingredient("slag"));
+        i1.add(new Ingredient("mlijeko"));
+        i1.add(new Ingredient("Feta sir"));
+        i1.add(new Ingredient("Mozzarella"));
+        i1.add(new Ingredient("Gauda"));
+        i1.add(new Ingredient("Feta sir"));
+        i1.add(new Ingredient("Kackavalj"));
+        i1.add(new Ingredient("jaja"));
+        i1.add(new Ingredient("maslac"));
+        i1.add(new Ingredient("slag"));
         i1.add(new Ingredient("mleko u prahu"));
-        
-        i2.add(new Ingredient("paprika")); i2.add(new Ingredient("mrkva"));i2.add(new Ingredient("repa"));
-        i2.add(new Ingredient("rotkva"));i2.add(new Ingredient("kupus"));i2.add(new Ingredient("luk"));
-        i2.add(new Ingredient("spanac")); i2.add(new Ingredient("blitva")); i2.add(new Ingredient("tikvice"));
+
+        i2.add(new Ingredient("paprika"));
+        i2.add(new Ingredient("mrkva"));
+        i2.add(new Ingredient("repa"));
+        i2.add(new Ingredient("rotkva"));
+        i2.add(new Ingredient("kupus"));
+        i2.add(new Ingredient("luk"));
+        i2.add(new Ingredient("spanac"));
+        i2.add(new Ingredient("blitva"));
+        i2.add(new Ingredient("tikvice"));
         i2.add(new Ingredient("persun"));
         ic1.setIngredientsSet(i1);
         ic2.setIngredientsSet(i2);
-        ic.add(ic1); ic.add(ic2);
-        
-         Set<KitchenAppliance> ka = new HashSet<>(); ka.add(new KitchenAppliance("mikser"));
-         ka.add(new KitchenAppliance("blender"));
-        
-        
+        ic.add(ic1);
+        ic.add(ic2);
+
+        Set<KitchenAppliance> ka = new HashSet<>();
+        ka.add(new KitchenAppliance("mikser"));
+        ka.add(new KitchenAppliance("blender"));
+
         Set<Recipe> recs = new HashSet<>();
         RegisteredUser user = new RegisteredUser();
         user.setAccount(new Account());
         user.getAccount().setUsername("kuvar najbolji na svetu");
         user.getAccount().setPassword("a");
         user.getAccount().setEmail("a@a.a");
-        user.setName("Kuvar"); user.setSurname("Kuvaric");
-        user.setBirthDate(LocalDate.now()); user.setUserType(UserType.user);
-        
+        user.setName("Kuvar");
+        user.setSurname("Kuvaric");
+        user.setBirthDate(LocalDate.now());
+        user.setUserType(UserType.user);
+
         HashSet<IngredientAmount> ingrs = new HashSet<>();
         ingrs.add(new IngredientAmount("mleko", 100.0, "g"));
         ingrs.add(new IngredientAmount("jaja", 100.0, "kom"));
@@ -111,19 +126,19 @@ public class ViewController {
         stars.comment = "lep recept";
         stars.rating = 4;
         stars.reviewer = user;
-        HashSet<Review> reviews = new HashSet<>(); reviews.add(stars);
+        HashSet<Review> reviews = new HashSet<>();
+        reviews.add(stars);
         r1.setReviews(reviews);
         recs.add(r1);
         Recipe r2 = new Recipe(2l, "Baklava", "Kupi u poslasticarnici", user, ingrs);
         recs.add(r2);
         //---------------------------------------------------------------------------
-                
+
         rb = new RecipeBook();
-        
+
         //-------------------------------------------------
         // dodavanje usera da ne bi morali da se logujemo??
         //-------------------------------------------------
-        
         ViewController k = new ViewController();
         MainWindow mw = k.createMainWindow();
         mw.getJScrollPane1().setViewportView(k.createLeftPanel(ic, ka));
@@ -131,12 +146,12 @@ public class ViewController {
         //RecipeFrame rf = k.createRecipeFrame(r1); rf.setVisible(true);
         mw.setVisible(true);
     }
-    
+
     public MainWindow initAllRecipePanels(MainWindow mw, Set<Recipe> recipes) {
         mw.emptyRecipePanelsPanel(); // uklanja sve recepte prethodno prikazane
         mw.validate(); //...
         Iterator<Recipe> it = recipes.iterator();
-        while (it.hasNext()){
+        while (it.hasNext()) {
             Recipe r = it.next();
             createRecipePanel(r);
             mw.addRecipePanel(createRecipePanel(r));
@@ -154,7 +169,7 @@ public class ViewController {
                         .ofPattern("dd.MM.yyyy. HH:mm")));
         rp.getNameLabel().setText(r.getName());
         /* If instructions are longer than 280 chars, it chopps it off */
-        /* <html> tags enable the formatting of text in the label      */
+ /* <html> tags enable the formatting of text in the label      */
         rp.getInstructionsLabel().setText("<html>" + r.getText().substring(0,
                 Math.min(r.getText().length(), 280)) + "...</html>");
         rp.getReviewsLabel().setText(Double.toString(r.calculateGradeAvg()));
@@ -167,28 +182,44 @@ public class ViewController {
     public MainWindow createMainWindow() {
         MainWindow mw = new MainWindow();
 
+        mw.showAccountLbl(false);
+
         mw.setLoginLblListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (rb.getCurrentAccount() == null) {
-                    createLoginWindow();
-                    mw.changeLoginLbl(false);
+                    LoginWindow lw = createLoginWindow();
+
+                    lw.addComponentListener(new ComponentAdapter() {
+                        @Override
+                        public void componentHidden(ComponentEvent e) {
+                            if (rb.getCurrentAccount() != null) {
+                                mw.showAccountLbl(true);
+                                mw.changeLoginLbl(true);
+                                lw.dispose();
+                                System.out.println("Dodjoh, videh, pobedih");
+                            }
+                        }
+
+                    });
                 } else {
                     rb.setCurrentAccount(null);
-                    mw.changeLoginLbl(true);
+                    mw.changeLoginLbl(false);
+                    mw.showAccountLbl(false);
+                    //mw.repaint();
                 }
             }
         });
-        
+
         mw.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentHidden(ComponentEvent e) {
                 rb.dumpAll();
                 mw.dispose();
             }
-            
+
         });
-        
+
         mw.setFavLblListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -240,7 +271,7 @@ public class ViewController {
                 }
             }
         });
-        
+
         lw.setCreateAccountListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -262,7 +293,7 @@ public class ViewController {
         int y = (screenSize.height - frame.getSize().height) / 2;
         frame.setLocation(x, y);
     }
-    
+
     public ReviewPanel createReviewPanel(Review r) {
         ReviewPanel rp = new ReviewPanel();
         rp.getTextLabel().setText(r.comment);
@@ -270,20 +301,20 @@ public class ViewController {
         rp.initRating(r.rating);
         return rp;
     }
-    
+
     public RecipeFrame createRecipeFrame(Recipe r) {
         RecipeFrame rf = new RecipeFrame();
         rf.getNameLabel().setText(r.getName());
         rf.getRatingLabel().setText(Double.toString(r.calculateGradeAvg()));
         rf.getInstructionsPane().setText(r.getText());
-        
+
         DefaultListModel ingredientsListModel = new DefaultListModel();
         ingredientsListModel.addAll(r.getIngredientAmounts()
-                                     .stream()
-                                     .map(i -> i.toString())
-                                     .collect(Collectors.toList()));
+                .stream()
+                .map(i -> i.toString())
+                .collect(Collectors.toList()));
         rf.setIngredientsList(new JList<>(ingredientsListModel));
-        
+
         /* Add users' reviews to the scroll pane */
         Iterator<Review> it = r.getReviews().iterator();
         while (it.hasNext()) {
@@ -292,17 +323,17 @@ public class ViewController {
             rf.getCommentPanel().add(rp);
             rf.getCommentPanel().add(Box.createVerticalStrut(5));
         }
-        
+
         rf.setListener(new PostReviewListener() {
             @Override
             public void postReviewEventEmitted(PostReviewEvent e) {
                 String username = e.getReviewerUsername();
                 Integer rating = e.getRating();
                 String comment = e.getComment();
-                
+
                 //rf.getCommentPanel().setEnabled(false);
                 rf.disableRating();
-                
+
                 Review review = new Review();
                 review.rating = rating;
                 review.comment = comment;
@@ -311,11 +342,11 @@ public class ViewController {
                 Account acc = new Account(); //
                 acc.setUsername(username); //
                 review.reviewer.setAccount(acc); //
-                
+
                 Set<Review> reviews = r.getReviews();
                 reviews.add(review);
                 r.setReviews(reviews);
-                
+
                 ReviewPanel rp = createReviewPanel(review);
                 rf.getCommentPanel().add(rp);
                 rf.getCommentPanel().add(Box.createVerticalStrut(5));
@@ -323,10 +354,10 @@ public class ViewController {
                 rf.repaint();
             }
         });
-        
+
         return rf;
     }
-        
+
     public CreateRecipeFrame createRecipeCreator() {
         CreateRecipeFrame crf = new CreateRecipeFrame();
         crf.setListener(new CreateRecipeListener() {
@@ -338,14 +369,14 @@ public class ViewController {
                 Set<IngredientAmount> ingredients = new HashSet<>();
                 Iterator<String> it = r.getIngredients().iterator();
                 while (it.hasNext()) {
-                    String ingredientData [] = it.next().split(" ");
+                    String ingredientData[] = it.next().split(" ");
                     IngredientAmount ing = new IngredientAmount(
-                            ingredientData[0], 
+                            ingredientData[0],
                             Double.parseDouble(ingredientData[1]),
                             ingredientData[2]);
                     ingredients.add(ing);
                 }
-                Recipe recipe = new Recipe(id, name, text, 
+                Recipe recipe = new Recipe(id, name, text,
                         (RegisteredUser) rb.getCurrentAccount().getAccountOwner(), ingredients);
                 rb.recipes.put(id, recipe);
                 JOptionPane.showMessageDialog(crf, "Uspesno dodat recept!");
@@ -353,74 +384,79 @@ public class ViewController {
         });
         return crf;
     }
-    
+
     public Set<Recipe> getRecipesByIngredients(Set<Ingredient> ingredients, Set<KitchenAppliance> kAppliances) {
         //------------------------------------OVO OBRISATI, SAMO ZA PROVJERU ISPRAVNOSTI RADA FJE
-        Set<IngredientAmount> ia = new HashSet<>(); ia.add(new IngredientAmount("jaja", 1.0, "kg"));
+        Set<IngredientAmount> ia = new HashSet<>();
+        ia.add(new IngredientAmount("jaja", 1.0, "kg"));
         Recipe rp1 = new Recipe(1l, "a", "a", null, ia);
-        Set<KitchenAppliance> kp = new HashSet<>(); kp.add(new KitchenAppliance("mikser"));
+        Set<KitchenAppliance> kp = new HashSet<>();
+        kp.add(new KitchenAppliance("mikser"));
         rp1.setRequiredAppliances(kp);
-        Map<Long, Recipe> R = new HashMap<>(); R.put(1l, rp1);
+        Map<Long, Recipe> R = new HashMap<>();
+        R.put(1l, rp1);
         //----------------------------------------------------------------------
         Set<Recipe> foundRecipes = new HashSet<>();
-    
-        for (Iterator<Map.Entry<Long, Recipe>> it = R.entrySet().iterator(); it.hasNext();) 
-        {  
+
+        for (Iterator<Map.Entry<Long, Recipe>> it = R.entrySet().iterator(); it.hasNext();) {
             Recipe r = it.next().getValue();
-            if (r.getIngredientAmounts().containsAll(ingredients) && r.getRequiredAppliances().containsAll(kAppliances))
+            if (r.getIngredientAmounts().containsAll(ingredients) && r.getRequiredAppliances().containsAll(kAppliances)) {
                 foundRecipes.add(r);
+            }
         }
-    return foundRecipes;
-}
-    private LeftPanel createLeftPanel(Set<IngredientCategory> ingredientCategories, Set<KitchenAppliance> kAppliance){
-        
+        return foundRecipes;
+    }
+
+    private LeftPanel createLeftPanel(Set<IngredientCategory> ingredientCategories, Set<KitchenAppliance> kAppliance) {
+
         Set<Ingredient> ingredients = new HashSet<>();
         Set<KitchenAppliance> appliances = new HashSet<>();
         LeftPanel lp = new LeftPanel();
         Iterator<IngredientCategory> itC = ingredientCategories.iterator();
 
-        while(itC.hasNext())
-        {
+        while (itC.hasNext()) {
             IngredientCategory ci = itC.next();
             CategoryPanel cp = new CategoryPanel(ci.getName());
             lp.initCategory(cp);
             Iterator<Ingredient> itI = ci.getIngredientsSet().iterator();
             IngredientPanel ip = new IngredientPanel();
-            
-            while(itI.hasNext())
+
+            while (itI.hasNext()) {
                 ip.init(itI.next().getName());
+            }
             lp.initIngridient(ip);
         }
         lp.alignment();
-        
+
         Iterator<KitchenAppliance> itI = kAppliance.iterator();
         IngredientPanel ip = new IngredientPanel();
-            
-        while(itI.hasNext())
+
+        while (itI.hasNext()) {
             ip.init(itI.next().getName());
-        
+        }
+
         CategoryPanel cp = new CategoryPanel("Kuhinjski aparati");
         lp.initPanelAppliance(ip, cp);
-        
-        lp.getLPanel().setListener(new SearchListener() 
-        {
-             @Override
-             public void searchEventEmitted(SearchEvent e) 
-             {
-                for (String ingr : e.getIngredients())
-                      ingredients.add(new Ingredient(ingr));
 
-                for (String aplc : e.getAppliances())
-                      appliances.add(new KitchenAppliance(aplc));
-                
+        lp.getLPanel().setListener(new SearchListener() {
+            @Override
+            public void searchEventEmitted(SearchEvent e) {
+                for (String ingr : e.getIngredients()) {
+                    ingredients.add(new Ingredient(ingr));
+                }
+
+                for (String aplc : e.getAppliances()) {
+                    appliances.add(new KitchenAppliance(aplc));
+                }
+
                 Set<Recipe> foundRecipes = getRecipesByIngredients(ingredients, appliances);
                 //TODO: poziv funkcije za dodavanje panela u desni dio kojoj se proslijedjuju foundRecipes
-             }
-         });
-        
+            }
+        });
+
         return lp;
     }
-    
+
     public CreateAccountFrame createNewAccountFrame() {
         CreateAccountFrame cap = new CreateAccountFrame();
 
@@ -520,7 +556,7 @@ public class ViewController {
                     newAccOwner.setReviews(new TreeSet<>());
                     newAccOwner.setPrivileged(false);
                     newAccOwner.setAccount(newAcc);
-                    
+
                     newAcc.setAccountOwner(newAccOwner);
                     rb.accounts.put(username, newAcc);
                     cap.dispose();
