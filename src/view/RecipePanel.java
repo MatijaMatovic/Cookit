@@ -39,9 +39,9 @@ public class RecipePanel extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        setMaximumSize(new java.awt.Dimension(32767, 277));
-        setMinimumSize(new java.awt.Dimension(0, 200));
-        setPreferredSize(new java.awt.Dimension(1053, 200));
+        setMaximumSize(new java.awt.Dimension(32767, 220));
+        setMinimumSize(new java.awt.Dimension(0, 220));
+        setPreferredSize(new java.awt.Dimension(1053, 220));
 
         nameLabel.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         nameLabel.setText("Naziv recepta ");
@@ -92,8 +92,8 @@ public class RecipePanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(appliancesLabel)
                 .addGap(13, 13, 13)
-                .addComponent(instructionsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(instructionsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(reviewsLabel)
                     .addComponent(dateLabel)
