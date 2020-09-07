@@ -1,0 +1,18 @@
+A: &id001 !!model.Account
+  accountOwner: !!model.RegisteredUser
+    account: *id001
+    birthDate: {
+      }
+    following: !!set {
+      }
+    name: A
+    privileged: false
+    recipes: null
+    reviews: !!set {
+      }
+    surname: A
+    userType: user
+  active: true
+  email: A@A.A
+  password: A
+  username: A
