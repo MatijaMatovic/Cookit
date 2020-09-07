@@ -70,6 +70,7 @@ import view.recipeWindow.ReviewPanel;
 public class ViewController {
 
     public static RecipeBook rb;
+    public static MainWindow mw;
 
     public static void main(String[] args) {
         IngredientCategory ic1 = new IngredientCategory("Mlijecni proizvodi");
@@ -140,7 +141,7 @@ public class ViewController {
         // dodavanje usera da ne bi morali da se logujemo??
         //-------------------------------------------------
         ViewController k = new ViewController();
-        MainWindow mw = k.createMainWindow();
+        mw = k.createMainWindow();
         mw.getJScrollPane1().setViewportView(k.createLeftPanel(ic, ka));
         k.initAllRecipePanels(mw, recs);
         //RecipeFrame rf = k.createRecipeFrame(r1); rf.setVisible(true);
@@ -559,6 +560,11 @@ public class ViewController {
 
                     newAcc.setAccountOwner(newAccOwner);
                     rb.accounts.put(username, newAcc);
+                    mw.showAccountLbl(true);
+                    mw.changeLoginLbl(true);
+                    
+                    rb.setCurrentAccount(newAcc);
+                    
                     cap.dispose();
                 }
 
