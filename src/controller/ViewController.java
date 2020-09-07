@@ -267,7 +267,7 @@ public class ViewController {
 
                 if (currentAccount != null) {
                     rb.setCurrentAccount(currentAccount);
-                    lw.dispose();
+                    lw.setVisible(false);
                 }
             }
         });
@@ -476,7 +476,7 @@ public class ViewController {
 
                 String name = e.getName();
                 String surname = e.getSurname();
-                if (email.equals("")) {
+                if (!(email.equals(""))) {
                     newUsername = email;
 
                 } else {
