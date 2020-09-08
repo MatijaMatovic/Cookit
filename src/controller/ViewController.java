@@ -369,7 +369,14 @@ public class ViewController {
         crf.setListener(new CreateRecipeListener() {
             @Override
             public void createRecipeEventEmitted(CreateRecipeEvent r) {
-                long id = rb.recipes.isEmpty() ? 1 : Collections.max(rb.recipes.keySet())+1;
+                //Long id = rb.recipes.isEmpty() ? 1L : Collections.max(rb.recipes.keySet())+1L;
+                Long id;
+                if (rb.recipes.isEmpty())
+                    id = 1L;
+                else {
+                    Number tmp = Collections.max(rb.recipes.keySet());
+                    id = tmp.longValue()+1L;
+                }
                 String name = r.getName();
                 String text = r.getText();
                 Set<IngredientAmount> ingredients = new HashSet<>();
