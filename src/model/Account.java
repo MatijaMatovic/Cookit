@@ -15,8 +15,6 @@ public class Account implements Comparable<Account> {
 
     private boolean active = true;
 
-    private AccountOwner accountOwner;
-
     public Account(String username) {
         this.username = username;
     }
@@ -82,15 +80,6 @@ public class Account implements Comparable<Account> {
     public void setActive(boolean active) {
         this.active = active;
     }
-
-    public AccountOwner getAccountOwner() {
-        return accountOwner;
-    }
-
-    public void setAccountOwner(AccountOwner accountOwner) {
-        this.accountOwner = accountOwner;
-    }
-    
     
 
 }

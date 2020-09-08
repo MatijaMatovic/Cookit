@@ -1,29 +1,36 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.Set;
 
 public class RegisteredUser extends AccountOwner {
-
-    public RegisteredUser() {
-    }
 
     public String name;
 
     public String surname;
 
-    public LocalDate birthDate;
+    public String birthDate;
 
     public boolean privileged = false;
 
-    public Set<Recipe> recipes;
+    public Set<Long> recipeIDs;
 
     public Set<Review> reviews;
 
+    public Set<String> following;
+    
+    
+    public RegisteredUser() {
+        recipeIDs = new HashSet<>();
+        reviews = new HashSet<>();
+        following = new HashSet<>();
+    }
 
-    public Set<RegisteredUser> following;
 
     public RegisteredUser(String name) {
+        this();
         this.name = name; 
     }
 
@@ -44,11 +51,11 @@ public class RegisteredUser extends AccountOwner {
     }
 
     public LocalDate getBirthDate() {
-        return birthDate;
+        return LocalDate.parse(this.birthDate, DateTimeFormatter.ISO_DATE);
     }
 
     public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+        this.birthDate = birthDate.format(DateTimeFormatter.ISO_DATE);
     }
 
     public boolean isPrivileged() {
@@ -59,12 +66,12 @@ public class RegisteredUser extends AccountOwner {
         this.privileged = privileged;
     }
 
-    public Set<Recipe> getRecipes() {
-        return recipes;
+    public Set<Long> getRecipes() {
+        return recipeIDs;
     }
 
-    public void setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
+    public void setRecipes(Set<Long> recipes) {
+        this.recipeIDs = recipes;
     }
 
     public Set<Review> getReviews() {
@@ -75,11 +82,11 @@ public class RegisteredUser extends AccountOwner {
         this.reviews = reviews;
     }
 
-    public Set<RegisteredUser> getFollowing() {
+    public Set<String> getFollowing() {
         return following;
     }
 
-    public void setFollowing(Set<RegisteredUser> following) {
+    public void setFollowing(Set<String> following) {
         this.following = following;
     }
     

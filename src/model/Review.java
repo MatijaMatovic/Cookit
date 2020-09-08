@@ -9,6 +9,6 @@ public class Review {
 
     public String comment;
 
-    public RegisteredUser reviewer;
+    public String reviewer;
 
 }

@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.*;
 import model.Account;
+import model.AccountOwner;
 import model.IngredientCategory;
 import model.KitchenAppliance;
 import model.Recipe;
@@ -16,7 +17,7 @@ import org.yaml.snakeyaml.Yaml;
 
 public class RecipeBook {
 
-    public Map<String, Account> accounts;
+    public Map<String, AccountOwner> accountOwners;
     public Map<Long, Recipe> recipes;
     public Set<IngredientCategory> ingredientCategories;
     public Set<KitchenAppliance> appliances;
@@ -40,15 +41,14 @@ public class RecipeBook {
     public static String separator = System.getProperty("file.separator");
 
     public RecipeBook() {
-        this.accounts = new HashMap<>();
+        this.accountOwners = new HashMap<>();
         this.recipes = new HashMap<>();
         this.ingredientCategories = new TreeSet<>();
-
         this.appliances = new TreeSet<>();
     }
 
     public Account logIn(String userName, String password) {
-        Account ac = this.accounts.get(userName);
+        Account ac = this.accountOwners.get(userName).getAccount();
         if (ac == null){
             return null;
         }
@@ -127,7 +127,7 @@ public class RecipeBook {
             // so they need to be handled separately
             try (PrintWriter out = new PrintWriter(new FileWriter(getPath(FileType.ACCOUNTS), false))) {
                 Yaml yaml = new Yaml(dop);
-                yaml.dump(this.accounts, out);
+                yaml.dump(this.accountOwners, out);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,7 +145,7 @@ public class RecipeBook {
             // so they need to be handled separately
             try (InputStream in = new FileInputStream(new File(getPath(FileType.ACCOUNTS)))) {
                 Yaml yaml = new Yaml();
-                this.accounts = (Map<String, Account>) yaml.load(in);
+                this.accountOwners = (Map<String, AccountOwner>) yaml.load(in);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -153,7 +153,7 @@ public class RecipeBook {
     }
     
     public boolean checkAccount(String username){
-        return this.accounts.containsKey(username);
+        return this.accountOwners.containsKey(username);
     }
     
     /**
@@ -270,10 +270,21 @@ public class RecipeBook {
             loadAppliances();
             loadIngredients();
             loadRecipes();
+            reinitialzeData();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
     
+    public AccountOwner getCurrentAccountOwner() {
+        return this.accountOwners.get(currentAccount.getUsername());
+    }
+    
+    public void reinitialzeData() {
+        if (this.accountOwners == null) this.accountOwners = new HashMap<>();
+        if (this.recipes == null) this.recipes = new HashMap<>();
+        if (this.ingredientCategories == null) this.ingredientCategories = new TreeSet<>();
+        if (this.appliances == null) this.appliances = new TreeSet<>();
+    }
 }

@@ -78,7 +78,7 @@ public class ViewController {
     public static void main(String[] args) {
         
         rb = new RecipeBook();
-        //rb.loadAll();
+        rb.loadAll();
         
         //---------------------------------------------------------------------------------------
         
@@ -156,7 +156,7 @@ public class ViewController {
         ViewController k = new ViewController();
         mw = k.createMainWindow();
         mw.getJScrollPane1().setViewportView(k.createLeftPanel(ic, ka));
-        k.initAllRecipePanels(new HashSet<Recipe>(rb.recipes.values()));
+        k.initAllRecipePanels(new HashSet<>(rb.recipes.values()));
         //RecipeFrame rf = k.createRecipeFrame(r1); rf.setVisible(true);
         mw.setVisible(true);
     }
@@ -183,13 +183,13 @@ public class ViewController {
                         .ofPattern("dd.MM.yyyy. HH:mm")));
         rp.getNameLabel().setText(r.getName());
         /* If instructions are longer than 280 chars, it chopps it off */
- /* <html> tags enable the formatting of text in the label      */
+        /* <html> tags enable the formatting of text in the label      */
         rp.getInstructionsLabel().setText("<html>" + r.getText().substring(0,
                 Math.min(r.getText().length(), 280)) + "...</html>");
         rp.getReviewsLabel().setText(Double.toString(r.calculateGradeAvg()));
         rp.getIngredientsLabel().setText(r.getIngredientsString());
         rp.getAppliancesLabel().setText(r.getAppliancesString());
-        rp.getAuthorLabel().setText(r.getAuthor().getAccount().getUsername());
+        rp.getAuthorLabel().setText(r.getAuthorUsername());
         return rp;
     }
 
@@ -307,7 +307,7 @@ public class ViewController {
     public ReviewPanel createReviewPanel(Review r) {
         ReviewPanel rp = new ReviewPanel();
         rp.getTextLabel().setText(r.comment);
-        rp.getUsernameLabel().setText(r.reviewer.getAccount().getUsername());
+        rp.getUsernameLabel().setText(r.reviewer);
         rp.initRating(r.rating);
         return rp;
     }
@@ -345,11 +345,11 @@ public class ViewController {
                 Review review = new Review();
                 review.rating = rating;
                 review.comment = comment;
-                review.reviewer.setAccount(rb.getCurrentAccount());
+                review.reviewer = rb.currentAccount.getUsername();
 
                 Set<Review> reviews = r.getReviews();
                 reviews.add(review);
-                RegisteredUser us = (RegisteredUser) rb.getCurrentAccount().getAccountOwner();
+                RegisteredUser us = (RegisteredUser) rb.getCurrentAccountOwner();
                 us.getReviews().add(review);
                 r.setReviews(reviews);
                 rf.getRatingLabel().setText(Double.toString(r.calculateGradeAvg()));
@@ -370,7 +370,7 @@ public class ViewController {
         crf.setListener(new CreateRecipeListener() {
             @Override
             public void createRecipeEventEmitted(CreateRecipeEvent r) {
-                long id = rb.recipes.isEmpty() ? 1 : Collections.max(rb.recipes.keySet());
+                long id = rb.recipes.isEmpty() ? 1 : Collections.max(rb.recipes.keySet())+1;
                 String name = r.getName();
                 String text = r.getText();
                 Set<IngredientAmount> ingredients = new HashSet<>();
@@ -384,11 +384,14 @@ public class ViewController {
                     ingredients.add(ing);
                 }
                 Recipe recipe = new Recipe(id, name, text,
-                        (RegisteredUser) rb.getCurrentAccount().getAccountOwner(), ingredients);
+                        rb.getCurrentAccount().getUsername(), ingredients);
                 rb.recipes.put(id, recipe);
+                
+                ((RegisteredUser) rb.getCurrentAccountOwner()).getRecipes().add(id);
                 JOptionPane.showMessageDialog(crf, "Uspesno dodat recept!");
                 
                 initAllRecipePanels(new HashSet<Recipe>(rb.recipes.values()));
+                crf.dispose();
             }
         });
         
@@ -607,8 +610,7 @@ public class ViewController {
                     newAccOwner.setPrivileged(false);
                     newAccOwner.setAccount(newAcc);
 
-                    newAcc.setAccountOwner(newAccOwner);
-                    rb.accounts.put(username, newAcc);
+                    rb.accountOwners.put(username, newAccOwner);
                     mw.showAccountLbl(true);
                     mw.changeLoginLbl(true);
                     
@@ -658,4 +660,5 @@ public class ViewController {
         }
         return password;
     }
+    
 }

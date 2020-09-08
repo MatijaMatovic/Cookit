@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Recipe {
@@ -9,13 +10,13 @@ public class Recipe {
 
     private String text;
 
-    private LocalDateTime creationDate;
+    private String creationDate;
     
     private Long id;
 
     private boolean active = true;
 
-    private RegisteredUser author;
+    private String authorUsername;
 
     private Set<KitchenAppliance> requiredAppliances;
 
@@ -25,18 +26,18 @@ public class Recipe {
     
     
     public Recipe() {
-        creationDate = LocalDateTime.now();
+        creationDate = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME);
         requiredAppliances = new HashSet<>();
         ingredientAmounts = new HashSet<>();
         reviews = new HashSet<>();
     }
 
-    public Recipe(Long id, String name, String text, RegisteredUser author, Set<IngredientAmount> ingredientAmounts) {
+    public Recipe(Long id, String name, String text, String authorUsername, Set<IngredientAmount> ingredientAmounts) {
         this();
         this.id = id;
         this.name = name;
         this.text = text;
-        this.author = author;
+        this.authorUsername = authorUsername;
         this.ingredientAmounts = ingredientAmounts;
     }
     
@@ -58,11 +59,15 @@ public class Recipe {
     }
 
     public LocalDateTime getCreationDate() {
-        return creationDate;
+        return LocalDateTime.parse(creationDate, DateTimeFormatter.ISO_DATE_TIME);
+    }
+    
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
+    public void changeCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate.format(DateTimeFormatter.ISO_DATE_TIME);
     }
 
     public Long getId() {
@@ -81,14 +86,16 @@ public class Recipe {
         this.active = active;
     }
 
-    public RegisteredUser getAuthor() {
-        return author;
+    public String getAuthorUsername() {
+        return authorUsername;
     }
 
-    public void setAuthor(RegisteredUser author) {
-        this.author = author;
+    public void setAuthorUsername(String authorUsername) {
+        this.authorUsername = authorUsername;
     }
 
+    
+    
     public Set<KitchenAppliance> getRequiredAppliances() {
         return requiredAppliances;
     }
