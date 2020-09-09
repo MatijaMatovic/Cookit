@@ -258,8 +258,8 @@ public class MainWindow extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.weightx = 1.2;
+        gridBagConstraints.weighty = 1.2;
         getContentPane().add(jPanel2, gridBagConstraints);
 
         jPanel3.setBackground(new java.awt.Color(0, 204, 204));
