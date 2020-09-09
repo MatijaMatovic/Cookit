@@ -47,7 +47,6 @@ import view.CreateRecipeWindow.IngredientPickerListener;
 import view.CreateRecipeWindow.OkIngredientEvent;
 import view.CreateRecipeWindow.OkIngredientListener;
 import view.MainWindow;
-import view.RecipePanel;
 import view.createIngredient.CreateIngredientEvent;
 import view.createIngredient.CreateIngredientFrame;
 import view.createIngredient.CreateIngredientListener;
@@ -64,6 +63,9 @@ import view.ingredientPanel.SearchListener;
 import view.loginWindow.LoginEvent;
 import view.loginWindow.LoginListener;
 import view.loginWindow.LoginWindow;
+import view.recipePanel.RecipePanel;
+import view.recipePanel.RecipePanelEvent;
+import view.recipePanel.RecipePanelListener;
 import view.recipeWindow.PostReviewEvent;
 import view.recipeWindow.PostReviewListener;
 import view.recipeWindow.RecipeFrame;
@@ -195,6 +197,13 @@ public class ViewController {
         rp.getIngredientsLabel().setText(r.getIngredientsString());
         rp.getAppliancesLabel().setText(r.getAppliancesString());
         rp.getAuthorLabel().setText(r.getAuthorUsername());
+        rp.setListener(new RecipePanelListener() {
+            @Override
+            public void recipePanelEventEmitted(RecipePanelEvent e) {
+                RecipeFrame rf = createRecipeFrame(r);
+                rf.setVisible(true);
+            }
+        });
         return rp;
     }
 
@@ -323,12 +332,19 @@ public class ViewController {
         rf.getRatingLabel().setText(Double.toString(r.calculateGradeAvg()));
         rf.getInstructionsPane().setText(r.getText());
 
-        DefaultListModel ingredientsListModel = new DefaultListModel();
-        ingredientsListModel.addAll(r.getIngredientAmounts()
-                .stream()
-                .map(i -> i.toString())
-                .collect(Collectors.toList()));
-        rf.setIngredientsList(new JList<>(ingredientsListModel));
+        DefaultListModel<String> ingredientsListModel = new DefaultListModel();
+        Iterator<IngredientAmount> iait = r.getIngredientAmounts().iterator();
+        while (iait.hasNext()){
+            IngredientAmount ia = iait.next();
+            ingredientsListModel.addElement(ia.toString());
+        }
+//        ingredientsListModel.addAll(r.getIngredientAmounts()
+//                .stream()
+//                .map(i -> i.toString())
+//                .collect(Collectors.toList()));
+        rf.setIngredientsListModel(ingredientsListModel);
+        //rf.setVisible(false);
+        //rf.setVisible(true);
 
         /* Add users' reviews to the scroll pane */
         Iterator<Review> it = r.getReviews().iterator();
@@ -337,6 +353,10 @@ public class ViewController {
             ReviewPanel rp = createReviewPanel(review);
             rf.getCommentPanel().add(rp);
             rf.getCommentPanel().add(Box.createVerticalStrut(5));
+        }
+        
+        if (rb.currentAccount == null){
+            rf.getGradePanel().setVisible(false);
         }
 
         rf.setListener(new PostReviewListener() {

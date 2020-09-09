@@ -1,4 +1,4 @@
-package view;
+package view.recipePanel;
 
 import java.time.format.DateTimeFormatter;
 import javax.swing.JLabel;
@@ -14,10 +14,15 @@ public class RecipePanel extends javax.swing.JPanel {
     /**
      * Creates new form RecipePanel
      */
-    private long recipeId;
+    public long recipeId;
+    RecipePanelListener listener;
     
     public RecipePanel() {
         initComponents();
+    }
+    
+     public void setListener(RecipePanelListener listener) {
+        this.listener = listener;
     }
 
     /**
@@ -42,6 +47,11 @@ public class RecipePanel extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(32767, 220));
         setMinimumSize(new java.awt.Dimension(0, 220));
         setPreferredSize(new java.awt.Dimension(1053, 220));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         nameLabel.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         nameLabel.setText("Naziv recepta ");
@@ -102,6 +112,17 @@ public class RecipePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        if (evt.getClickCount() == 2){
+            RecipePanelEvent e = new RecipePanelEvent(recipeId, this);
+            //System.out.println("taknuto maknuto");
+            listener.recipePanelEventEmitted(e);
+        }
+        
+    }//GEN-LAST:event_formMouseClicked
+
+    
+    
     public JLabel getAppliancesLabel() {
         return appliancesLabel;
     }

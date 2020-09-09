@@ -9,9 +9,14 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageProducer;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -40,7 +45,8 @@ public class RecipeFrame extends javax.swing.JFrame {
     }
     
     private void initRatingStars(){
-        ImageIcon defaultIcon = new ImageIcon(getClass().getResource("star.png"));
+        String separator = System.getProperty("file.separator");
+        ImageIcon defaultIcon = new ImageIcon("." + separator + "src" + separator + "view" + separator + "recipeWindow" + separator + "star.png");
         ImageProducer ip = defaultIcon.getImage().getSource();
         ImageIcon star = makeStarImageIcon(ip, 1f, .5f, 0f);
         List<ImageIcon> list = Arrays.asList(star, star, star, star, star);
@@ -84,11 +90,6 @@ public class RecipeFrame extends javax.swing.JFrame {
         nameLabel.setText("jLabel1");
 
         ingredientsList.setBorder(javax.swing.BorderFactory.createTitledBorder("Sastojci"));
-        ingredientsList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         ingredientsScrollPane.setViewportView(ingredientsList);
 
         instructionsScroll.setBorder(javax.swing.BorderFactory.createTitledBorder("Postupak"));
@@ -150,8 +151,8 @@ public class RecipeFrame extends javax.swing.JFrame {
                     .addComponent(postReviwButton)
                     .addComponent(ratingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout commentPanelLayout = new javax.swing.GroupLayout(commentPanel);
@@ -185,7 +186,7 @@ public class RecipeFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(gradePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(reviewsScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                .addComponent(reviewsScroller, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -291,12 +292,16 @@ public class RecipeFrame extends javax.swing.JFrame {
         return ratingLabel;
     }
 
-    public void setIngredientsList(JList<String> ingredientsList) {
-        this.ingredientsList = ingredientsList;
+    public void setIngredientsListModel(DefaultListModel<String> ingredientsListModel) {
+        this.ingredientsList.setModel(ingredientsListModel);
     }
 
     public JPanel getCommentPanel() {
         return commentPanel;
+    }
+
+    public JPanel getGradePanel() {
+        return gradePanel;
     }
 
     

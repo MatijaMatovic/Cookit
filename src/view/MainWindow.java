@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 import view.ingredientPanel.LeftPanel;
+import view.recipePanel.RecipePanel;
 
 /**
  *
