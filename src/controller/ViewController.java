@@ -47,6 +47,9 @@ import view.CreateRecipeWindow.OkIngredientEvent;
 import view.CreateRecipeWindow.OkIngredientListener;
 import view.MainWindow;
 import view.RecipePanel;
+import view.createIngredient.CreateIngredientEvent;
+import view.createIngredient.CreateIngredientFrame;
+import view.createIngredient.CreateIngredientListener;
 import view.createUser.CreateAccountEvent;
 import view.createUser.CreateAccountFrame;
 import view.createUser.CreateAccountListener;
@@ -665,6 +668,34 @@ public class ViewController {
             }
         }
         return password;
+    }
+    
+    
+    public CreateIngredientFrame createIngredientFrameCreator(){
+        CreateIngredientFrame cif = new CreateIngredientFrame();
+        
+        cif.setComboBoxModel(new DefaultComboBoxModel(rb.ingredientCategories.toArray()));
+        
+        cif.setListener(new CreateIngredientListener() {
+            @Override
+            public void createIngredient(CreateIngredientEvent ev) {
+                String ingredientString = ev.getIngredientString();
+                Ingredient ingredient = new Ingredient(ingredientString);
+                IngredientCategory ingredientCategory = ev.getIngredientCategory();
+                
+                if (ingredientCategory.getIngredientsSet().contains(ingredient)){
+                    JOptionPane.showMessageDialog(cif, "U odabranoj kategoriji već postoji sastojak sa istim nazivom", "Greška", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(cif, "Novi sastojak uspešno dodat", "Uspešno dodavanje", JOptionPane.PLAIN_MESSAGE);
+                    ingredientCategory.addIngredient(ingredient);
+                    cif.dispose();
+                }
+            }
+        });
+        
+        cif.setVisible(true);
+        centerFrame(cif);
+        return cif;
     }
     
 }
