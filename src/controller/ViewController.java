@@ -250,7 +250,7 @@ public class ViewController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //TODO: kreirati prozor za izmjenu licnih podataka
-                System.out.println("my profile");
+                CreateIngredientFrame cif = createIngredientFrameCreator();
             }
         });
         mw.setNewRecepieListener(new ActionListener() {
@@ -691,6 +691,7 @@ public class ViewController {
                 } else {
                     JOptionPane.showMessageDialog(cif, "Novi sastojak uspešno dodat", "Uspešno dodavanje", JOptionPane.PLAIN_MESSAGE);
                     ingredientCategory.addIngredient(ingredient);
+                    addNewIngredientV();
                     cif.dispose();
                 }
             }

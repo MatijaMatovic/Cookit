@@ -66,6 +66,13 @@ public class IngredientCategory implements Comparable<IngredientCategory> {
     public void setIngredientsSet(Set<Ingredient> ingredientsSet) {
         this.ingredientsSet = ingredientsSet;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+    
+    
     
     
 }
