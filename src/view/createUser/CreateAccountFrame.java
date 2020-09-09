@@ -76,6 +76,15 @@ public class CreateAccountFrame extends javax.swing.JFrame {
         }
         return true;
     }
+    
+    public void enableAdminChkBox(boolean isAdmin){
+        this.moderatorLbl.setEnabled(isAdmin);
+        this.moderatorChkBox.setEnabled(isAdmin);
+    }
+    
+    public boolean isModeratorSelected(){
+        return this.moderatorChkBox.isSelected();
+    }
 
     /**
      * Creates new form CreateAccountFrame
@@ -132,6 +141,8 @@ public class CreateAccountFrame extends javax.swing.JFrame {
         dotLbl = new javax.swing.JLabel();
         emailDotComTextField = new javax.swing.JTextField();
         passwordTextField = new javax.swing.JTextField();
+        moderatorLbl = new javax.swing.JLabel();
+        moderatorChkBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -247,6 +258,10 @@ public class CreateAccountFrame extends javax.swing.JFrame {
             }
         });
 
+        moderatorLbl.setText("Moderator?");
+
+        moderatorChkBox.setText(" ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -296,7 +311,12 @@ public class CreateAccountFrame extends javax.swing.JFrame {
                         .addGap(5, 5, 5)
                         .addComponent(dotLbl)
                         .addGap(5, 5, 5)
-                        .addComponent(emailDotComTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(emailDotComTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(moderatorLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(moderatorChkBox)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -336,7 +356,11 @@ public class CreateAccountFrame extends javax.swing.JFrame {
                     .addComponent(passwordLbl)
                     .addComponent(generatePasswordBtn)
                     .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(moderatorLbl)
+                    .addComponent(moderatorChkBox))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addComponent(createAccountBtn)
                 .addContainerGap())
         );
@@ -354,7 +378,7 @@ public class CreateAccountFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 341, Short.MAX_VALUE)
+            .addGap(0, 348, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -498,6 +522,8 @@ public class CreateAccountFrame extends javax.swing.JFrame {
     private javax.swing.JButton generatePasswordBtn;
     private javax.swing.JButton generateUserNameBtn;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JCheckBox moderatorChkBox;
+    private javax.swing.JLabel moderatorLbl;
     private javax.swing.JLabel nameLbl;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JLabel panelTitleLbl;
