@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  * @author Jovana
  */
 public class LeftPanel extends javax.swing.JPanel {
-    private int i=1;
+     private int i=1;
     private GridBagConstraints cbg;
     private LPanel lPanel;
 
@@ -25,10 +25,11 @@ public class LeftPanel extends javax.swing.JPanel {
     public LeftPanel() {
         GridBagLayout gbl = new GridBagLayout();
         this.setLayout(gbl);
-        setBackground(Color.red);
-        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 0), 1, true));
         cbg = new GridBagConstraints();
-        
+   
+    }
+    
+    public void header(){
         cbg.anchor = GridBagConstraints.NORTHWEST;
         cbg.gridx = 0;
         cbg.gridy = 0;
@@ -38,6 +39,7 @@ public class LeftPanel extends javax.swing.JPanel {
         
         cbg = new GridBagConstraints();
         cbg.anchor = GridBagConstraints.NORTHWEST;
+    
     }
     
     public void initCategory(JPanel jp){
@@ -72,8 +74,9 @@ public class LeftPanel extends javax.swing.JPanel {
     public void alignment(){
         cbg.weighty=1;
         JPanel jp = new JPanel();
-        lPanel.categories.add(jp);
-        this.add(new JPanel(),cbg);
+        //lPanel.categories.add(jp);
+        jp.setBackground(Color.white);
+        this.add(jp,cbg);
     }
     
     public LPanel getLPanel(){

@@ -5,15 +5,12 @@
  */
 package view;
 
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-import model.Recipe;
-import view.recipeWindow.ReviewPanel;
+import view.ingredientPanel.LeftPanel;
 
 /**
  *
@@ -23,40 +20,39 @@ public class MainWindow extends javax.swing.JFrame {
 
     private boolean labelPressed = false;
     private ActionListener loginLblListener, favLblListener, myPrListener, newRecepieListener;
+    private LeftPanel lp = new LeftPanel();
 
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
         initComponents();
-        jPanel4.setVisible(false);
+        jLabel3.setForeground(new java.awt.Color(153, 153, 255));
+        jLabel7.setForeground(new java.awt.Color(153, 153, 255));
+        jLabel4.setForeground(new java.awt.Color(153, 153, 255));
+        jSeparator1.setForeground(new java.awt.Color(153, 153, 255));
+        jSeparator1.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel4.setBackground(new java.awt.Color(153, 153, 255));
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         
         jScrollPane1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jScrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        
-        // test code //
-        //ArrayList<Recipe> recipes = new ArrayList<>();
-        /*
-        Recipe r = new Recipe();
-        r.setName("Recept test");
-        recipes.add(r);
-        Recipe r2 = new Recipe();
-        r2.setName("Recept test2");
-        recipes.add(r2);
-        Recipe r3 = new Recipe();
-        r3.setName("Recept test3");
-        recipes.add(r3);
-        // end of test code... almost //  */
+
         recipePanelsPanel.setLayout(new BoxLayout(recipePanelsPanel, BoxLayout.Y_AXIS));
-        //initAllRecipePanels(recipes);
     }
     
     public void changeLoginLbl(boolean loggedIn) {
         if (loggedIn) {
             this.jLabel5.setText("Odjava");
         } else {
+            jLabel2.setForeground(Color.white);
+            jLabel3.setForeground(new java.awt.Color(153, 153, 255));
+            jLabel7.setForeground(new java.awt.Color(153, 153, 255));
+            jLabel4.setForeground(new java.awt.Color(153, 153, 255));
+            jSeparator1.setForeground(new java.awt.Color(153, 153, 255));
+            jSeparator1.setBackground(new java.awt.Color(153, 153, 255));
+            jPanel4.setBackground(new java.awt.Color(153, 153, 255));
             this.jLabel5.setText("Prijava");
         }
         this.jLabel5.repaint();
@@ -92,6 +88,14 @@ public class MainWindow extends javax.swing.JFrame {
         return jScrollPane1;
     }
     
+    public LeftPanel getLp() {
+        return lp;
+    }
+
+    public void setLp(LeftPanel lp) {
+        this.lp = lp;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,7 +114,6 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -175,7 +178,6 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(30, 30, 30))))
-            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,9 +188,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -226,7 +226,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -300,27 +300,32 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
         if (!labelPressed) {
-            jPanel4.setVisible(true);
+            jLabel2.setForeground(Color.gray);
+            jLabel3.setForeground(Color.BLACK);
+            jLabel7.setForeground(Color.BLACK);
+            jLabel4.setForeground(Color.BLACK);
+            jSeparator1.setForeground(Color.BLACK);
+            jSeparator1.setBackground(Color.WHITE);
+            jPanel4.setBackground(Color.white);
             labelPressed = true;
 
         } else {
-            jPanel4.setVisible(false);
+            jLabel2.setForeground(Color.white);
+            jLabel3.setForeground(new java.awt.Color(153, 153, 255));
+            jLabel7.setForeground(new java.awt.Color(153, 153, 255));
+            jLabel4.setForeground(new java.awt.Color(153, 153, 255));
+            jSeparator1.setForeground(new java.awt.Color(153, 153, 255));
+            jSeparator1.setBackground(new java.awt.Color(153, 153, 255));
+            jPanel4.setBackground(new java.awt.Color(153, 153, 255));
             labelPressed = false;
         }
-
     }//GEN-LAST:event_jLabel2MousePressed
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-         if (favLblListener != null) {
-            favLblListener.actionPerformed(new ActionEvent(this, 0, "clicked"));
+    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
+        if (loginLblListener != null) {
+            loginLblListener.actionPerformed(new ActionEvent(this, 0, "clicked"));
         }
-    }//GEN-LAST:event_jLabel3MouseClicked
-
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        if (myPrListener != null) {
-            myPrListener.actionPerformed(new ActionEvent(this, 0, "clicked"));
-        }
-    }//GEN-LAST:event_jLabel4MouseClicked
+    }//GEN-LAST:event_jLabel5MousePressed
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         if (newRecepieListener != null) {
@@ -328,11 +333,17 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel7MouseClicked
 
-    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
-        if (loginLblListener != null) {
-            loginLblListener.actionPerformed(new ActionEvent(this, 0, "clicked"));
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        if (myPrListener != null) {
+            myPrListener.actionPerformed(new ActionEvent(this, 0, "clicked"));
         }
-    }//GEN-LAST:event_jLabel5MousePressed
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        if (favLblListener != null) {
+            favLblListener.actionPerformed(new ActionEvent(this, 0, "clicked"));
+        }
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -381,6 +392,10 @@ public class MainWindow extends javax.swing.JFrame {
         this.recipePanelsPanel.removeAll();
     }
     
+    public void emptyLeftPanel() {
+        this.lp.removeAll();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -395,7 +410,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel recipePanelsPanel;
     // End of variables declaration//GEN-END:variables
 }

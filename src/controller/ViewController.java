@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -157,7 +158,9 @@ public class ViewController {
         //-------------------------------------------------
         ViewController k = new ViewController();
         mw = k.createMainWindow();
-        mw.getJScrollPane1().setViewportView(k.createLeftPanel(ic, ka));
+        
+        LeftPanel lp = k.createLeftPanel(rb.ingredientCategories, rb.appliances);
+        mw.getJScrollPane1().setViewportView(lp);
         k.initAllRecipePanels(new HashSet<>(rb.recipes.values()));
         //RecipeFrame rf = k.createRecipeFrame(r1); rf.setVisible(true);
         mw.setVisible(true);
@@ -468,25 +471,26 @@ public class ViewController {
     }
 
     private LeftPanel createLeftPanel(Set<IngredientCategory> ingredientCategories, Set<KitchenAppliance> kAppliance) {
-
         Set<Ingredient> ingredients = new HashSet<>();
         Set<KitchenAppliance> appliances = new HashSet<>();
-        LeftPanel lp = new LeftPanel();
-        Iterator<IngredientCategory> itC = ingredientCategories.iterator();
 
+        mw.getLp().setBackground(Color.white);
+        mw.getLp().header();
+        Iterator<IngredientCategory> itC = ingredientCategories.iterator();
+ 
         while (itC.hasNext()) {
             IngredientCategory ci = itC.next();
             CategoryPanel cp = new CategoryPanel(ci.getName());
-            lp.initCategory(cp);
+            mw.getLp().initCategory(cp);
             Iterator<Ingredient> itI = ci.getIngredientsSet().iterator();
             IngredientPanel ip = new IngredientPanel();
 
             while (itI.hasNext()) {
                 ip.init(itI.next().getName());
             }
-            lp.initIngridient(ip);
+            mw.getLp().initIngridient(ip);
         }
-        lp.alignment();
+        mw.getLp().alignment();
 
         Iterator<KitchenAppliance> itI = kAppliance.iterator();
         IngredientPanel ip = new IngredientPanel();
@@ -496,9 +500,9 @@ public class ViewController {
         }
 
         CategoryPanel cp = new CategoryPanel("Kuhinjski aparati");
-        lp.initPanelAppliance(ip, cp);
+        mw.getLp().initPanelAppliance(ip, cp);
 
-        lp.getLPanel().setListener(new SearchListener() {
+        mw.getLp().getLPanel().setListener(new SearchListener() {
             @Override
             public void searchEventEmitted(SearchEvent e) {
                 for (String ingr : e.getIngredients()) {
@@ -511,11 +515,10 @@ public class ViewController {
 
                 Set<Recipe> foundRecipes = getRecipesByIngredients(ingredients, appliances);
                 initAllRecipePanels(foundRecipes);
-                //TODO: poziv funkcije za dodavanje panela u desni dio kojoj se proslijedjuju foundRecipes
             }
         });
 
-        return lp;
+        return mw.getLp();
     }
 
 
@@ -696,6 +699,14 @@ public class ViewController {
         cif.setVisible(true);
         centerFrame(cif);
         return cif;
+    }
+    
+    public void addNewIngredientV(){
+        mw.emptyLeftPanel();
+        mw.validate();
+        createLeftPanel(rb.ingredientCategories, rb.appliances);
+        mw.validate();
+        mw.repaint();
     }
     
 }

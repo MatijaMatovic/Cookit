@@ -35,8 +35,6 @@ public class IngredientPanel extends javax.swing.JPanel {
      */
     public IngredientPanel() {
         initComponents();
-        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 0), 1, true));
-        setBackground(Color.WHITE);
         this.setLayout(new GridBagLayout());
 
         c = new GridBagConstraints();
@@ -64,7 +62,7 @@ public class IngredientPanel extends javax.swing.JPanel {
             }
             });
         jcb.setBackground(Color.white);
-        tmp = tmp - ingredient.length()*8-30 ;
+        tmp = tmp - ingredient.length()*5-25 ;
         if(tmp<=0)
         {
             tmp = width;
