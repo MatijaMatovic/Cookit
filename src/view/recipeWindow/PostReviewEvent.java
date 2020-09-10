@@ -6,7 +6,6 @@
 package view.recipeWindow;
 
 import java.util.EventObject;
-import model.RegisteredUser;
 
 /**
  *

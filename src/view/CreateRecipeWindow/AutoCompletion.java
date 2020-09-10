@@ -10,9 +10,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.*;
 import javax.swing.text.*;
-
 import javax.swing.JComboBox;
-
 import javax.swing.JFrame;
 
 /* This work is hereby released into the Public Domain.

@@ -15,7 +15,6 @@ import java.util.Map;
 public class AccountsList {
 
     private Map<String, Account> allAccountsMap;
-
     private Map<String, Account> activeAccountsMap;
     private Map<String, Account> inactiveAccountsMap;
 

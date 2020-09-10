@@ -4,6 +4,11 @@ public class AccountOwner {
 
     public AccountOwner() {
     }
+    
+    public AccountOwner(Account account,UserType userType ) {
+        this.account = account;
+        this.userType = userType;
+    }
 
     private UserType userType;
 

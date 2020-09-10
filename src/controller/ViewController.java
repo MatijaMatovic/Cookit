@@ -21,12 +21,10 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import model.Account;
 import model.AccountOwner;
@@ -122,42 +120,13 @@ public class ViewController {
         ka.add(new KitchenAppliance("mikser"));
         ka.add(new KitchenAppliance("blender"));
         ka.add(new KitchenAppliance("sokovnik"));
+        
+        Account ac = new Account("admin", "admin", "admin@gmail.com");
+        AccountOwner aco = new AccountOwner(ac, UserType.administrator);
+        rb.accountOwners.put("admin", aco);
 
         rb.ingredientCategories = ic;
         rb.appliances = ka;
-
-
-        /*
-        Set<Recipe> recs = new HashSet<>();
-        RegisteredUser user = new RegisteredUser();
-        user.setAccount(new Account());
-        user.getAccount().setUsername("kuvar najbolji na svetu");
-        user.getAccount().setPassword("a");
-        user.getAccount().setEmail("a@a.a");
-        user.setName("Kuvar");
-        user.setSurname("Kuvaric");
-        user.setBirthDate(LocalDate.now());
-        user.setUserType(UserType.user);
-
-        HashSet<IngredientAmount> ingrs = new HashSet<>();
-        ingrs.add(new IngredientAmount("mleko", 100.0, "g"));
-        ingrs.add(new IngredientAmount("jaja", 100.0, "kom"));
-        Recipe r1 = new Recipe(1l, "Palacinke", "Mesaj sve", user, ingrs);
-        Review stars = new Review();
-        stars.comment = "lep recept";
-        stars.rating = 4;
-        stars.reviewer = user;
-        HashSet<Review> reviews = new HashSet<>();
-        reviews.add(stars);
-        r1.setReviews(reviews);
-        recs.add(r1);
-        Recipe r2 = new Recipe(2l, "Baklava", "Kupi u poslasticarnici", user, ingrs);
-        recs.add(r2);
-         */
-        //---------------------------------------------------------------------------
-        //-------------------------------------------------
-        // dodavanje usera da ne bi morali da se logujemo??
-        //-------------------------------------------------
         ViewController k = new ViewController();
         mw = k.createMainWindow();
 
@@ -496,24 +465,14 @@ public class ViewController {
     }
 
     public Set<Recipe> getRecipesByIngredients(Set<Ingredient> ingredients, Set<KitchenAppliance> kAppliances) {
-        //------------------------------------OVO OBRISATI, SAMO ZA PROVJERU ISPRAVNOSTI RADA FJE
         Set<IngredientAmount> ia = new HashSet<>();
-        //ia.add(new IngredientAmount("jaja", 1.0, "kg"));
-
-        //RegisteredUser rrr = new RegisteredUser("neki autor");
-        //rrr.setAccount(new Account("dkjsj"));
-        //Recipe rp1 = new Recipe(1l, "a", "a", rrr, ia);
-        //Set<KitchenAppliance> kp = new HashSet<>();
-        //kp.add(new KitchenAppliance("mikser"));
-        //rp1.setRequiredAppliances(kp);
         Map<Long, Recipe> R = rb.recipes;
-        //R.put(1l, rp1);
-        //----------------------------------------------------------------------
         Set<Recipe> foundRecipes = new HashSet<>();
 
         for (Iterator<Map.Entry<Long, Recipe>> it = R.entrySet().iterator(); it.hasNext();) {
             Recipe r = it.next().getValue();
-            if (r.getIngredientAmounts().containsAll(ingredients) && r.getRequiredAppliances().containsAll(kAppliances)) {
+            //r.getIngredientAmounts()
+            if (ingredients.containsAll(r.getIngredientAmounts()) && r.getRequiredAppliances().containsAll(kAppliances)) {
                 foundRecipes.add(r);
             }
         }
@@ -521,7 +480,7 @@ public class ViewController {
     }
 
     private LeftPanel createLeftPanel(Set<IngredientCategory> ingredientCategories, Set<KitchenAppliance> kAppliance) {
-        Set<Ingredient> ingredients = new HashSet<>();
+        
         Set<KitchenAppliance> appliances = new HashSet<>();
 
         mw.getLp().setBackground(Color.white);
@@ -555,6 +514,7 @@ public class ViewController {
         mw.getLp().getLPanel().setListener(new SearchListener() {
             @Override
             public void searchEventEmitted(SearchEvent e) {
+                Set<Ingredient> ingredients = new HashSet<>();
                 for (String ingr : e.getIngredients()) {
                     ingredients.add(new Ingredient(ingr));
                 }

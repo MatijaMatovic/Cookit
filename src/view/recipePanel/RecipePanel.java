@@ -1,8 +1,6 @@
 package view.recipePanel;
 
-import java.time.format.DateTimeFormatter;
 import javax.swing.JLabel;
-import model.Recipe;
 
 /**
  * This class is used to present the preview of the recipe, in the main window

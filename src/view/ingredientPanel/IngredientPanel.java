@@ -54,7 +54,6 @@ public class IngredientPanel extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(jcb.isSelected()){
-                    //JOptionPane.showMessageDialog(null, "yyy");
                     ingredients.add(jcb.getLabel());
                 }else{
                     ingredients.remove(jcb.getLabel());
