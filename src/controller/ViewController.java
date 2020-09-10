@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
@@ -442,7 +443,7 @@ public class ViewController {
         crf.setIngredientListener(new IngredientPickerListener() {
             @Override
             public void ingredientPickerEventEmitted(IngredientPickerEvent e) {
-                Set<String> ingrs = new HashSet<>();
+                Set<String> ingrs = new HashSet<>(); 
                 Iterator<IngredientCategory> itCat = rb.ingredientCategories.iterator();
                 while (itCat.hasNext()){
                     Iterator<Ingredient> it = itCat.next().getIngredientsSet().iterator();
@@ -451,25 +452,33 @@ public class ViewController {
                         ingrs.add(in.getName());
                     }
                 }
-                IngredientPickerDialog i = createIngredientPickerDialog(ingrs, crf);
+                IngredientPickerDialog i = createIngredientPickerDialog(ingrs, crf, e.isEdit());
                 i.setVisible(true);
             }
         });
         return crf;
     }
     
-    public IngredientPickerDialog createIngredientPickerDialog(Set<String> ingrs, CreateRecipeFrame crf){
-        IngredientPickerDialog i = new IngredientPickerDialog(mw, true);
+    public IngredientPickerDialog createIngredientPickerDialog(Set<String> ingrs, CreateRecipeFrame crf, boolean edit){
+        IngredientPickerDialog i = new IngredientPickerDialog(mw, true, edit);
         DefaultComboBoxModel<String> ingrModel = new DefaultComboBoxModel();
         ingrModel.addAll(ingrs);
         i.setIngredientsComboModel(ingrModel);
-        AutoCompletion.enable(i.getIngredientsComboBox());
+        i.setLocationRelativeTo(crf);
+        if (!edit)
+            AutoCompletion.enable(i.getIngredientsComboBox());
         
         i.setOkListener(new OkIngredientListener() {
             @Override
             public void okIngredientEventEmitted(OkIngredientEvent e) {
-                crf.addIngredient(i.getIngredientsComboModel().getSelectedItem().toString() 
-                        + " " + i.getAmountFTF().getText() + " " + i.getUnitComboBox().getModel().getSelectedItem().toString());
+                if (!edit){
+                    crf.addIngredient(e.getIngredient()
+                            + " " + String.valueOf(e.getAmount()) + " " + e.getUnit());
+                } else {
+                    String ingredient = crf.getIngredientModel().get(crf.getIngredientsList().getSelectedIndex()).split(" ")[0];
+                    crf.editIngredient(ingredient
+                            + " " + String.valueOf(e.getAmount()) + " " + e.getUnit());
+                }
                 i.dispose();
             }
         });

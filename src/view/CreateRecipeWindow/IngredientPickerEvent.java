@@ -12,9 +12,24 @@ import java.util.EventObject;
  * @author isido
  */
 public class IngredientPickerEvent extends EventObject{
+    
+    boolean edit;
 
     public IngredientPickerEvent(Object o) {
         super(o);
+    }
+
+    public IngredientPickerEvent(boolean edit, Object source) {
+        super(source);
+        this.edit = edit;
+    }
+
+    public boolean isEdit() {
+        return edit;
+    }
+
+    public void setEdit(boolean edit) {
+        this.edit = edit;
     }
     
 }

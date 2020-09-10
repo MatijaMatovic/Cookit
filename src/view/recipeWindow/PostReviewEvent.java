@@ -39,7 +39,7 @@ public class PostReviewEvent extends EventObject {
     public PostReviewEvent(String comment, Integer rating, Object source) {
         super(source);
         this.comment = comment;
-        this.rating = rating;
+        this.rating = rating + 1;
     }
 
 }
