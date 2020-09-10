@@ -32,8 +32,10 @@ public class ReviewPanel extends javax.swing.JPanel {
         
     }
     
-    private void initRatingStars(int rate){
-        ImageIcon defaultIcon = new ImageIcon(getClass().getResource("star.png"));
+    private void initRatingStars(int rate) {
+        String separator = System.getProperty("file.separator");
+        String starURL = "." + separator + "src" + separator + "view" + separator + "recipeWindow" + separator + "star.png";
+        ImageIcon defaultIcon = new ImageIcon(starURL);
         ImageProducer ip = defaultIcon.getImage().getSource();
         ImageIcon star = makeStarImageIcon(ip, 1f, .5f, 0f);
         List<ImageIcon> list = Arrays.asList(star, star, star, star, star);

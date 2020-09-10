@@ -18,20 +18,26 @@ public class IngredientPickerDialog extends javax.swing.JDialog {
     
     private DefaultComboBoxModel<String> ingredientsComboModel;
     private OkIngredientListener okListener;
+    boolean editAmount;
 
     /**
      * Creates new form IngredientPickerDialog
      * @param parent
      * @param modal
      */
-    public IngredientPickerDialog(java.awt.Frame parent, boolean modal) {
+    public IngredientPickerDialog(java.awt.Frame parent, boolean modal, boolean edit) {
         super(parent, modal);
         ArrayList<String> ingrs = new ArrayList<>();
+        editAmount = edit;
         //{"mleko", "jaja", "brasno", "djumbir", "kisela pavlaka"}
         //ingrs.add("mleko"); ingrs.add("jaja"); ingrs.add("brasno"); ingrs.add("djumbir"); ingrs.add("kisela pavlaka");
         ingredientsComboModel = new DefaultComboBoxModel<>();
         //ingredientsComboModel.addAll(ingrs);
         initComponents();
+        
+        if (edit){
+            ingrComboBox.setVisible(false);
+        }
     }
 
     /**
@@ -49,6 +55,8 @@ public class IngredientPickerDialog extends javax.swing.JDialog {
         okButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAutoRequestFocus(false);
+        setResizable(false);
 
         amountFTF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
@@ -99,54 +107,18 @@ public class IngredientPickerDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        okListener.okIngredientEventEmitted(new OkIngredientEvent(evt));
+        String ingredient;
+        if (!editAmount)
+             ingredient = ingredientsComboModel.getSelectedItem().toString();
+        else
+            ingredient = "";
+        Double amount = Double.parseDouble(amountFTF.getText());
+        String unit = unitComboBox.getSelectedItem().toString();
+        okListener.okIngredientEventEmitted(new OkIngredientEvent(ingredient, amount, unit, editAmount, this));
     }//GEN-LAST:event_okButtonActionPerformed
 
     public void setOkListener(OkIngredientListener okListener) {
         this.okListener = okListener;
-    }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IngredientPickerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IngredientPickerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IngredientPickerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IngredientPickerDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                IngredientPickerDialog dialog = new IngredientPickerDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     public DefaultComboBoxModel<String> getIngredientsComboModel() {

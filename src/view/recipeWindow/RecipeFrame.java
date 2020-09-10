@@ -84,7 +84,7 @@ public class RecipeFrame extends javax.swing.JFrame {
         reviewsScroller = new javax.swing.JScrollPane();
         commentPanel = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         nameLabel.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         nameLabel.setText("jLabel1");

@@ -8,6 +8,7 @@ package view.CreateRecipeWindow;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /**
  *
@@ -191,13 +192,7 @@ public class CreateRecipeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelActionPerformed
 
     private void editAmountMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAmountMenuItemActionPerformed
-        // TODO add your handling code here:
-        int koji = ingredientsList.getSelectedIndex();
-        if (koji > -1){
-            IngredientPickerDialog picker = new IngredientPickerDialog(CreateRecipeFrame.this, true);
-            picker.ingrComboBox.setEnabled(false);
-            picker.setVisible(true);
-        }
+        ingredientListener.ingredientPickerEventEmitted(new IngredientPickerEvent(true, this));
     }//GEN-LAST:event_editAmountMenuItemActionPerformed
 
     private void deleteIngredientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteIngredientActionPerformed
@@ -207,16 +202,24 @@ public class CreateRecipeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteIngredientActionPerformed
 
     private void addIngredientMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addIngredientMenuItemActionPerformed
-        ingredientListener.ingredientPickerEventEmitted(new IngredientPickerEvent(evt));
+        ingredientListener.ingredientPickerEventEmitted(new IngredientPickerEvent(false, this));
     }//GEN-LAST:event_addIngredientMenuItemActionPerformed
     
-    void editIngredient(Object selectedItem, String string) {
+    public void editIngredient(String string) {
         int koji = ingredientsList.getSelectedIndex();
         ingredientModel.setElementAt(string, koji);
     }
     
     public void addIngredient(String ingr){
         ingredientModel.addElement(ingr);
+    }
+
+    public DefaultListModel<String> getIngredientModel() {
+        return ingredientModel;
+    }
+
+    public JList<String> getIngredientsList() {
+        return ingredientsList;
     }
     
     /**
