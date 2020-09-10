@@ -22,12 +22,10 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import model.Account;
 import model.AccountOwner;
@@ -83,12 +81,11 @@ public class ViewController {
     public static MainWindow mw;
 
     public static void main(String[] args) {
-        
+
         rb = new RecipeBook();
         rb.loadAll();
-        
+
         //---------------------------------------------------------------------------------------
-        
         IngredientCategory ic1 = new IngredientCategory("Mlijecni proizvodi");
         IngredientCategory ic2 = new IngredientCategory("Povrce");
         Set<IngredientCategory> ic = new HashSet<>();
@@ -131,42 +128,9 @@ public class ViewController {
         
         rb.ingredientCategories = ic;
         rb.appliances = ka;
-        
-
-        /*
-        Set<Recipe> recs = new HashSet<>();
-        RegisteredUser user = new RegisteredUser();
-        user.setAccount(new Account());
-        user.getAccount().setUsername("kuvar najbolji na svetu");
-        user.getAccount().setPassword("a");
-        user.getAccount().setEmail("a@a.a");
-        user.setName("Kuvar");
-        user.setSurname("Kuvaric");
-        user.setBirthDate(LocalDate.now());
-        user.setUserType(UserType.user);
-
-        HashSet<IngredientAmount> ingrs = new HashSet<>();
-        ingrs.add(new IngredientAmount("mleko", 100.0, "g"));
-        ingrs.add(new IngredientAmount("jaja", 100.0, "kom"));
-        Recipe r1 = new Recipe(1l, "Palacinke", "Mesaj sve", user, ingrs);
-        Review stars = new Review();
-        stars.comment = "lep recept";
-        stars.rating = 4;
-        stars.reviewer = user;
-        HashSet<Review> reviews = new HashSet<>();
-        reviews.add(stars);
-        r1.setReviews(reviews);
-        recs.add(r1);
-        Recipe r2 = new Recipe(2l, "Baklava", "Kupi u poslasticarnici", user, ingrs);
-        recs.add(r2);
-        */
-        //---------------------------------------------------------------------------
-        //-------------------------------------------------
-        // dodavanje usera da ne bi morali da se logujemo??
-        //-------------------------------------------------
         ViewController k = new ViewController();
         mw = k.createMainWindow();
-        
+
         LeftPanel lp = k.createLeftPanel(rb.ingredientCategories, rb.appliances);
         mw.getJScrollPane1().setViewportView(lp);
         k.initAllRecipePanels(new HashSet<>(rb.recipes.values()));
@@ -196,7 +160,7 @@ public class ViewController {
                         .ofPattern("dd.MM.yyyy. HH:mm")));
         rp.getNameLabel().setText(r.getName());
         /* If instructions are longer than 280 chars, it chopps it off */
-        /* <html> tags enable the formatting of text in the label      */
+ /* <html> tags enable the formatting of text in the label      */
         rp.getInstructionsLabel().setText("<html>" + r.getText().substring(0,
                 Math.min(r.getText().length(), 280)) + "...</html>");
         rp.getReviewsLabel().setText(Double.toString(r.calculateGradeAvg()));
@@ -467,15 +431,15 @@ public class ViewController {
                 Recipe recipe = new Recipe(id, name, text,
                         rb.getCurrentAccount().getUsername(), ingredients);
                 rb.recipes.put(id, recipe);
-                
+
                 ((RegisteredUser) rb.getCurrentAccountOwner()).getRecipes().add(id);
                 JOptionPane.showMessageDialog(crf, "Uspesno dodat recept!");
-                
+
                 initAllRecipePanels(new HashSet<Recipe>(rb.recipes.values()));
                 crf.dispose();
             }
         });
-        
+
         crf.setIngredientListener(new IngredientPickerListener() {
             @Override
             public void ingredientPickerEventEmitted(IngredientPickerEvent e) {
@@ -521,26 +485,15 @@ public class ViewController {
         return i;
     }
 
-   public Set<Recipe> getRecipesByIngredients(Set<Ingredient> ingredients, Set<KitchenAppliance> kAppliances) {
-        //------------------------------------OVO OBRISATI, SAMO ZA PROVJERU ISPRAVNOSTI RADA FJE
+    public Set<Recipe> getRecipesByIngredients(Set<Ingredient> ingredients, Set<KitchenAppliance> kAppliances) {
         Set<IngredientAmount> ia = new HashSet<>();
-        //ia.add(new IngredientAmount("jaja", 1.0, "kg"));
-        
-        //RegisteredUser rrr = new RegisteredUser("neki autor");
-        //rrr.setAccount(new Account("dkjsj"));
-        //Recipe rp1 = new Recipe(1l, "a", "a", rrr, ia);
-        
-        //Set<KitchenAppliance> kp = new HashSet<>();
-        //kp.add(new KitchenAppliance("mikser"));
-        //rp1.setRequiredAppliances(kp);
         Map<Long, Recipe> R = rb.recipes;
-        //R.put(1l, rp1);
-        //----------------------------------------------------------------------
         Set<Recipe> foundRecipes = new HashSet<>();
 
         for (Iterator<Map.Entry<Long, Recipe>> it = R.entrySet().iterator(); it.hasNext();) {
             Recipe r = it.next().getValue();
-            if (r.getIngredientAmounts().containsAll(ingredients) && r.getRequiredAppliances().containsAll(kAppliances)) {
+            //r.getIngredientAmounts()
+            if (ingredients.containsAll(r.getIngredientAmounts()) && r.getRequiredAppliances().containsAll(kAppliances)) {
                 foundRecipes.add(r);
             }
         }
@@ -548,13 +501,13 @@ public class ViewController {
     }
 
     private LeftPanel createLeftPanel(Set<IngredientCategory> ingredientCategories, Set<KitchenAppliance> kAppliance) {
-        Set<Ingredient> ingredients = new HashSet<>();
+        
         Set<KitchenAppliance> appliances = new HashSet<>();
 
         mw.getLp().setBackground(Color.white);
         mw.getLp().header();
         Iterator<IngredientCategory> itC = ingredientCategories.iterator();
- 
+
         while (itC.hasNext()) {
             IngredientCategory ci = itC.next();
             CategoryPanel cp = new CategoryPanel(ci.getName());
@@ -598,7 +551,6 @@ public class ViewController {
 
         return mw.getLp();
     }
-
 
     public CreateAccountFrame createNewAccountFrame() {
         CreateAccountFrame cap = new CreateAccountFrame();
@@ -704,9 +656,9 @@ public class ViewController {
                     rb.accountOwners.put(username, newAccOwner);
                     mw.showAccountLbl(true);
                     mw.changeLoginLbl(true);
-                    
+
                     rb.setCurrentAccount(newAcc);
-                    
+
                     cap.dispose();
                 }
 
@@ -831,21 +783,20 @@ public class ViewController {
         }
         return password;
     }
-    
-    
-    public CreateIngredientFrame createIngredientFrameCreator(){
+
+    public CreateIngredientFrame createIngredientFrameCreator() {
         CreateIngredientFrame cif = new CreateIngredientFrame();
-        
+
         cif.setComboBoxModel(new DefaultComboBoxModel(rb.ingredientCategories.toArray()));
-        
+
         cif.setListener(new CreateIngredientListener() {
             @Override
             public void createIngredient(CreateIngredientEvent ev) {
                 String ingredientString = ev.getIngredientString();
                 Ingredient ingredient = new Ingredient(ingredientString);
                 IngredientCategory ingredientCategory = ev.getIngredientCategory();
-                
-                if (ingredientCategory.getIngredientsSet().contains(ingredient)){
+
+                if (ingredientCategory.getIngredientsSet().contains(ingredient)) {
                     JOptionPane.showMessageDialog(cif, "U odabranoj kategoriji već postoji sastojak sa istim nazivom", "Greška", JOptionPane.ERROR_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(cif, "Novi sastojak uspešno dodat", "Uspešno dodavanje", JOptionPane.PLAIN_MESSAGE);
@@ -855,7 +806,7 @@ public class ViewController {
                 }
             }
         });
-        
+
         cif.setVisible(true);
         centerFrame(cif);
         return cif;
@@ -868,5 +819,5 @@ public class ViewController {
         mw.validate();
         mw.repaint();
     }
-    
+
 }

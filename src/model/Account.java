@@ -18,6 +18,12 @@ public class Account implements Comparable<Account> {
     public Account(String username) {
         this.username = username;
     }
+    
+    public Account(String username, String password,String email ) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
 
      public Account(String username, String password,String email ) {
         this.username = username;

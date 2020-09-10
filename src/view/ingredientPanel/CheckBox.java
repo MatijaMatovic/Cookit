@@ -5,9 +5,6 @@
  */
 package view.ingredientPanel;
 
-import java.awt.Color;
-import java.awt.Dimension;
-
 /**
  *
  * @author Jovana
