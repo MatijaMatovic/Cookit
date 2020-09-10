@@ -97,6 +97,10 @@ public class MainWindow extends javax.swing.JFrame {
         this.lp = lp;
     }
     
+    public void changeSpecialLbl(String newTitle){
+        this.jLabel4.setText(newTitle);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

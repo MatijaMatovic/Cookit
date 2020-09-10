@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class IngredientAmount extends Ingredient{
 
     private Double amount;
@@ -35,5 +37,23 @@ public class IngredientAmount extends Ingredient{
     public String toString() {
         return this.name + " " + Double.toString(this.amount) + this.unit;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass() && Ingredient.class != obj.getClass() ) {
+            return false;
+        }
+        final Ingredient other = (Ingredient) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        return true;
+    }
+    
     
 }

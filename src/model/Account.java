@@ -19,6 +19,12 @@ public class Account implements Comparable<Account> {
         this.username = username;
     }
 
+     public Account(String username, String password,String email ) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
