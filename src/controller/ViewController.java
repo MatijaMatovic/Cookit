@@ -29,6 +29,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import model.Account;
+import model.AccountOwner;
 import model.IngredientAmount;
 import model.Ingredient;
 import model.IngredientCategory;
@@ -81,12 +82,11 @@ public class ViewController {
     public static MainWindow mw;
 
     public static void main(String[] args) {
-        
+
         rb = new RecipeBook();
         rb.loadAll();
-        
+
         //---------------------------------------------------------------------------------------
-        
         IngredientCategory ic1 = new IngredientCategory("Mlijecni proizvodi");
         IngredientCategory ic2 = new IngredientCategory("Povrce");
         Set<IngredientCategory> ic = new HashSet<>();
@@ -122,10 +122,10 @@ public class ViewController {
         ka.add(new KitchenAppliance("mikser"));
         ka.add(new KitchenAppliance("blender"));
         ka.add(new KitchenAppliance("sokovnik"));
-        
+
         rb.ingredientCategories = ic;
         rb.appliances = ka;
-        
+
 
         /*
         Set<Recipe> recs = new HashSet<>();
@@ -153,14 +153,14 @@ public class ViewController {
         recs.add(r1);
         Recipe r2 = new Recipe(2l, "Baklava", "Kupi u poslasticarnici", user, ingrs);
         recs.add(r2);
-        */
+         */
         //---------------------------------------------------------------------------
         //-------------------------------------------------
         // dodavanje usera da ne bi morali da se logujemo??
         //-------------------------------------------------
         ViewController k = new ViewController();
         mw = k.createMainWindow();
-        
+
         LeftPanel lp = k.createLeftPanel(rb.ingredientCategories, rb.appliances);
         mw.getJScrollPane1().setViewportView(lp);
         k.initAllRecipePanels(new HashSet<>(rb.recipes.values()));
@@ -190,7 +190,7 @@ public class ViewController {
                         .ofPattern("dd.MM.yyyy. HH:mm")));
         rp.getNameLabel().setText(r.getName());
         /* If instructions are longer than 280 chars, it chopps it off */
-        /* <html> tags enable the formatting of text in the label      */
+ /* <html> tags enable the formatting of text in the label      */
         rp.getInstructionsLabel().setText("<html>" + r.getText().substring(0,
                 Math.min(r.getText().length(), 280)) + "...</html>");
         rp.getReviewsLabel().setText(Double.toString(r.calculateGradeAvg()));
@@ -259,7 +259,22 @@ public class ViewController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //TODO: kreirati prozor za izmjenu licnih podataka
-                CreateIngredientFrame cif = createIngredientFrameCreator();
+
+                UserType currentUserType = rb.getCurrentAccountOwner().getUserType();
+
+                switch (currentUserType) {
+                    case user:
+                        JOptionPane.showMessageDialog(mw, "Funkcija u izradi");
+                        break;
+                    case moderator:
+                        CreateIngredientFrame cif = createIngredientFrameCreator();
+                        break;
+                    case administrator:
+                        CreateAccountFrame caf = adminCreateNewAccountFrame();
+                        break;
+
+                }
+
             }
         });
         mw.setNewRecepieListener(new ActionListener() {
@@ -291,6 +306,22 @@ public class ViewController {
 
                 if (currentAccount != null) {
                     rb.setCurrentAccount(currentAccount);
+
+                    UserType currentUserType = rb.getCurrentAccountOwner().getUserType();
+
+                    switch (currentUserType) {
+                        case user:
+                            break;
+                        case administrator:
+                            mw.changeSpecialLbl("Dodavanje korisnika");
+                            break;
+                        case moderator:
+                            mw.changeSpecialLbl("Dodavanje sastojaka");
+                            break;
+                        default:
+                            break;
+                    }
+
                     lw.setVisible(false);
                 }
             }
@@ -334,7 +365,7 @@ public class ViewController {
 
         DefaultListModel<String> ingredientsListModel = new DefaultListModel();
         Iterator<IngredientAmount> iait = r.getIngredientAmounts().iterator();
-        while (iait.hasNext()){
+        while (iait.hasNext()) {
             IngredientAmount ia = iait.next();
             ingredientsListModel.addElement(ia.toString());
         }
@@ -354,8 +385,8 @@ public class ViewController {
             rf.getCommentPanel().add(rp);
             rf.getCommentPanel().add(Box.createVerticalStrut(5));
         }
-        
-        if (rb.currentAccount == null){
+
+        if (rb.currentAccount == null) {
             rf.getGradePanel().setVisible(false);
         }
 
@@ -397,11 +428,11 @@ public class ViewController {
             public void createRecipeEventEmitted(CreateRecipeEvent r) {
                 //Long id = rb.recipes.isEmpty() ? 1L : Collections.max(rb.recipes.keySet())+1L;
                 Long id;
-                if (rb.recipes.isEmpty())
+                if (rb.recipes.isEmpty()) {
                     id = 1L;
-                else {
+                } else {
                     Number tmp = Collections.max(rb.recipes.keySet());
-                    id = tmp.longValue()+1L;
+                    id = tmp.longValue() + 1L;
                 }
                 String name = r.getName();
                 String text = r.getText();
@@ -418,23 +449,23 @@ public class ViewController {
                 Recipe recipe = new Recipe(id, name, text,
                         rb.getCurrentAccount().getUsername(), ingredients);
                 rb.recipes.put(id, recipe);
-                
+
                 ((RegisteredUser) rb.getCurrentAccountOwner()).getRecipes().add(id);
                 JOptionPane.showMessageDialog(crf, "Uspesno dodat recept!");
-                
+
                 initAllRecipePanels(new HashSet<Recipe>(rb.recipes.values()));
                 crf.dispose();
             }
         });
-        
+
         crf.setIngredientListener(new IngredientPickerListener() {
             @Override
             public void ingredientPickerEventEmitted(IngredientPickerEvent e) {
                 Set<String> ingrs = new HashSet<>();
                 Iterator<IngredientCategory> itCat = rb.ingredientCategories.iterator();
-                while (itCat.hasNext()){
+                while (itCat.hasNext()) {
                     Iterator<Ingredient> it = itCat.next().getIngredientsSet().iterator();
-                    while (it.hasNext()){
+                    while (it.hasNext()) {
                         Ingredient in = it.next();
                         ingrs.add(in.getName());
                     }
@@ -445,18 +476,18 @@ public class ViewController {
         });
         return crf;
     }
-    
-    public IngredientPickerDialog createIngredientPickerDialog(Set<String> ingrs, CreateRecipeFrame crf){
+
+    public IngredientPickerDialog createIngredientPickerDialog(Set<String> ingrs, CreateRecipeFrame crf) {
         IngredientPickerDialog i = new IngredientPickerDialog(mw, true);
         DefaultComboBoxModel<String> ingrModel = new DefaultComboBoxModel();
         ingrModel.addAll(ingrs);
         i.setIngredientsComboModel(ingrModel);
         AutoCompletion.enable(i.getIngredientsComboBox());
-        
+
         i.setOkListener(new OkIngredientListener() {
             @Override
             public void okIngredientEventEmitted(OkIngredientEvent e) {
-                crf.addIngredient(i.getIngredientsComboModel().getSelectedItem().toString() 
+                crf.addIngredient(i.getIngredientsComboModel().getSelectedItem().toString()
                         + " " + i.getAmountFTF().getText() + " " + i.getUnitComboBox().getModel().getSelectedItem().toString());
                 i.dispose();
             }
@@ -464,15 +495,14 @@ public class ViewController {
         return i;
     }
 
-   public Set<Recipe> getRecipesByIngredients(Set<Ingredient> ingredients, Set<KitchenAppliance> kAppliances) {
+    public Set<Recipe> getRecipesByIngredients(Set<Ingredient> ingredients, Set<KitchenAppliance> kAppliances) {
         //------------------------------------OVO OBRISATI, SAMO ZA PROVJERU ISPRAVNOSTI RADA FJE
         Set<IngredientAmount> ia = new HashSet<>();
         //ia.add(new IngredientAmount("jaja", 1.0, "kg"));
-        
+
         //RegisteredUser rrr = new RegisteredUser("neki autor");
         //rrr.setAccount(new Account("dkjsj"));
         //Recipe rp1 = new Recipe(1l, "a", "a", rrr, ia);
-        
         //Set<KitchenAppliance> kp = new HashSet<>();
         //kp.add(new KitchenAppliance("mikser"));
         //rp1.setRequiredAppliances(kp);
@@ -497,7 +527,7 @@ public class ViewController {
         mw.getLp().setBackground(Color.white);
         mw.getLp().header();
         Iterator<IngredientCategory> itC = ingredientCategories.iterator();
- 
+
         while (itC.hasNext()) {
             IngredientCategory ci = itC.next();
             CategoryPanel cp = new CategoryPanel(ci.getName());
@@ -541,9 +571,9 @@ public class ViewController {
         return mw.getLp();
     }
 
-
     public CreateAccountFrame createNewAccountFrame() {
         CreateAccountFrame cap = new CreateAccountFrame();
+        cap.enableAdminChkBox(false);
 
         cap.setGeneratePasswordListener(new ActionListener() {
             @Override
@@ -645,9 +675,9 @@ public class ViewController {
                     rb.accountOwners.put(username, newAccOwner);
                     mw.showAccountLbl(true);
                     mw.changeLoginLbl(true);
-                    
+
                     rb.setCurrentAccount(newAcc);
-                    
+
                     cap.dispose();
                 }
 
@@ -655,7 +685,86 @@ public class ViewController {
         });
 
         cap.setVisible(true);
+        centerFrame(cap);
         return cap;
+    }
+
+    public CreateAccountFrame adminCreateNewAccountFrame() {
+        CreateAccountFrame caf = createNewAccountFrame();
+        caf.enableAdminChkBox(true);
+        caf.setCreateAccountListener(new CreateAccountListener() {
+            @Override
+            public void createNewAccount(CreateAccountEvent e) {
+
+                boolean allDataEntered = true;
+
+                String name = e.getName();
+                String surname = e.getSurname();
+                String email = e.getEmail();
+                String username = e.getUsername();
+                String password = e.getPassword();
+
+                LocalDate birthDate = e.getBirthDate();
+
+                if (name.isBlank()) {
+                    caf.colorTextField(email);
+                    allDataEntered = false;
+                }
+                if (surname.isBlank()) {
+                    caf.colorTextField("surname");
+                    allDataEntered = false;
+                }
+                if (username.isBlank()) {
+                    caf.colorTextField("username");
+                    allDataEntered = false;
+                }
+                if (password.isBlank()) {
+                    caf.colorTextField("password");
+                    allDataEntered = false;
+                }
+
+                if (!(caf.checkEmailFields())) {
+                    allDataEntered = false;
+                }
+
+                if (allDataEntered) {
+                    if (rb.checkAccount(username)) {
+                        caf.colorTextField("username");
+                        return;
+                    }
+
+                    Account newAcc = new Account();
+                    newAcc.setEmail(email);
+                    newAcc.setUsername(username);
+                    newAcc.setPassword(password);
+
+                    RegisteredUser newAccOwner = new RegisteredUser();
+                    if (caf.isModeratorSelected()) {
+                        newAccOwner.setUserType(UserType.moderator);
+                    } else {
+                        newAccOwner.setUserType(UserType.user);
+                    }
+
+                    newAccOwner.setBirthDate(birthDate);
+                    newAccOwner.setFollowing(new TreeSet<>());
+                    newAccOwner.setName(name);
+                    newAccOwner.setSurname(surname);
+                    newAccOwner.setReviews(new TreeSet<>());
+                    newAccOwner.setPrivileged(false);
+                    newAccOwner.setAccount(newAcc);
+
+                    rb.accountOwners.put(username, newAccOwner);
+                    mw.showAccountLbl(true);
+                    mw.changeLoginLbl(true);
+
+                    rb.setCurrentAccount(newAcc);
+
+                    caf.dispose();
+                }
+
+            }
+        });
+        return caf;
     }
 
     public static String generatePassword() {
@@ -692,21 +801,20 @@ public class ViewController {
         }
         return password;
     }
-    
-    
-    public CreateIngredientFrame createIngredientFrameCreator(){
+
+    public CreateIngredientFrame createIngredientFrameCreator() {
         CreateIngredientFrame cif = new CreateIngredientFrame();
-        
+
         cif.setComboBoxModel(new DefaultComboBoxModel(rb.ingredientCategories.toArray()));
-        
+
         cif.setListener(new CreateIngredientListener() {
             @Override
             public void createIngredient(CreateIngredientEvent ev) {
                 String ingredientString = ev.getIngredientString();
                 Ingredient ingredient = new Ingredient(ingredientString);
                 IngredientCategory ingredientCategory = ev.getIngredientCategory();
-                
-                if (ingredientCategory.getIngredientsSet().contains(ingredient)){
+
+                if (ingredientCategory.getIngredientsSet().contains(ingredient)) {
                     JOptionPane.showMessageDialog(cif, "U odabranoj kategoriji već postoji sastojak sa istim nazivom", "Greška", JOptionPane.ERROR_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(cif, "Novi sastojak uspešno dodat", "Uspešno dodavanje", JOptionPane.PLAIN_MESSAGE);
@@ -716,18 +824,18 @@ public class ViewController {
                 }
             }
         });
-        
+
         cif.setVisible(true);
         centerFrame(cif);
         return cif;
     }
-    
-    public void addNewIngredientV(){
+
+    public void addNewIngredientV() {
         mw.emptyLeftPanel();
         mw.validate();
         createLeftPanel(rb.ingredientCategories, rb.appliances);
         mw.validate();
         mw.repaint();
     }
-    
+
 }
