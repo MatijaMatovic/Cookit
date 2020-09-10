@@ -345,11 +345,17 @@ public class ViewController {
         rf.setIngredientsListModel(ingredientsListModel);
         //rf.setVisible(false);
         //rf.setVisible(true);
-
+        
         /* Add users' reviews to the scroll pane */
         Iterator<Review> it = r.getReviews().iterator();
         while (it.hasNext()) {
             Review review = it.next();
+            
+            if (rb.getCurrentAccount() != null){
+                if (review.reviewer.equals(rb.getCurrentAccount().getUsername()))
+                    rf.getGradePanel().setVisible(false);
+            }
+            
             ReviewPanel rp = createReviewPanel(review);
             rf.getCommentPanel().add(rp);
             rf.getCommentPanel().add(Box.createVerticalStrut(5));
@@ -364,6 +370,10 @@ public class ViewController {
             public void postReviewEventEmitted(PostReviewEvent e) {
                 Integer rating = e.getRating();
                 String comment = e.getComment();
+                
+                if (rating == 0){
+                    return;
+                }
 
                 rf.disableRating();
 
@@ -382,6 +392,8 @@ public class ViewController {
                 ReviewPanel rp = createReviewPanel(review);
                 rf.getCommentPanel().add(rp);
                 rf.getCommentPanel().add(Box.createVerticalStrut(5));
+                
+                rf.getRatingLabel().setText(Double.toString(r.calculateGradeAvg()));
                 rf.validate();
                 rf.repaint();
             }
@@ -635,10 +647,10 @@ public class ViewController {
                     RegisteredUser newAccOwner = new RegisteredUser();
                     newAccOwner.setUserType(UserType.user);
                     newAccOwner.setBirthDate(birthDate);
-                    newAccOwner.setFollowing(new TreeSet<>());
+                    newAccOwner.setFollowing(new HashSet<>());
                     newAccOwner.setName(name);
                     newAccOwner.setSurname(surname);
-                    newAccOwner.setReviews(new TreeSet<>());
+                    newAccOwner.setReviews(new HashSet<>());
                     newAccOwner.setPrivileged(false);
                     newAccOwner.setAccount(newAcc);
 
