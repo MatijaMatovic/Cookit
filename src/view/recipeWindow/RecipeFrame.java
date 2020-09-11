@@ -151,17 +151,7 @@ public class RecipeFrame extends javax.swing.JFrame {
                 .addGap(0, 6, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout commentPanelLayout = new javax.swing.GroupLayout(commentPanel);
-        commentPanel.setLayout(commentPanelLayout);
-        commentPanelLayout.setHorizontalGroup(
-            commentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 683, Short.MAX_VALUE)
-        );
-        commentPanelLayout.setVerticalGroup(
-            commentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 219, Short.MAX_VALUE)
-        );
-
+        commentPanel.setLayout(new javax.swing.BoxLayout(commentPanel, javax.swing.BoxLayout.Y_AXIS));
         reviewsScroller.setViewportView(commentPanel);
 
         javax.swing.GroupLayout reviewsPanelLayout = new javax.swing.GroupLayout(reviewsPanel);
@@ -225,7 +215,7 @@ public class RecipeFrame extends javax.swing.JFrame {
 
     private void postReviwButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postReviwButtonActionPerformed
         // TODO add your handling code here:
-        PostReviewEvent ev = new PostReviewEvent(reviewText.getText(), rating.getLevel(), this);
+        PostReviewEvent ev = new PostReviewEvent(reviewText.getText(), rating.getLevel() + 1, this);
         listener.postReviewEventEmitted(ev);
     }//GEN-LAST:event_postReviwButtonActionPerformed
 

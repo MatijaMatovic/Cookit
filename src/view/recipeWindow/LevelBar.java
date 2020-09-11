@@ -51,7 +51,7 @@ public class LevelBar extends JPanel implements MouseListener, MouseMotionListen
   }
 
   public int getLevel() {
-    return clicked + 1;
+    return clicked;
   }
 
   public void setLevel(int l) {

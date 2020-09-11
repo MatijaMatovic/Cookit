@@ -445,7 +445,7 @@ public class ViewController {
             
             ReviewPanel rp = createReviewPanel(review);
             rf.getCommentPanel().add(rp);
-            rf.getCommentPanel().add(Box.createVerticalStrut(5));
+            //rf.getCommentPanel().add(Box.createVerticalStrut(5));
         }
         
         if (rb.currentAccount == null) {

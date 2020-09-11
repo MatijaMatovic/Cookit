@@ -41,7 +41,7 @@ public class ReviewPanel extends javax.swing.JPanel {
         List<ImageIcon> list = Arrays.asList(star, star, star, star, star);
         ratingPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         rating = new LevelBar(defaultIcon, list, 2);
-        rating.setLevel(rate);
+        rating.setLevel(rate - 1);
         rating.freezeRating();
         ratingPanel.add(rating);
         rating.setVisible(true);
@@ -64,6 +64,7 @@ public class ReviewPanel extends javax.swing.JPanel {
         textLabel = new javax.swing.JLabel();
         ratingPanel = new javax.swing.JPanel();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setMaximumSize(new java.awt.Dimension(32767, 150));
 
         usernameLabel.setText("username");
@@ -96,7 +97,7 @@ public class ReviewPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(ratingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(usernameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                        .addGap(0, 490, Short.MAX_VALUE))))
+                        .addGap(0, 488, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +107,7 @@ public class ReviewPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ratingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(textLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                .addComponent(textLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
