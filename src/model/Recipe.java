@@ -58,8 +58,12 @@ public class Recipe {
         this.text = text;
     }
 
-    public LocalDateTime getCreationDate() {
+    public LocalDateTime getCreationDateParsed() {
         return LocalDateTime.parse(creationDate, DateTimeFormatter.ISO_DATE_TIME);
+    }
+    
+    public String getCreationDate() {
+        return this.creationDate;
     }
     
     public void setCreationDate(String creationDate) {

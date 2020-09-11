@@ -32,7 +32,7 @@ public class RecipesList {
         recipesSet = new TreeSet<>(new Comparator<Recipe>() {
             @Override
             public int compare(Recipe o1, Recipe o2) {
-                return o2.getCreationDate().compareTo(o1.getCreationDate());
+                return o2.getCreationDateParsed().compareTo(o1.getCreationDateParsed());
             }
 
         });
@@ -86,7 +86,7 @@ public class RecipesList {
         recipeStringMap.putIfAbsent(ingredientsString, new TreeSet<>(new Comparator<Recipe>() {
             @Override
             public int compare(Recipe o1, Recipe o2) {
-                return o2.getCreationDate().compareTo(o1.getCreationDate());
+                return o2.getCreationDateParsed().compareTo(o1.getCreationDateParsed());
             }
 
         }));
@@ -103,7 +103,7 @@ public class RecipesList {
         newIngredientRecipeMap.putIfAbsent(ts, new TreeSet<>(new Comparator<Recipe>() {
             @Override
             public int compare(Recipe o1, Recipe o2) {
-                return o2.getCreationDate().compareTo(o1.getCreationDate());
+                return o2.getCreationDateParsed().compareTo(o1.getCreationDateParsed());
             }
 
         }));
@@ -119,7 +119,7 @@ public class RecipesList {
         Set<Recipe> returnRecipes = new TreeSet<>(new Comparator<Recipe>() {
             @Override
             public int compare(Recipe o1, Recipe o2) {
-                return o2.getCreationDate().compareTo(o1.getCreationDate());
+                return o2.getCreationDateParsed().compareTo(o1.getCreationDateParsed());
             }
 
         });
@@ -137,7 +137,7 @@ public class RecipesList {
         Set<Recipe> returnRecipes = new TreeSet<>(new Comparator<Recipe>() {
             @Override
             public int compare(Recipe o1, Recipe o2) {
-                return o2.getCreationDate().compareTo(o1.getCreationDate());
+                return o2.getCreationDateParsed().compareTo(o1.getCreationDateParsed());
             }
 
         });

@@ -10,7 +10,7 @@ public class RecipeCollection {
         recipeList = new TreeSet<>(new Comparator<Recipe>() {
             @Override
             public int compare(Recipe o1, Recipe o2) {
-                return o2.getCreationDate().compareTo(o1.getCreationDate());
+                return o2.getCreationDateParsed().compareTo(o1.getCreationDateParsed());
             }
         });
 

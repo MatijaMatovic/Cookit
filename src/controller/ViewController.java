@@ -241,7 +241,7 @@ public class ViewController {
     public RecipePanel createRecipePanel(Recipe r) {
         RecipePanel rp = new RecipePanel();
         rp.setRecipeId(r.getId());
-        rp.getDateLabel().setText(r.getCreationDate()
+        rp.getDateLabel().setText(r.getCreationDateParsed()
                 .format(DateTimeFormatter
                         .ofPattern("dd.MM.yyyy. HH:mm")));
         rp.getNameLabel().setText(r.getName());
@@ -516,13 +516,13 @@ public class ViewController {
 //                    ingredients.add(ing);
 //                }
                 Recipe recipe = new Recipe(id, name, text,
-                        rb.getCurrentAccount().getUsername(), new HashSet<IngredientAmount>(ingredientAmounts));
+                        rb.getCurrentAccount().getUsername(), new HashSet<>(ingredientAmounts));
                 rb.recipes.put(id, recipe);
 
                 ((RegisteredUser) rb.getCurrentAccountOwner()).getRecipes().add(id);
                 JOptionPane.showMessageDialog(crf, "Uspesno dodat recept!");
 
-                initAllRecipePanels(new HashSet<Recipe>(rb.recipes.values()));
+                initAllRecipePanels(new HashSet<>(rb.recipes.values()));
                 crf.dispose();
             }
         });
