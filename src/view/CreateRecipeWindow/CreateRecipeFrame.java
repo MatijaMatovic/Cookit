@@ -19,6 +19,7 @@ public class CreateRecipeFrame extends javax.swing.JFrame {
     private DefaultListModel<String> ingredientModel;
     private CreateRecipeListener listener;
     private IngredientPickerListener ingredientListener;
+    private DeleteIngredientListener deleteListener;
 
     /**
      * Creates new form ReceptKreiranje
@@ -173,6 +174,10 @@ public class CreateRecipeFrame extends javax.swing.JFrame {
         this.ingredientListener = ingredientListener;
     }
 
+    public void setDeleteListener(DeleteIngredientListener deleteListener) {
+        this.deleteListener = deleteListener;
+    }
+
     private void okayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okayActionPerformed
         if (listener == null)
             return;
@@ -196,9 +201,7 @@ public class CreateRecipeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_editAmountMenuItemActionPerformed
 
     private void deleteIngredientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteIngredientActionPerformed
-        int koji = ingredientsList.getSelectedIndex();
-        if (koji > -1)
-            ingredientModel.remove(koji);
+        deleteListener.deleteIngredientEventEmitted(new DeleteIngredientEvent(ingredientsList.getSelectedIndex(), this));
     }//GEN-LAST:event_deleteIngredientActionPerformed
 
     private void addIngredientMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addIngredientMenuItemActionPerformed
@@ -208,6 +211,11 @@ public class CreateRecipeFrame extends javax.swing.JFrame {
     public void editIngredient(String string) {
         int koji = ingredientsList.getSelectedIndex();
         ingredientModel.setElementAt(string, koji);
+    }
+    
+    public void deleteIngredient(){
+        int koji = ingredientsList.getSelectedIndex();
+        ingredientModel.remove(koji);
     }
     
     public void addIngredient(String ingr){

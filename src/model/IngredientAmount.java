@@ -37,6 +37,7 @@ public class IngredientAmount extends Ingredient{
     public String toString() {
         return this.name + " " + Double.toString(this.amount) + this.unit;
     }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -49,7 +50,7 @@ public class IngredientAmount extends Ingredient{
             return false;
         }
         final Ingredient other = (Ingredient) obj;
-        if (!Objects.equals(this.name, other.name)) {
+        if (!this.name.equals(other.name)) {
             return false;
         }
         return true;

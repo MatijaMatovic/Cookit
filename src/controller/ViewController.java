@@ -15,9 +15,11 @@ import java.awt.event.ComponentEvent;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -41,6 +43,8 @@ import view.CreateRecipeWindow.AutoCompletion;
 import view.CreateRecipeWindow.CreateRecipeEvent;
 import view.CreateRecipeWindow.CreateRecipeFrame;
 import view.CreateRecipeWindow.CreateRecipeListener;
+import view.CreateRecipeWindow.DeleteIngredientEvent;
+import view.CreateRecipeWindow.DeleteIngredientListener;
 import view.CreateRecipeWindow.IngredientPickerDialog;
 import view.CreateRecipeWindow.IngredientPickerEvent;
 import view.CreateRecipeWindow.IngredientPickerListener;
@@ -487,6 +491,7 @@ public class ViewController {
 
     public CreateRecipeFrame createRecipeCreator() {
         CreateRecipeFrame crf = new CreateRecipeFrame();
+        List<IngredientAmount> ingredientAmounts = new ArrayList<>();
         crf.setListener(new CreateRecipeListener() {
             @Override
             public void createRecipeEventEmitted(CreateRecipeEvent r) {
@@ -500,18 +505,18 @@ public class ViewController {
                 }
                 String name = r.getName();
                 String text = r.getText();
-                Set<IngredientAmount> ingredients = new HashSet<>();
-                Iterator<String> it = r.getIngredients().iterator();
-                while (it.hasNext()) {
-                    String ingredientData[] = it.next().split(" ");
-                    IngredientAmount ing = new IngredientAmount(
-                            ingredientData[0],
-                            Double.parseDouble(ingredientData[1]),
-                            ingredientData[2]);
-                    ingredients.add(ing);
-                }
+//                Set<IngredientAmount> ingredients = new HashSet<>();
+//                Iterator<String> it = r.getIngredients().iterator();
+//                while (it.hasNext()) {
+//                    String ingredientData[] = it.next().split(" ");
+//                    IngredientAmount ing = new IngredientAmount(
+//                            ingredientData[0],
+//                            Double.parseDouble(ingredientData[1]),
+//                            ingredientData[2]);
+//                    ingredients.add(ing);
+//                }
                 Recipe recipe = new Recipe(id, name, text,
-                        rb.getCurrentAccount().getUsername(), ingredients);
+                        rb.getCurrentAccount().getUsername(), new HashSet<IngredientAmount>(ingredientAmounts));
                 rb.recipes.put(id, recipe);
 
                 ((RegisteredUser) rb.getCurrentAccountOwner()).getRecipes().add(id);
@@ -521,7 +526,7 @@ public class ViewController {
                 crf.dispose();
             }
         });
-
+        
         crf.setIngredientListener(new IngredientPickerListener() {
             @Override
             public void ingredientPickerEventEmitted(IngredientPickerEvent e) {
@@ -534,14 +539,23 @@ public class ViewController {
                         ingrs.add(in.getName());
                     }
                 }
-                IngredientPickerDialog i = createIngredientPickerDialog(ingrs, crf, e.isEdit());
+                IngredientPickerDialog i = createIngredientPickerDialog(ingrs, crf, e.isEdit(), ingredientAmounts);
                 i.setVisible(true);
             }
         });
+        
+        crf.setDeleteListener(new DeleteIngredientListener() {
+            @Override
+            public void deleteIngredientEventEmitted(DeleteIngredientEvent e) {
+               ingredientAmounts.remove(crf.getIngredientsList().getSelectedIndex());
+               crf.deleteIngredient();
+            }
+        });
+        
         return crf;
     }
     
-    public IngredientPickerDialog createIngredientPickerDialog(Set<String> ingrs, CreateRecipeFrame crf, boolean edit){
+    public IngredientPickerDialog createIngredientPickerDialog(Set<String> ingrs, CreateRecipeFrame crf, boolean edit, List<IngredientAmount> ingredients){
         IngredientPickerDialog i = new IngredientPickerDialog(mw, true, edit);
         DefaultComboBoxModel<String> ingrModel = new DefaultComboBoxModel();
         ingrModel.addAll(ingrs);
@@ -554,12 +568,14 @@ public class ViewController {
             @Override
             public void okIngredientEventEmitted(OkIngredientEvent e) {
                 if (!edit){
-                    crf.addIngredient(e.getIngredient()
-                            + " " + String.valueOf(e.getAmount()) + " " + e.getUnit());
+                    IngredientAmount ingr = new IngredientAmount(e.getIngredient(), e.getAmount(), e.getUnit());
+                    ingredients.add(ingr);
+                    crf.addIngredient(ingr.toString());
                 } else {
-                    String ingredient = crf.getIngredientModel().get(crf.getIngredientsList().getSelectedIndex()).split(" ")[0];
-                    crf.editIngredient(ingredient
-                            + " " + String.valueOf(e.getAmount()) + " " + e.getUnit());
+                    IngredientAmount ingrEdited = ingredients.get(crf.getIngredientsList().getSelectedIndex());
+                    ingrEdited.setAmount(e.getAmount());
+                    ingrEdited.setUnit(e.getUnit());
+                    crf.editIngredient(ingrEdited.toString());
                 }
                 i.dispose();
             }
@@ -568,14 +584,12 @@ public class ViewController {
     }
 
     public Set<Recipe> getRecipesByIngredients(Set<Ingredient> ingredients, Set<KitchenAppliance> kAppliances) {
-        Set<IngredientAmount> ia = new HashSet<>();
         Map<Long, Recipe> R = rb.recipes;
         Set<Recipe> foundRecipes = new HashSet<>();
 
         for (Iterator<Map.Entry<Long, Recipe>> it = R.entrySet().iterator(); it.hasNext();) {
             Recipe r = it.next().getValue();
-            //r.getIngredientAmounts()
-            if (ingredients.containsAll(r.getIngredientAmounts()) && r.getRequiredAppliances().containsAll(kAppliances)) {
+            if (ingredients.containsAll(r.getIngredientAmounts()) && kAppliances.containsAll(r.getRequiredAppliances())) {
                 foundRecipes.add(r);
             }
         }
