@@ -78,8 +78,8 @@ public class CreateAccountFrame extends javax.swing.JFrame {
     }
     
     public void enableAdminChkBox(boolean isAdmin){
-        this.moderatorLbl.setEnabled(isAdmin);
-        this.moderatorChkBox.setEnabled(isAdmin);
+        this.moderatorLbl.setVisible(isAdmin);
+        this.moderatorChkBox.setVisible(isAdmin);
     }
     
     public boolean isModeratorSelected(){
