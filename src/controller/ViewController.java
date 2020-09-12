@@ -379,6 +379,8 @@ public class ViewController {
                     }
                     
                     lw.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(lw, "Neispravno uneti podaci. Ne postoji korisnik sa tim korisničkim imenom i tom lozinkom.", "Neispravni podaci", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
