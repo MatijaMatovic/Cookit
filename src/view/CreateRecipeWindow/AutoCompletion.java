@@ -136,9 +136,13 @@ public void insertString(int offs, String str, AttributeSet a) throws BadLocatio
         // provide feedback to the user that his input has been received but can not be accepted
         comboBox.getToolkit().beep(); // when available use: UIManager.getLookAndFeel().provideErrorFeedback(comboBox);
     }
+    try {
     setText(item.toString());
     // select the completed part
     highlightCompletedText(offs+str.length());
+    } catch (Exception e) {
+        
+    }
 }
 
 private void setText(String text) {
@@ -147,7 +151,7 @@ private void setText(String text) {
         super.remove(0, getLength());
         super.insertString(0, text, null);
     } catch (BadLocationException e) {
-        throw new RuntimeException(e.toString());
+        //throw new RuntimeException(e.toString());
     }
 }
 

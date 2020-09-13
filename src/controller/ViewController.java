@@ -88,138 +88,12 @@ public class ViewController {
         rb = new RecipeBook();
         rb.loadAll();
 
-        //---------------------------------------------------------------------------------------
-        IngredientCategory ic1 = new IngredientCategory("Mlijecni proizvodi");
-        IngredientCategory ic2 = new IngredientCategory("Povrce");
-        IngredientCategory ic3 = new IngredientCategory("Voce");
-        IngredientCategory ic4 = new IngredientCategory("Zacini");
-        IngredientCategory ic5 = new IngredientCategory("Zitarice");
-        IngredientCategory ic6 = new IngredientCategory("Meso");
-        Set<IngredientCategory> ic = new HashSet<>();
-        Set<Ingredient> i1 = new TreeSet<>();
-        Set<Ingredient> i2 = new TreeSet<>();
-        Set<Ingredient> i3 = new TreeSet<>();
-        Set<Ingredient> i4 = new TreeSet<>();
-        Set<Ingredient> i5 = new TreeSet<>();
-        Set<Ingredient> i6 = new TreeSet<>();
-        i1.add(new Ingredient("mlijeko"));
-        i1.add(new Ingredient("jaja"));
-        i1.add(new Ingredient("puter"));
-        i1.add(new Ingredient("jogurt"));
-        i1.add(new Ingredient("vrhnje"));
-        i1.add(new Ingredient("Mozzarella"));
-        i1.add(new Ingredient("Gauda"));
-        i1.add(new Ingredient("Feta sir"));
-        i1.add(new Ingredient("Kackavalj"));
-        i1.add(new Ingredient("jaja"));
-        i1.add(new Ingredient("maslac"));
-        i1.add(new Ingredient("slag"));
-      
-        i2.add(new Ingredient("paprika"));
-        i2.add(new Ingredient("mrkva"));
-        i2.add(new Ingredient("rotkva"));
-        i2.add(new Ingredient("krompir"));
-        i2.add(new Ingredient("luk"));
-        i2.add(new Ingredient("spanac"));
-        i2.add(new Ingredient("tikvice"));
-        i2.add(new Ingredient("persun"));
-        i2.add(new Ingredient("celer"));
-        i2.add(new Ingredient("bijeli luk"));
-        i2.add(new Ingredient("kupus"));
-        i2.add(new Ingredient("patlidzan"));
-        i2.add(new Ingredient("cvekla"));
-        i2.add(new Ingredient("paradajz"));
-        i2.add(new Ingredient("blitva"));
-        
-        i3.add(new Ingredient("limun"));
-        i3.add(new Ingredient("narandza"));
-        i3.add(new Ingredient("jabuka "));
-        i3.add(new Ingredient("orasi"));
-        i3.add(new Ingredient("ljesnik"));
-        i3.add(new Ingredient("sljiva "));
-        i3.add(new Ingredient("badem"));
-        i3.add(new Ingredient("grozdjice"));
-        i3.add(new Ingredient("kupine"));
-        i3.add(new Ingredient("malina"));
-        i3.add(new Ingredient("ribizla"));
-        i3.add(new Ingredient("breskva"));
-        i3.add(new Ingredient("kajsija"));
-        i3.add(new Ingredient("smokva"));
-        i3.add(new Ingredient("grozdje"));
-        i3.add(new Ingredient("tresnja"));
-        
-        i4.add(new Ingredient("secer"));
-        i4.add(new Ingredient("prasak za pecivo"));
-        i4.add(new Ingredient("kvasac"));
-        i4.add(new Ingredient("ulje"));
-        i4.add(new Ingredient("cimet"));
-        i4.add(new Ingredient("kakao prah"));
-        i4.add(new Ingredient("vegeta"));
-        //i4.add(new Ingredient("zobene pahuljice"));
-        i4.add(new Ingredient("vanilin secer"));
-        i4.add(new Ingredient("prezle"));
-        i4.add(new Ingredient("cia semenke"));
-        i4.add(new Ingredient("biber"));
-        i4.add(new Ingredient("bosiljak"));
-        i4.add(new Ingredient("zacinsko bilje"));
-        
-        i5.add(new Ingredient("brasno"));
-        i5.add(new Ingredient("integralno brasno"));
-        i5.add(new Ingredient("makaroni"));
-        i5.add(new Ingredient("spagete"));
-        i5.add(new Ingredient("riza"));
-        i5.add(new Ingredient("heljda"));
-        i5.add(new Ingredient("proso"));
-        i5.add(new Ingredient("jecam"));
-        i5.add(new Ingredient("zito"));
-        i5.add(new Ingredient("kinoa"));
-        
-        i6.add(new Ingredient("pileca prsa"));
-        i6.add(new Ingredient("mljeveno meso"));
-        i6.add(new Ingredient("pileci file"));
-        i6.add(new Ingredient("govedina"));
-        i6.add(new Ingredient("pileci karabatak"));
-        i6.add(new Ingredient("pileci batak"));
-        i6.add(new Ingredient("meso puza"));
-        
-        //i5.add(new Ingredient("cia semenke"));
-        
-        
-        
-      
-        
-        
-        ic1.setIngredientsSet(i1);
-        ic2.setIngredientsSet(i2);
-        ic3.setIngredientsSet(i3);
-        ic4.setIngredientsSet(i4);
-        ic5.setIngredientsSet(i5);
-        ic6.setIngredientsSet(i6);
-        ic.add(ic1);
-        ic.add(ic2);
-        ic.add(ic3);
-        ic.add(ic4);
-        ic.add(ic5);
-        ic.add(ic6);
-
-        Set<KitchenAppliance> ka = new HashSet<>();
-        ka.add(new KitchenAppliance("mikser"));
-        ka.add(new KitchenAppliance("blender"));
-        ka.add(new KitchenAppliance("sokovnik"));
-        
-        Account ac = new Account("admin", "admin", "admin@gmail.com");
-        AccountOwner aco = new AccountOwner(ac, UserType.administrator);
-        rb.accountOwners.put("admin", aco);
-        
-        rb.ingredientCategories = ic;
-        rb.appliances = ka;
         ViewController k = new ViewController();
         mw = k.createMainWindow();
 
         LeftPanel lp = k.createLeftPanel(rb.ingredientCategories, rb.appliances);
         mw.getJScrollPane1().setViewportView(lp);
         k.initAllRecipePanels(new HashSet<>(rb.recipes.values()));
-        //RecipeFrame rf = k.createRecipeFrame(r1); rf.setVisible(true);
         mw.setVisible(true);
     }
 
@@ -280,7 +154,6 @@ public class ViewController {
                                 mw.showAccountLbl(true);
                                 mw.changeLoginLbl(true);
                                 lw.dispose();
-                                System.out.println("Dodjoh, videh, pobedih");
                             }
                         }
 
@@ -289,7 +162,6 @@ public class ViewController {
                     rb.setCurrentAccount(null);
                     mw.changeLoginLbl(false);
                     mw.showAccountLbl(false);
-                    //mw.repaint();
                 }
             }
         });
@@ -306,15 +178,12 @@ public class ViewController {
         mw.setFavLblListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO: kreirati prozor za prikaz omiljenih recepata
-                System.out.println("fav");
+
             }
         });
         mw.setMyPrListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO: kreirati prozor za izmjenu licnih podataka
-                
                 UserType currentUserType = rb.getCurrentAccountOwner().getUserType();
 
                 switch (currentUserType) {
@@ -342,7 +211,6 @@ public class ViewController {
                 CreateRecipeFrame crf = createRecipeCreator();
                 crf.setVisible(true);
                 centerFrame(crf);
-                System.out.println("new recepie");
             }
         });
 
@@ -426,14 +294,8 @@ public class ViewController {
             IngredientAmount ia = iait.next();
             ingredientsListModel.addElement(ia.toString());
         }
-//        ingredientsListModel.addAll(r.getIngredientAmounts()
-//                .stream()
-//                .map(i -> i.toString())
-//                .collect(Collectors.toList()));
         rf.setIngredientsListModel(ingredientsListModel);
-        //rf.setVisible(false);
-        //rf.setVisible(true);
-        
+      
         /* Add users' reviews to the scroll pane */
         Iterator<Review> it = r.getReviews().iterator();
         while (it.hasNext()) {
@@ -446,7 +308,6 @@ public class ViewController {
             
             ReviewPanel rp = createReviewPanel(review);
             rf.getCommentPanel().add(rp);
-            //rf.getCommentPanel().add(Box.createVerticalStrut(5));
         }
         
         if (rb.currentAccount == null) {
@@ -496,20 +357,10 @@ public class ViewController {
         crf.setListener(new CreateRecipeListener() {
             @Override
             public void createRecipeEventEmitted(CreateRecipeEvent r) {
-                //Long id = rb.recipes.isEmpty() ? 1L : Collections.max(rb.recipes.keySet())+1L;
                 int id = rb.recipes.isEmpty() ? 1 : Collections.max(rb.recipes.keySet())+1;
                 String name = r.getName();
                 String text = r.getText();
-//                Set<IngredientAmount> ingredients = new HashSet<>();
-//                Iterator<String> it = r.getIngredients().iterator();
-//                while (it.hasNext()) {
-//                    String ingredientData[] = it.next().split(" ");
-//                    IngredientAmount ing = new IngredientAmount(
-//                            ingredientData[0],
-//                            Double.parseDouble(ingredientData[1]),
-//                            ingredientData[2]);
-//                    ingredients.add(ing);
-//                }
+
                 Recipe recipe = new Recipe(id, name, text,
                         rb.getCurrentAccount().getUsername(), new HashSet<>(ingredientAmounts));
                 rb.recipes.put(id, recipe);
