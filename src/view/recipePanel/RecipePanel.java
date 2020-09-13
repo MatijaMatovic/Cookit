@@ -40,6 +40,7 @@ public class RecipePanel extends javax.swing.JPanel {
         appliancesLabel = new javax.swing.JLabel();
         authorLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         setMaximumSize(new java.awt.Dimension(32767, 220));

@@ -28,12 +28,12 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
-        jLabel3.setForeground(new java.awt.Color(153, 153, 255));
-        jLabel7.setForeground(new java.awt.Color(153, 153, 255));
-        jLabel4.setForeground(new java.awt.Color(153, 153, 255));
-        jSeparator1.setForeground(new java.awt.Color(153, 153, 255));
-        jSeparator1.setBackground(new java.awt.Color(153, 153, 255));
-        jPanel4.setBackground(new java.awt.Color(153, 153, 255));
+        jLabel3.setForeground(new java.awt.Color(255, 51, 102));
+        jLabel7.setForeground(new java.awt.Color(255, 51, 102));
+        jLabel4.setForeground(new java.awt.Color(255, 51, 102));
+        jSeparator1.setForeground(new java.awt.Color(255, 51, 102));
+        jSeparator1.setBackground(new java.awt.Color(255, 51, 102));
+        jPanel4.setBackground(new java.awt.Color(255, 51, 102));
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         
@@ -48,12 +48,12 @@ public class MainWindow extends javax.swing.JFrame {
             this.jLabel5.setText("Odjava");
         } else {
             jLabel2.setForeground(Color.white);
-            jLabel3.setForeground(new java.awt.Color(153, 153, 255));
-            jLabel7.setForeground(new java.awt.Color(153, 153, 255));
-            jLabel4.setForeground(new java.awt.Color(153, 153, 255));
-            jSeparator1.setForeground(new java.awt.Color(153, 153, 255));
-            jSeparator1.setBackground(new java.awt.Color(153, 153, 255));
-            jPanel4.setBackground(new java.awt.Color(153, 153, 255));
+            jLabel3.setForeground(new java.awt.Color(255, 51, 102));
+            jLabel7.setForeground(new java.awt.Color(255, 51, 102));
+            jLabel4.setForeground(new java.awt.Color(255, 51, 102));
+            jSeparator1.setForeground(new java.awt.Color(255, 51, 102));
+            jSeparator1.setBackground(new java.awt.Color(255, 51, 102));
+            jPanel4.setBackground(new java.awt.Color(255, 51, 102));
             this.jLabel5.setText("Prijava");
         }
         this.jLabel5.repaint();
@@ -128,7 +128,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 51, 102));
 
         jLabel1.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -268,6 +268,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(0, 204, 204));
 
+        recipePanelsPanel.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout recipePanelsPanelLayout = new javax.swing.GroupLayout(recipePanelsPanel);
         recipePanelsPanel.setLayout(recipePanelsPanelLayout);
         recipePanelsPanelLayout.setHorizontalGroup(
@@ -316,12 +318,12 @@ public class MainWindow extends javax.swing.JFrame {
 
         } else {
             jLabel2.setForeground(Color.white);
-            jLabel3.setForeground(new java.awt.Color(153, 153, 255));
-            jLabel7.setForeground(new java.awt.Color(153, 153, 255));
-            jLabel4.setForeground(new java.awt.Color(153, 153, 255));
-            jSeparator1.setForeground(new java.awt.Color(153, 153, 255));
-            jSeparator1.setBackground(new java.awt.Color(153, 153, 255));
-            jPanel4.setBackground(new java.awt.Color(153, 153, 255));
+            jLabel3.setForeground(new java.awt.Color(255, 51, 102));
+            jLabel7.setForeground(new java.awt.Color(255, 51, 102));
+            jLabel4.setForeground(new java.awt.Color(255, 51, 102));
+            jSeparator1.setForeground(new java.awt.Color(255, 51, 102));
+            jSeparator1.setBackground(new java.awt.Color(255, 51, 102));
+            jPanel4.setBackground(new java.awt.Color(255, 51, 102));
             labelPressed = false;
         }
     }//GEN-LAST:event_jLabel2MousePressed

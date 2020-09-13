@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -587,6 +586,9 @@ public class ViewController {
 
     public Set<Recipe> getRecipesByIngredients(Set<Ingredient> ingredients, Set<KitchenAppliance> kAppliances) {
         Map<Long, Recipe> R = rb.recipes;
+        if(ingredients.isEmpty()){
+            return new HashSet<>(rb.recipes.values());
+        }
         Set<Recipe> foundRecipes = new HashSet<>();
 
         for (Iterator<Map.Entry<Long, Recipe>> it = R.entrySet().iterator(); it.hasNext();) {
@@ -641,8 +643,8 @@ public class ViewController {
                 for (String aplc : e.getAppliances()) {
                     appliances.add(new KitchenAppliance(aplc));
                 }
-
                 Set<Recipe> foundRecipes = getRecipesByIngredients(ingredients, appliances);
+                
                 initAllRecipePanels(foundRecipes);
             }
         });
