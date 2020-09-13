@@ -2,30 +2,6 @@
 ? !!model.IngredientCategory
   ingredientsSet: !!set
     ? {
-      name: jaja
-    }
-    : null
-    ? {
-      name: Kackavalj
-    }
-    : null
-    ? {
-      name: mleko u prahu
-    }
-    : null
-    ? {
-      name: Mozzarella
-    }
-    : null
-    ? {
-      name: mlijeko
-    }
-    : null
-    ? {
-      name: slag
-    }
-    : null
-    ? {
       name: Feta sir
     }
     : null
@@ -34,7 +10,39 @@
     }
     : null
     ? {
+      name: Kackavalj
+    }
+    : null
+    ? {
+      name: Mozzarella
+    }
+    : null
+    ? {
+      name: jaja
+    }
+    : null
+    ? {
+      name: jogurt
+    }
+    : null
+    ? {
       name: maslac
+    }
+    : null
+    ? {
+      name: mlijeko
+    }
+    : null
+    ? {
+      name: puter
+    }
+    : null
+    ? {
+      name: slag
+    }
+    : null
+    ? {
+      name: vrhnje
     }
     : null
   name: Mlijecni proizvodi
@@ -42,19 +50,83 @@
 ? !!model.IngredientCategory
   ingredientsSet: !!set
     ? {
-      name: paprika
+      name: biber
     }
     : null
     ? {
-      name: mrkva
+      name: bosiljak
     }
     : null
     ? {
-      name: persun
+      name: cia semenke
     }
     : null
     ? {
-      name: repa
+      name: cimet
+    }
+    : null
+    ? {
+      name: kakao prah
+    }
+    : null
+    ? {
+      name: kvasac
+    }
+    : null
+    ? {
+      name: prasak za pecivo
+    }
+    : null
+    ? {
+      name: prezle
+    }
+    : null
+    ? {
+      name: secer
+    }
+    : null
+    ? {
+      name: ulje
+    }
+    : null
+    ? {
+      name: vanilin secer
+    }
+    : null
+    ? {
+      name: vegeta
+    }
+    : null
+    ? {
+      name: zacinsko bilje
+    }
+    : null
+  name: Zacini
+: null
+? !!model.IngredientCategory
+  ingredientsSet: !!set
+    ? {
+      name: bijeli luk
+    }
+    : null
+    ? {
+      name: blitva
+    }
+    : null
+    ? {
+      name: celer
+    }
+    : null
+    ? {
+      name: cvekla
+    }
+    : null
+    ? {
+      name: krompir
+    }
+    : null
+    ? {
+      name: kupus
     }
     : null
     ? {
@@ -62,7 +134,23 @@
     }
     : null
     ? {
-      name: tikvice
+      name: mrkva
+    }
+    : null
+    ? {
+      name: paprika
+    }
+    : null
+    ? {
+      name: paradajz
+    }
+    : null
+    ? {
+      name: patlidzan
+    }
+    : null
+    ? {
+      name: persun
     }
     : null
     ? {
@@ -74,12 +162,152 @@
     }
     : null
     ? {
-      name: kupus
-    }
-    : null
-    ? {
-      name: blitva
+      name: tikvice
     }
     : null
   name: Povrce
+: null
+? !!model.IngredientCategory
+  ingredientsSet: !!set
+    ? {
+      name: badem
+    }
+    : null
+    ? {
+      name: breskva
+    }
+    : null
+    ? {
+      name: grozdje
+    }
+    : null
+    ? {
+      name: grozdjice
+    }
+    : null
+    ? {
+      name: 'jabuka '
+    }
+    : null
+    ? {
+      name: kajsija
+    }
+    : null
+    ? {
+      name: kupine
+    }
+    : null
+    ? {
+      name: limun
+    }
+    : null
+    ? {
+      name: ljesnik
+    }
+    : null
+    ? {
+      name: malina
+    }
+    : null
+    ? {
+      name: narandza
+    }
+    : null
+    ? {
+      name: orasi
+    }
+    : null
+    ? {
+      name: ribizla
+    }
+    : null
+    ? {
+      name: 'sljiva '
+    }
+    : null
+    ? {
+      name: smokva
+    }
+    : null
+    ? {
+      name: tresnja
+    }
+    : null
+  name: Voce
+: null
+? !!model.IngredientCategory
+  ingredientsSet: !!set
+    ? {
+      name: brasno
+    }
+    : null
+    ? {
+      name: heljda
+    }
+    : null
+    ? {
+      name: integralno brasno
+    }
+    : null
+    ? {
+      name: jecam
+    }
+    : null
+    ? {
+      name: kinoa
+    }
+    : null
+    ? {
+      name: makaroni
+    }
+    : null
+    ? {
+      name: proso
+    }
+    : null
+    ? {
+      name: riza
+    }
+    : null
+    ? {
+      name: spagete
+    }
+    : null
+    ? {
+      name: zito
+    }
+    : null
+  name: Zitarice
+: null
+? !!model.IngredientCategory
+  ingredientsSet: !!set
+    ? {
+      name: govedina
+    }
+    : null
+    ? {
+      name: meso puza
+    }
+    : null
+    ? {
+      name: mljeveno meso
+    }
+    : null
+    ? {
+      name: pileca prsa
+    }
+    : null
+    ? {
+      name: pileci batak
+    }
+    : null
+    ? {
+      name: pileci file
+    }
+    : null
+    ? {
+      name: pileci karabatak
+    }
+    : null
+  name: Meso
 : null
