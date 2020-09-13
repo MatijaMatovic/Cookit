@@ -12,7 +12,7 @@ public class RecipePanel extends javax.swing.JPanel {
     /**
      * Creates new form RecipePanel
      */
-    public long recipeId;
+    public int recipeId;
     RecipePanelListener listener;
     
     public RecipePanel() {
@@ -150,11 +150,11 @@ public class RecipePanel extends javax.swing.JPanel {
         return authorLabel;
     }
 
-    public long getRecipeId() {
+    public int getRecipeId() {
         return recipeId;
     }
 
-    public void setRecipeId(long recipeId) {
+    public void setRecipeId(int recipeId) {
         this.recipeId = recipeId;
     }
     

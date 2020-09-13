@@ -15,7 +15,7 @@ public class RegisteredUser extends AccountOwner {
 
     public boolean privileged = false;
 
-    public Set<Long> recipeIDs;
+    public Set<Integer> recipeIDs;
 
     public Set<Review> reviews;
 
@@ -66,11 +66,11 @@ public class RegisteredUser extends AccountOwner {
         this.privileged = privileged;
     }
 
-    public Set<Long> getRecipes() {
+    public Set<Integer> getRecipes() {
         return recipeIDs;
     }
 
-    public void setRecipes(Set<Long> recipes) {
+    public void setRecipes(Set<Integer> recipes) {
         this.recipeIDs = recipes;
     }
 

@@ -18,7 +18,7 @@ import org.yaml.snakeyaml.Yaml;
 public class RecipeBook {
 
     public Map<String, AccountOwner> accountOwners;
-    public Map<Long, Recipe> recipes;
+    public Map<Integer, Recipe> recipes;
     public Set<IngredientCategory> ingredientCategories;
     public Set<KitchenAppliance> appliances;
 
@@ -186,7 +186,7 @@ public class RecipeBook {
             
             try (InputStream in = new FileInputStream(new File(getPath(FileType.RECIPES)))) {
                 Yaml yaml = new Yaml();
-                this.recipes = (Map<Long, Recipe>) yaml.load(in);
+                this.recipes = (Map<Integer, Recipe>) yaml.load(in);
             }
         }
         catch (Exception e) {

@@ -497,13 +497,7 @@ public class ViewController {
             @Override
             public void createRecipeEventEmitted(CreateRecipeEvent r) {
                 //Long id = rb.recipes.isEmpty() ? 1L : Collections.max(rb.recipes.keySet())+1L;
-                Long id;
-                if (rb.recipes.isEmpty()) {
-                    id = 1L;
-                } else {
-                    Number tmp = Collections.max(rb.recipes.keySet());
-                    id = tmp.longValue() + 1L;
-                }
+                int id = rb.recipes.isEmpty() ? 1 : Collections.max(rb.recipes.keySet())+1;
                 String name = r.getName();
                 String text = r.getText();
 //                Set<IngredientAmount> ingredients = new HashSet<>();
@@ -585,13 +579,13 @@ public class ViewController {
     }
 
     public Set<Recipe> getRecipesByIngredients(Set<Ingredient> ingredients, Set<KitchenAppliance> kAppliances) {
-        Map<Long, Recipe> R = rb.recipes;
+        Map<Integer, Recipe> R = rb.recipes;
         if(ingredients.isEmpty()){
             return new HashSet<>(rb.recipes.values());
         }
         Set<Recipe> foundRecipes = new HashSet<>();
 
-        for (Iterator<Map.Entry<Long, Recipe>> it = R.entrySet().iterator(); it.hasNext();) {
+        for (Iterator<Map.Entry<Integer, Recipe>> it = R.entrySet().iterator(); it.hasNext();) {
             Recipe r = it.next().getValue();
             if (ingredients.containsAll(r.getIngredientAmounts()) && kAppliances.containsAll(r.getRequiredAppliances())) {
                 foundRecipes.add(r);

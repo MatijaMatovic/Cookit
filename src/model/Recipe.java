@@ -12,7 +12,7 @@ public class Recipe {
 
     private String creationDate;
     
-    private Long id;
+    private int id;
 
     private boolean active = true;
 
@@ -32,7 +32,7 @@ public class Recipe {
         reviews = new HashSet<>();
     }
 
-    public Recipe(Long id, String name, String text, String authorUsername, Set<IngredientAmount> ingredientAmounts) {
+    public Recipe(int id, String name, String text, String authorUsername, Set<IngredientAmount> ingredientAmounts) {
         this();
         this.id = id;
         this.name = name;
@@ -74,11 +74,11 @@ public class Recipe {
         this.creationDate = creationDate.format(DateTimeFormatter.ISO_DATE_TIME);
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
