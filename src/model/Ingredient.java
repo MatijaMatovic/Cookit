@@ -39,11 +39,14 @@ public class Ingredient implements Comparable<Ingredient> {
         if (getClass() != obj.getClass() && IngredientAmount.class != obj.getClass() ) {
             return false;
         }
-        final Ingredient other = (Ingredient) obj;
-        if (!this.name.equals(other.name)) {
-            return false;
+        if (this.getClass() == obj.getClass()) {
+            Ingredient other = (Ingredient) obj;
+            return this.name.equals(other.getName());
         }
-        return true;
+        else {
+            IngredientAmount other = (IngredientAmount) obj;
+            return this.name.equals(other.getIngredient().getName());
+        }
     }
 
     @Override

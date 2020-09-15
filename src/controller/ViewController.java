@@ -445,7 +445,7 @@ public class ViewController {
         }
         return foundRecipes;
     }
-
+    
     private LeftPanel createLeftPanel(Set<IngredientCategory> ingredientCategories, Set<KitchenAppliance> kAppliance) {
         
         Set<KitchenAppliance> appliances = new HashSet<>();

@@ -2,8 +2,9 @@ package model;
 
 import java.util.Objects;
 
-public class IngredientAmount extends Ingredient{
-
+public class IngredientAmount {
+    private Ingredient ingredient;
+    
     private Double amount;
 
     private String unit;
@@ -12,9 +13,17 @@ public class IngredientAmount extends Ingredient{
     }
 
     public IngredientAmount(String name, Double amount, String unit) {
-        super(name);
+        this.ingredient = new Ingredient(name);
         this.amount = amount;
         this.unit = unit;
+    }
+
+    public Ingredient getIngredient() {
+        return ingredient;
+    }
+
+    public void setIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
     }
     
     public Double getAmount() {
@@ -35,7 +44,14 @@ public class IngredientAmount extends Ingredient{
 
     @Override
     public String toString() {
-        return this.name + " " + Double.toString(this.amount) + this.unit;
+        return this.ingredient.getName() + " " + Double.toString(this.amount) + this.unit;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.ingredient.getName());
+        return hash;
     }
     
     @Override
@@ -49,11 +65,15 @@ public class IngredientAmount extends Ingredient{
         if (getClass() != obj.getClass() && Ingredient.class != obj.getClass() ) {
             return false;
         }
-        final Ingredient other = (Ingredient) obj;
-        if (!this.name.equals(other.name)) {
-            return false;
+        if (this.getClass() == obj.getClass()) {
+            IngredientAmount other = (IngredientAmount) obj;
+            return this.ingredient.getName().equals(other.getIngredient().getName());
         }
-        return true;
+        else {
+            Ingredient other = (Ingredient) obj;
+            return this.ingredient.getName().equals(other.getName());
+        }
+           
     }
     
     
