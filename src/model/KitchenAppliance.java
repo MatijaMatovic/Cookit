@@ -47,6 +47,10 @@ public class KitchenAppliance implements Comparable<KitchenAppliance>{
        return name.compareTo(o.name);
     }
     
+    @Override
+    public String toString() {
+        return this.name;
+    }
     
     
     
