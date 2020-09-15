@@ -284,6 +284,7 @@ public class ViewController {
 
     public RecipeFrame createRecipeFrame(Recipe r) {
         RecipeFrame rf = new RecipeFrame();
+        centerFrame(rf);
         rf.getNameLabel().setText(r.getName());
         rf.getRatingLabel().setText(Double.toString(r.calculateGradeAvg()));
         rf.getInstructionsPane().setText(r.getText());
