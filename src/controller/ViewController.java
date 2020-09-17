@@ -87,6 +87,7 @@ public class ViewController {
 
         rb = new RecipeBook();
         rb.loadAll();
+        
 
         ViewController k = new ViewController();
         mw = k.createMainWindow();

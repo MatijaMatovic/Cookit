@@ -21,7 +21,7 @@ import java.util.TreeSet;
  * @author jovandjordjic
  */
 public class RecipesList {
-
+/*
     private Set<Recipe> recipesSet; // spisak svih recepata, sortiranih po datumu kreiranja (najnoviji prvo)
 
     private Map<Set<Ingredient>, Set<Recipe>> recipeByIngredientsMap; // Set<Ingredient> skup sastojaka neophodnih za recept
@@ -95,22 +95,6 @@ public class RecipesList {
 
     }
 
-    public void addRecipe2(Recipe r) {
-        Set<IngredientAmount> ingredientAmounts = r.getIngredientAmounts();
-        TreeSet<Ingredient> ts = new TreeSet<>(Ingredient::compareTo);
-        ts.addAll(ingredientAmounts);
-
-        newIngredientRecipeMap.putIfAbsent(ts, new TreeSet<>(new Comparator<Recipe>() {
-            @Override
-            public int compare(Recipe o1, Recipe o2) {
-                return o2.getCreationDateParsed().compareTo(o1.getCreationDateParsed());
-            }
-
-        }));
-
-        newIngredientRecipeMap.get(ts).add(r);
-    }
-
     public Set<Recipe> getRecipes() {
         return recipesSet;
     }
@@ -153,6 +137,7 @@ public class RecipesList {
         return returnRecipes;
 
     }
+*/
 
 }
 
